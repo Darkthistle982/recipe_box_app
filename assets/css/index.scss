@@ -1,0 +1,12 @@
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+$gold-color: #daa520;
+$blue-color: 	#20abd9;
+$green-color: 	#abd920;
+$purple-color: #ab20d9;
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+  background-color: $primary-color;
+}
