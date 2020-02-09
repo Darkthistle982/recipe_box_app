@@ -7,8 +7,11 @@
     <title>The Salty Beards | recipe app</title>
     <!-- reset.css -->
     <link rel="stylesheet" href="./assets/css/reset.css" />
+    <!--Jquery-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <!-- font awesome -->
     <script src="https://kit.fontawesome.com/d54a006847.js" crossorigin="anonymous"></script>
     <!-- my style -->
@@ -23,8 +26,8 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">The Salty Beards</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
@@ -32,12 +35,27 @@
                     <a class="nav-link" href="#"> Recipe Box <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Add</a>
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#newRecipeForm">Add</a>
+                    <!-- <div class="modal fade" id="newRecipeForm" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-conent">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Add a New Recipe</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>modal text goes here</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Search
-            </a>
+                        Search
+                    </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#">Action</a>
                         <a class="dropdown-item" href="#">Another action</a>
@@ -66,6 +84,16 @@
                 <div class="card-body"><span id=recipeTitle>Recipe Title</span>
                     <ol>
                         <li>ingredients</li>
+                        <li>recipe this is just text to test what happpens when the text is longer than the card </li>
+                    </ol>
+                </div>
+                <!-- <div class="card-footer">Recipe footer</div> -->
+            </div>
+            <div class="card col-6">
+                <!-- <div class="card-header">Recipe Header</div> -->
+                <div class="card-body"><span id=recipeTitle>Recipe Title</span>
+                    <ol>
+                        <li>ingredients</li>
                         <li>recipe</li>
                     </ol>
                 </div>
@@ -73,22 +101,75 @@
             </div>
             <div class="card col-6">
                 <!-- <div class="card-header">Recipe Header</div> -->
-                <div class="card-body">Recipe body</div>
+                <div class="card-body"><span id=recipeTitle>Recipe Title</span>
+                    <ol>
+                        <li>ingredients</li>
+                        <li>recipe</li>
+                    </ol>
+                </div>
                 <!-- <div class="card-footer">Recipe footer</div> -->
             </div>
             <div class="card col-6">
                 <!-- <div class="card-header">Recipe Header</div> -->
-                <div class="card-body">Recipe body</div>
+                <div class="card-body"><span id=recipeTitle>Recipe Title</span>
+                    <ol>
+                        <li>ingredients</li>
+                        <li>recipe</li>
+                    </ol>
+                </div>
                 <!-- <div class="card-footer">Recipe footer</div> -->
             </div>
         </div>
     </div>
 
+    <!-- I added in logic for a sticky footer, and styled a plus button for the add new recipe. I also added in the code for a modal to popup 
+    as it is shown in both W3schools and in bootstrap, but it doesn't seem to be responding currently. I also commented out the code for a modal link
+    in the add button of the navbar. I'm not sure what is going on so we need to investigate further -->
+    <footer class="footer mt-auto py-3">
+        <div class="container">
+            <button class="float-right rounded-circle btn btn-secondary bt-info" data-toggle="modal" data-target="#addNewRecipe"><i class="fas fa-plus fa-2x"></i></button>
+            <div id="addNewRecipe" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!--content of the modal-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Add a New Recipe</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>add new recipe form will go here</p>
+                            <!-- <form role="form">
+                                <div class="form-group row">
+                                  <label for="recipe-input">Recipe Title:</label>
+                                  <input class="form-control" id="recipe-input" type="text">
+                                </div>
+                                <div class="form-group row">
+                                  <label for="ingredient-input">Ingredients:</label>
+                                  <input class="form-control" id="ingredient-input" type="ingredient">
+                                </div>
+                                <div class="form-group row">
+                                  <label for="instructions-input">Cooking Instructions</label>
+                                  <textarea class="form-control" rows="5" id="instructions-input"></textarea>
+                                </div>
+                                <button class="btn btn-default" id="add-user" type="submit">Submit</button>
+                              </form> -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-default">Save Recipe</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
     <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-firestore.js"></script>
     <script src="./assets/javascript/app.js"></script>
-
 </body>
 
 </html>
