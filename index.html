@@ -13,6 +13,9 @@
     <script src="https://kit.fontawesome.com/d54a006847.js" crossorigin="anonymous"></script>
     <!-- my style -->
     <link rel="stylesheet" href="./assets/css/index.css" />
+    <!-- Googel Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
@@ -56,25 +59,35 @@
     <div class="container main-box">
         <!-- TODO: add a home for cards -->
         <div class="container recipe-box row">
+
             <!-- in Jacobs code I grabbed 'recipe-box'  to append cards to-->
             <div class="card col-6">
-                <div class="card-header">Recipe Header</div>
-                <div class="card-body">Recipe body</div>
-                <div class="card-footer">Recipe footer</div>
+                <!-- <div class="card-header">Recipe Header</div> -->
+                <div class="card-body"><span id=recipeTitle>Recipe Title</span>
+                    <ol>
+                        <li>ingredients</li>
+                        <li>recipe</li>
+                    </ol>
+                </div>
+                <!-- <div class="card-footer">Recipe footer</div> -->
             </div>
             <div class="card col-6">
-                <div class="card-header">Recipe Header</div>
+                <!-- <div class="card-header">Recipe Header</div> -->
                 <div class="card-body">Recipe body</div>
-                <div class="card-footer">Recipe footer</div>
+                <!-- <div class="card-footer">Recipe footer</div> -->
             </div>
             <div class="card col-6">
-                <div class="card-header">Recipe Header</div>
+                <!-- <div class="card-header">Recipe Header</div> -->
                 <div class="card-body">Recipe body</div>
-                <div class="card-footer">Recipe footer</div>
+                <!-- <div class="card-footer">Recipe footer</div> -->
             </div>
         </div>
     </div>
 
+    <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-firestore.js"></script>
+    <script src="./assets/javascript/app.js"></script>
 
 </body>
 
