@@ -10,18 +10,27 @@ body {
   font-size: 100%;
 }
 
-.card {
+.recipe-box .card {
   background-image: linear-gradient(180deg, white 3rem, #F0A4A4 calc(3rem), #F0A4A4 calc(3rem + 2px), transparent 1px), repeating-linear-gradient(0deg, transparent, transparent 1.5rem, #DDD 1px, #DDD calc(1.5rem + 1px));
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
-  height: 14rem auto;
-  width: 400px;
-  margin: auto;
-  top: 50%;
+  /* height: 14rem auto; */
+  /* width: 400px; */
+  /* margin: auto; */
+  /* top: 50%; */
   font-family: "Permanent Marker", cursive;
   font-size: 1.1em;
+  margin-bottom: 10px;
+}
+
+.card-header {
+  margin-bottom: 10px;
 }
 
 #recipeTitle {
   font-size: 1.25em;
   line-height: 1.1em;
+}
+
+.main-box {
+  background-color: #d9f2e6;
 }
