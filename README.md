@@ -9,3 +9,8 @@ This will be an app that users can utilize to organize, review, search and make 
 * Ability to search for new recipes in the existing database
 * Possible API connection either search for recipes elsewhere/possibly search for indgredient information
 
+
+
+
+* experimenting with branching -js
+
