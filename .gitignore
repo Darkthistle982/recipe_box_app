@@ -1,0 +1,4 @@
+# Put files you want git to ignore in here
+
+# vs code settings
+.vscode
