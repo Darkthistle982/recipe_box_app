@@ -12,7 +12,9 @@ firebase.initializeApp(firebaseConfig);
 
 
 
-
+$('#addNewRecipe').on('shown.bs.modal', function () {
+    $('#plusAdd').trigger('focus')
+  })
 
 
 
