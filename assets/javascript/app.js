@@ -10,49 +10,41 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+$(document).ready(function () {
+  
+  // ===================================================
+  // EVENT - save recipe
+  // ===================================================
+  $('#save-recipe-btn').on('click', function(event) {
+    console.log('here is event', event);
+    var title = $('#recipe-input').val();
+    console.log('here is title: '  + title);
+
+    // TODO: save form entry to database
+    
+
+    // TODO: when the data is saved to database, add success message
+    var successMessage = $('<div>').addClass('alert alert-success')
+      .attr('role', 'alert')
+      .text('Yay! you saved something!');
+  
+    $('.card-message').prepend(successMessage);
+  
+    // removes message after 5 seconds  
+    setTimeout(function() {
+      $('.card-message').detach();
+
+    }, 4 * 1000);
+
+    
+  });
 
 
-$('#addNewRecipe').on('shown.bs.modal', function () {
-    $('#plusAdd').trigger('focus')
-  })
+
+});
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// this is the card created in jacobs code
-// 
-// ==================================================
-//   <div class="card card mb-4 shadow-sm mx-auto">
-//     <div class="card-header text-wrap">
-//      <h3>
-//      <h6>
-//      <h7>
-//     </div>
-//     <div class="card-body">
-//       <img>
-//     </div>
-//   </div>
-// ===================================================
+// $('#addNewRecipe').on('shown.bs.modal', function () {
+//     $('#plusAdd').trigger('focus')
+//   })

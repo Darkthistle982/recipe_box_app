@@ -114,6 +114,8 @@
     <div class=" container card main-box">
       <div class="card-header">
         <h1>My Recipe Box</h1>
+        <!-- ====== here is where message displays ================= -->
+        <div class="card-message"></div>
       </div>
       <!-- TODO: add a home for cards -->
       <div class="container recipe-box row">
@@ -175,8 +177,10 @@
     <!-- I added in logic for a sticky footer, and styled a plus button for the add new recipe. I also added in the code for a modal to popup 
     as it is shown in both W3schools and in bootstrap, but it doesn't seem to be responding currently. I also commented out the code for a modal link
     in the add button of the navbar. I'm not sure what is going on so we need to investigate further -->
+    <!-- fixed -->
     <footer class="footer mt-auto py-3">
       <div class="container">
+
         <!-- PLUS ( + ) button  -->
         <button
           class="float-right rounded-circle btn btn-secondary bt-info"
@@ -186,18 +190,20 @@
           <i class="fas fa-plus fa-2x"></i>
         </button>
 
+        <!-- new recipe modal -->
         <div id="addNewRecipe" class="modal fade" role="dialog">
           <div class="modal-dialog">
             <!--content of the modal-->
             <div class="modal-content">
               <div class="modal-header">
                 <h4 class="modal-title">Add a New Recipe</h4>
-                <button type="button" class="close" data-dismiss="modal">
-                  &times;
-                </button>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
               </div>
               <div class="modal-body">
                 <p>add new recipe form will go here</p>
+                <!-- <div class="card-message"></div> -->
+
+                <!-- ===================== FORM ================================= -->
                 <form role="form">
                   <div class="form-group row">
                     <label for="recipe-input">Recipe Title:</label>
@@ -219,20 +225,19 @@
                       id="instructions-input"
                     ></textarea>
                   </div>
-                  <button class="btn btn-default" id="add-user" type="submit">
-                    Submit
-                  </button>
+                  <!-- <button class="btn btn-default" id="add-user" type="submit"> Submit </button> -->
                 </form>
+
               </div>
+
               <div class="modal-footer">
                 <button
                   type="button"
-                  class="btn btn-default"
-                  data-dismiss="modal"
-                >
+                  class="btn btn-default btn-outline-danger"
+                  data-dismiss="modal">
                   Close
                 </button>
-                <button type="button" class="btn btn-default">
+                <button id="save-recipe-btn" type="button" class="btn btn-default btn-primary" data-dismiss="modal">
                   Save Recipe
                 </button>
               </div>

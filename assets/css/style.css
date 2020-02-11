@@ -1,3 +1,7 @@
+/* google font-family */
+/* font-family: 'Permanent Marker', cursive;
+font-family: 'Rock Salt', cursive; */
+
 * {
   box-sizing: border-box;
 }
@@ -32,10 +36,6 @@ body {
   line-height: 1.1em;
 }
 
-.main-box {
-  background-color: #d9f2e6;
-}
-
 nav {
   font-family: 'Rock Salt', cursive;
 }
@@ -44,5 +44,4 @@ nav {
   font-size: x-large;
 }
 
-/* font-family: 'Permanent Marker', cursive;
-font-family: 'Rock Salt', cursive; */
+
