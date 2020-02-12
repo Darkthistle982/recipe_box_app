@@ -10,36 +10,48 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-$(document).ready(function () {
-  
-  // ===================================================
-  // EVENT - save recipe
-  // ===================================================
-  $('#save-recipe-btn').on('click', function(event) {
-    console.log('here is event', event);
-    var title = $('#recipe-input').val();
-    console.log('here is title: '  + title);
+$(document).ready(function() {
 
-    // TODO: save form entry to database
-    
+    // ===================================================
+    // EVENT - save recipe
+    // ===================================================
+    $('#save-recipe-btn').on('click', function(event) {
+        console.log('here is event', event);
+        var title = $('#recipe-input').val();
+        console.log('here is title: ' + title);
 
-    // TODO: when the data is saved to database, add success message
-    var successMessage = $('<div>').addClass('alert alert-success')
-      .attr('role', 'alert')
-      .text('Yay! you saved something!');
-  
-    $('.card-message').prepend(successMessage);
-  
-    // removes message after 5 seconds  
-    setTimeout(function() {
-      $('.card-message').detach();
-
-    }, 4 * 1000);
-
-    
-  });
+        // TODO: save form entry to database
 
 
+        // TODO: when the data is saved to database, add success message
+        var successMessage = $('<div>').addClass('alert alert-success')
+            .attr('role', 'alert')
+            .text('Yay! you saved something!');
+
+        $('.card-message').prepend(successMessage);
+
+        // removes message after 5 seconds  
+        setTimeout(function() {
+            $('.card-message').detach();
+
+        }, 4 * 1000);
+
+
+    });
+    ///test for ajax/api call
+    $("#searchBtn").on("click", function(event) {
+        event.preventDefault();
+        var searchInput = $("#searchInput").val().trim();
+        var queryURL = "https://www.themealdb.com/api/json/v1/1/search.php?s=" + searchInput;
+        $.ajax({
+                url: queryURL,
+                method: "GET"
+            })
+            .then(function(response) {
+                console.log(response);
+            });
+        $("#searchInput").val("");
+    });
 
 });
 
@@ -47,4 +59,31 @@ $(document).ready(function () {
 
 // $('#addNewRecipe').on('shown.bs.modal', function () {
 //     $('#plusAdd').trigger('focus')
-//   })
+//   })$(document).ready(function() {
+
+// ===================================================
+// EVENT - save recipe
+// ===================================================
+$('#save-recipe-btn').on('click', function(event) {
+    console.log('here is event', event);
+    var title = $('#recipe-input').val();
+    console.log('here is title: ' + title);
+
+    // TODO: save form entry to database
+
+
+    // TODO: when the data is saved to database, add success message
+    var successMessage = $('<div>').addClass('alert alert-success')
+        .attr('role', 'alert')
+        .text('Yay! you saved something!');
+
+    $('.card-message').prepend(successMessage);
+
+    // removes message after 5 seconds  
+    setTimeout(function() {
+        $('.card-message').detach();
+
+    }, 4 * 1000);
+
+
+});
