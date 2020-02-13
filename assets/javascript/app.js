@@ -14,6 +14,8 @@ firebase.initializeApp(firebaseConfig);
 
 $(document).ready(function() {
 
+    var resultsArray = [];
+
     // ===================================================
     // EVENT - save recipe ( + ) button 
     // ===================================================
@@ -32,8 +34,9 @@ $(document).ready(function() {
         event.preventDefault();
         var trimSearchInputValue = $("#searchInput").val().trim();
 
-        var resultsArray = ajaxCallSearch( trimSearchInputValue );
-        // console.log(resultsArray);
+        resultsArray = ajaxCallSearch( trimSearchInputValue );
+        console.log('results array');
+        console.log(resultsArray);
         
     });
 
@@ -95,10 +98,12 @@ $(document).ready(function() {
         return parentCard;
     }
 
+
     function appendCardTo(targetClass, card) {
         targetClass = '.' + targetClass;
         $(targetClass).append(card);
     }
+
 
     function addSuccessMessage(elementClass) {
         elementClass = '.' + elementClass;
@@ -114,6 +119,7 @@ $(document).ready(function() {
         }, 4 * 1000);
     }
 
+
     function ajaxCallSearch(inputString) {
         var searchInput = inputString;
         var queryURL = "https://www.themealdb.com/api/json/v1/1/search.php?s=" + searchInput;
@@ -125,21 +131,23 @@ $(document).ready(function() {
                 method: "GET"
             })
             .then(function(response) {
-                console.log(response);
+                // console.log(response);
                 arrayOfMeals = response.meals;
                 
                 
                 // TODO: iterate over all of the results
                 for (let i = 0; i < arrayOfMeals.length; i++) {
                     const meal = arrayOfMeals[i];
-                    console.log('meals thing: ' + i );
+                    // console.log('meals thing: ' + i );
                     // console.log(meal.strMeal);
                     // console.log(meal.strMealThumb);
                     
                     // create card and append
                     var mealCard = createCard(meal);
                     appendCardTo('recipe-box', mealCard);
-                    
+
+                    //push to array
+                    // arrayOfMeals.push(meal);
                     
                 }
 
@@ -152,7 +160,11 @@ $(document).ready(function() {
 
             });
 
-            console.log('array of meals: ', arrayOfMeals);
+            // console.log('array of meals: ', arrayOfMeals);
+            // console.log(arrayOfMeals);
+            // console.log(resultsArray);
+            
+            
             
 
             return arrayOfMeals;
