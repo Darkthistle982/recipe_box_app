@@ -59,7 +59,7 @@ $(document).ready(function() {
                     
                     
                 }
-                
+
                 $('.recipe-card').on('click', function(event) {
                     console.log(this);
                     console.log(event);
@@ -82,6 +82,7 @@ $(document).ready(function() {
         var mealTitle = meal.strMeal;
         var mealImg = meal.strMealThumb;
 
+        // TODO: are there some default tags we want if no tags found.
         // safety feature
         var mealTagsArray;
         if (meal.strTags != null) {
@@ -122,13 +123,6 @@ $(document).ready(function() {
         }
         parentCardRow.append(titleDiv);
 
-        // FIXME: click on one card and ALL of them print
-        // $('.recipe-card').on('click', function(event) {
-        //     console.log(this);
-        //     console.log(event);
-        //     console.log('touched');
-        // });
-
         return parentCard;
     }
 
@@ -151,15 +145,6 @@ $(document).ready(function() {
         }, 4 * 1000);
     }
 
-
-
-    // NO WORKING NO WORKING
-    // $('.recipe-card').on('click', function(event){
-    //     console.log(this);
-    //     console.log(event);
-    //     console.log('touched');
-        
-    // });
 
 
 // end of document ready

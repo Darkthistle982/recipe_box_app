@@ -8,15 +8,15 @@
     <!-- reset.css -->
     <link rel="stylesheet" href="./assets/css/reset.css" />
     <!--Jquery-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script> -->
     <!-- bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
     <!-- font awesome -->
     <script src="https://kit.fontawesome.com/d54a006847.js" crossorigin="anonymous"></script>
     <!-- my style -->
     <link rel="stylesheet" href="./assets/css/style.css" />
-    <!-- Googel Fonts-->
+    <!-- Google Fonts-->
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker|Rock+Salt&display=swap" rel="stylesheet" />
     <!-- Favorites Page link -->
     <link rel="favoritesPage" href="favoriteRecipes.html" />
@@ -29,19 +29,37 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">The Salty Beards</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Recipe Box <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#">
+            Recipe Box <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" data-toggle="modal" data-target="#newRecipeForm">Add</a>
+                    <!-- <div class="modal fade" id="newRecipeForm" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-conent">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Add a New Recipe</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>modal text goes here</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search</a>
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Search
+          </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#">My Saved Recipes</a>
                         <a class="dropdown-item" href="#">Favorite Recipes</a>
@@ -51,25 +69,129 @@
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <input class="form-control mr-sm-2" id="searchInput" type="search" placeholder="Search" aria-label="Search" />
+                <button class="btn btn-outline-success my-2 my-sm-0" id="searchBtn" type="submit">
+          Search
+        </button>
             </form>
         </div>
     </nav>
     <!-- end of navbar -->
 
+    <!-- MAIN container -->
+    <div class=" container card main-box">
+        <div class="card-header">
+            <h1>My Recipe Box</h1>
+            <!-- ====== here is where message displays ================= -->
+            <div class="card-message"></div>
+        </div>
+
+        <!-- place the cards in this container -->
+        <div class="container recipe-box row col-lg-12 ">
 
 
-    <!-- links -->
+            <!-- card thing to compare -->
+            <div class="card mx-auto">
+                <div class="card-body recipe-card">
+                    <div class="row">
+                        <div class="container img-box col-xs-12 col-md-3">
+                            <img class="card-img" src="https://via.placeholder.com/100" alt="">
+                        </div>
+                        <div class="container col-xs-12 col-md-9">
+                            <h3 class="text-right">Title of Recipe</h3>
+                            <p class="text-right">This elegant dish can be made in under 30mins. Feeds 4. #dinner</p>
+
+                            <div class="row">
+                                <div class="container tag-box">
+                                    <span class="badge badge-pill badge-success">Mexican</span>
+                                    <span class="badge badge-pill badge-danger">Dinner</span>
+                                    <span class="badge badge-pill badge-warning">Feed 4</span>
+                                    <span class="badge badge-pill badge-info">Tags</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+        <!-- end of card row -->
+    </div>
+    <!-- end of main container -->
+
+
+
+
+    <!-- Add new recipe button link -->
+    <!-- fixed -->
+    <footer class="footer mt-auto py-3">
+        <div class="container">
+
+            <!-- PLUS ( + ) button  -->
+            <button class="float-right rounded-circle btn btn-secondary bt-info" id="plusAdd" data-toggle="modal" data-target="#addNewRecipe">
+        <i class="fas fa-plus fa-2x"></i>
+      </button>
+
+            <!-- new recipe modal -->
+            <div id="addNewRecipe" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!--content of the modal-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Add a New Recipe</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <p>add new recipe form will go here</p>
+                            <!-- <div class="card-message"></div> -->
+
+                            <!-- ===================== FORM ================================= -->
+                            <form role="form">
+                                <div class="form-group row">
+                                    <label for="recipe-input">Recipe Title:</label>
+                                    <input class="form-control" id="recipe-input" type="text" />
+                                </div>
+                                <div class="form-group row">
+                                    <label for="ingredient-input">Ingredients:</label>
+                                    <input class="form-control" id="ingredient-input" type="ingredient" />
+                                </div>
+                                <div class="form-group row">
+                                    <label for="instructions-input">Cooking Instructions</label>
+                                    <textarea class="form-control" rows="5" id="instructions-input"></textarea>
+                                </div>
+                                <!-- <button class="btn btn-default" id="add-user" type="submit"> Submit </button> -->
+                            </form>
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default btn-outline-danger" data-dismiss="modal">
+                Close
+              </button>
+                            <button id="save-recipe-btn" type="button" class="btn btn-default btn-primary" data-dismiss="modal">
+                Save Recipe
+              </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-firestore.js"></script>
     <!-- bootstrap js related scripts -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="./assets/javascript/app.js"></script>
 </body>
 
+</html>
 
 </html>
