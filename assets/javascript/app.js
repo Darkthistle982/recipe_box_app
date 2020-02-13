@@ -25,49 +25,19 @@ $(document).ready(function() {
         addSuccessMessage('card-message');
 
     });
-
-    // $('#addNewRecipe').on('shown.bs.modal', function () {
-//     $('#plusAdd').trigger('focus')
-//   })$(document).ready(function() {
     
 
     ///test for ajax/api call
     $("#searchBtn").on("click", function(event) {
         event.preventDefault();
-        var searchInput = $("#searchInput").val().trim();
-        var queryURL = "https://www.themealdb.com/api/json/v1/1/search.php?s=" + searchInput;
-        $.ajax({
-                url: queryURL,
-                method: "GET"
-            })
-            .then(function(response) {
-                console.log(response);
-                var arrayOfMeals = response.meals;
-                
-                
-                // TODO: iterate over all of the results
-                for (let i = 0; i < arrayOfMeals.length; i++) {
-                    const meal = arrayOfMeals[i];
-                    console.log('meals thing: ' + i );
-                    // console.log(meal.strMeal);
-                    // console.log(meal.strMealThumb);
-                    
-                    // create card and append
-                    var mealCard = createCard(meal);
-                    appendCardTo('recipe-box', mealCard);
-                    
-                    
-                }
+        var trimSearchInputValue = $("#searchInput").val().trim();
 
-                $('.recipe-card').on('click', function(event) {
-                    console.log(this);
-                    console.log(event);
-                    console.log('touched');
-                });
-                
-
-            });
+        var resultsArray = ajaxCallSearch( trimSearchInputValue );
+        // console.log(resultsArray);
+        
     });
+
+    
 
 
     
@@ -142,6 +112,50 @@ $(document).ready(function() {
         setTimeout(function() {
             $(elementClass).detach();
         }, 4 * 1000);
+    }
+
+    function ajaxCallSearch(inputString) {
+        var searchInput = inputString;
+        var queryURL = "https://www.themealdb.com/api/json/v1/1/search.php?s=" + searchInput;
+        var arrayOfMeals = [];
+
+        //make the call
+        $.ajax({
+                url: queryURL,
+                method: "GET"
+            })
+            .then(function(response) {
+                console.log(response);
+                arrayOfMeals = response.meals;
+                
+                
+                // TODO: iterate over all of the results
+                for (let i = 0; i < arrayOfMeals.length; i++) {
+                    const meal = arrayOfMeals[i];
+                    console.log('meals thing: ' + i );
+                    // console.log(meal.strMeal);
+                    // console.log(meal.strMealThumb);
+                    
+                    // create card and append
+                    var mealCard = createCard(meal);
+                    appendCardTo('recipe-box', mealCard);
+                    
+                    
+                }
+
+                $('.recipe-card').on('click', function(event) {
+                    console.log(this);
+                    console.log(event);
+                    console.log('touched');
+                });
+                
+
+            });
+
+            console.log('array of meals: ', arrayOfMeals);
+            
+
+            return arrayOfMeals;
     }
 
 

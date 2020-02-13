@@ -83,16 +83,20 @@
 
     <!-- MAIN container -->
     <div class=" container card main-box">
-        <div class="jumbotron">
-            <h1 class="display-4">Hello, world!</h1>
-            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-            <hr class="my-4">
-            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-        </div>
-
+        
         <div class="card-header">
-            <h1>Search Results</h1>
+            <div class="jumbotron">
+                <h1 class="display-4">Welcome! </h1>
+                <p class="lead">Sit down by the hearth. This recipe app will help you to search and store recipes to try later.</p>
+                <h4>Go ahead look up something</h4>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" id="searchInput-below" type="search" placeholder="Search" aria-label="Search" />
+                    <button class="btn btn-outline-success my-2 my-sm-0" id="searchBtn-below" type="submit">
+                      Search
+                    </button>
+                </form>
+            </div>
+            <!-- <h1>Search Results</h1> -->
             <!-- ====== here is where message displays ================= -->
             <div class="card-message"></div>
         </div>
