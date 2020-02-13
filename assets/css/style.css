@@ -44,3 +44,11 @@ nav {
 .navbar-brand {
     font-size: x-large;
 }
+
+.card-img {
+    width: 100px;
+}
+
+.badge-pill {
+    margin-right: 7px;
+}
