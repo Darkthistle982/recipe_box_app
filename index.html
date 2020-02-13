@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./assets/imgs/utensils-solid.png" type="image/gif">
     <title>The Salty Beards | recipe app</title>
     <!-- reset.css -->
     <link rel="stylesheet" href="./assets/css/reset.css" />
@@ -37,12 +38,12 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                <!-- <li class="nav-item active">
                     <a class="nav-link" href="#">
             Recipe Box <span class="sr-only">(current)</span></a>
-                </li>
+                </li> -->
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-toggle="modal" data-target="#newRecipeForm">Add</a>
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#newRecipeForm" hidden="true">Add</a>
                     <!-- <div class="modal fade" id="newRecipeForm" tabindex="-1" role="dialog">
                         <div class="modal-dialog" role="document">
                             <div class="modal-conent">
@@ -60,8 +61,8 @@
                     </div> -->
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Search
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" hidden="true">
+            more
           </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#">My Saved Recipes</a>
