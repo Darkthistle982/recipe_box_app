@@ -31,7 +31,9 @@ $(document).ready(function() {
     });
     
 
-    ///test for ajax/api call
+    // ===================================================
+    // EVENT - Search buttons
+    // ===================================================
     $("#searchBtn").on("click", function(event) {
         event.preventDefault();
         var trimSearchInputValue = $("#searchInput").val().trim();
@@ -44,9 +46,8 @@ $(document).ready(function() {
 
     $("#searchBtn-below").on("click", function(event) {
         event.preventDefault();
-        var searchInput = $("#searchInput-below").val().trim();
-        var queryURL = "https://www.themealdb.com/api/json/v1/1/search.php?s=" + searchInput;
-        
+        var trimSearchInputValue = $("#searchInput-below").val().trim();
+
         var someResultArray = ajaxCallSearch( trimSearchInputValue );
         console.log('someResultArray');
         console.log(someResultArray);
