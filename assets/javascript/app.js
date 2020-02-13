@@ -58,7 +58,7 @@ $(document).ready(function() {
                     
                     // create card and append
                     var mealCard = createCard(meal);
-                    $('.recipe-box').append(mealCard);
+                    appendCardTo('recipe-box', mealCard);
                     
                     
                     
@@ -67,6 +67,9 @@ $(document).ready(function() {
 
             });
     });
+
+
+    
 
 
 
@@ -86,7 +89,7 @@ $(document).ready(function() {
         }
 
         var parentCard = $('<div>').addClass('card mx-auto');
-        var cardBody = $('<div>').addClass('card-body');
+        var cardBody = $('<div>').addClass('card-body recipe-card');
         var parentCardRow = $('<div>').addClass('row');
         parentCard.append(cardBody);
         cardBody.append(parentCardRow);
@@ -117,11 +120,19 @@ $(document).ready(function() {
         }
         parentCardRow.append(titleDiv);
 
+        // FIXME: click on one card and ALL of them print
+        $('.recipe-card').on('click', function(event) {
+            console.log(this);
+            console.log(event);
+            console.log('touched');
+        });
+
         return parentCard;
     }
 
-    function appendCard(elementClass, card) {
-        elementClass = '.' + elementClass;
+    function appendCardTo(targetClass, card) {
+        targetClass = '.' + targetClass;
+        $(targetClass).append(card);
     }
 
     function addSuccessMessage(elementClass) {
@@ -138,6 +149,15 @@ $(document).ready(function() {
         }, 4 * 1000);
     }
 
+
+
+    // NO WORKING NO WORKING
+    // $('.recipe-card').on('click', function(event){
+    //     console.log(this);
+    //     console.log(event);
+    //     console.log('touched');
+        
+    // });
 
 
 // end of document ready
