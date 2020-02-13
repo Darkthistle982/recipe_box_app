@@ -43,20 +43,16 @@ $(document).ready(function() {
             .then(function(response) {
                 console.log(response);
                 var arrayOfMeals = response.meals;
-                // TODO: iterate over all of the results
                 
+                // TODO: iterate over all of the results
                 for (let i = 0; i < arrayOfMeals.length; i++) {
                     const meal = arrayOfMeals[i];
                     console.log('meals thing: ' + i );
-                    // meal title
                     // console.log(meal.strMeal);
-
-                    // meal img
                     // console.log(meal.strMealThumb);
                     
+                    // create card and append
                     var mealCard = createCard(meal);
-                    console.log('here is mealCard', mealCard);
-                    alert('stopping point');
                     $('.recipe-box').append(mealCard);
                     
                     
