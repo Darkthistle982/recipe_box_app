@@ -14,6 +14,8 @@ firebase.initializeApp(firebaseConfig);
 
 $(document).ready(function() {
 
+    var resultsArray = [];
+
     // ===================================================
     // EVENT - save recipe ( + ) button 
     // ===================================================
@@ -25,14 +27,20 @@ $(document).ready(function() {
         addSuccessMessage('card-message');
 
     });
-
-    // $('#addNewRecipe').on('shown.bs.modal', function () {
-//     $('#plusAdd').trigger('focus')
-//   })$(document).ready(function() {
     
 
     ///test for ajax/api call
     $("#searchBtn").on("click", function(event) {
+        event.preventDefault();
+        var trimSearchInputValue = $("#searchInput").val().trim();
+
+        resultsArray = ajaxCallSearch( trimSearchInputValue );
+        console.log('results array');
+        console.log(resultsArray);
+        
+    });
+
+    $("#searchBtn-below").on("click", function(event) {
         event.preventDefault();
         var searchInput = $("#searchInput").val().trim();
         var queryURL = "https://www.themealdb.com/api/json/v1/1/search.php?s=" + searchInput;
@@ -125,10 +133,12 @@ $(document).ready(function() {
         return parentCard;
     }
 
+
     function appendCardTo(targetClass, card) {
         targetClass = '.' + targetClass;
         $(targetClass).append(card);
     }
+
 
     function addSuccessMessage(elementClass) {
         elementClass = '.' + elementClass;
@@ -142,6 +152,57 @@ $(document).ready(function() {
         setTimeout(function() {
             $(elementClass).detach();
         }, 4 * 1000);
+    }
+
+
+    function ajaxCallSearch(inputString) {
+        var searchInput = inputString;
+        var queryURL = "https://www.themealdb.com/api/json/v1/1/search.php?s=" + searchInput;
+        var arrayOfMeals = [];
+
+        //make the call
+        $.ajax({
+                url: queryURL,
+                method: "GET"
+            })
+            .then(function(response) {
+                // console.log(response);
+                arrayOfMeals = response.meals;
+                
+                
+                // TODO: iterate over all of the results
+                for (let i = 0; i < arrayOfMeals.length; i++) {
+                    const meal = arrayOfMeals[i];
+                    // console.log('meals thing: ' + i );
+                    // console.log(meal.strMeal);
+                    // console.log(meal.strMealThumb);
+                    
+                    // create card and append
+                    var mealCard = createCard(meal);
+                    appendCardTo('recipe-box', mealCard);
+
+                    //push to array
+                    // arrayOfMeals.push(meal);
+                    
+                }
+
+                $('.recipe-card').on('click', function(event) {
+                    console.log(this);
+                    console.log(event);
+                    console.log('touched');
+                });
+                
+
+            });
+
+            // console.log('array of meals: ', arrayOfMeals);
+            // console.log(arrayOfMeals);
+            // console.log(resultsArray);
+            
+            
+            
+
+            return arrayOfMeals;
     }
 
 
