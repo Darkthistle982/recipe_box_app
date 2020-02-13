@@ -61,7 +61,6 @@ $(document).ready(function() {
                     appendCardTo('recipe-box', mealCard);
                     
                     
-                    
                 }
                 
 
