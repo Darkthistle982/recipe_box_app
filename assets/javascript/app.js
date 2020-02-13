@@ -10,6 +10,8 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+//some comment
+
 
 
 $(document).ready(function() {
