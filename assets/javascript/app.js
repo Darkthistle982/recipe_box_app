@@ -43,10 +43,6 @@ $(document).ready(function() {
             .then(function(response) {
                 console.log(response);
                 var arrayOfMeals = response.meals;
-
-                // FIXME: not working somewhere here
-                console.log('arrayOfMeals: ', arrayOfMeals);
-                console.log('arrayOffMeals.length: ', arrayOfMeals.length);
                 
                 
                 // TODO: iterate over all of the results
@@ -63,6 +59,12 @@ $(document).ready(function() {
                     
                     
                 }
+                
+                $('.recipe-card').on('click', function(event) {
+                    console.log(this);
+                    console.log(event);
+                    console.log('touched');
+                });
                 
 
             });
@@ -121,11 +123,11 @@ $(document).ready(function() {
         parentCardRow.append(titleDiv);
 
         // FIXME: click on one card and ALL of them print
-        $('.recipe-card').on('click', function(event) {
-            console.log(this);
-            console.log(event);
-            console.log('touched');
-        });
+        // $('.recipe-card').on('click', function(event) {
+        //     console.log(this);
+        //     console.log(event);
+        //     console.log('touched');
+        // });
 
         return parentCard;
     }
