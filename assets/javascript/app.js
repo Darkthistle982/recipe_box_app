@@ -43,6 +43,11 @@ $(document).ready(function() {
             .then(function(response) {
                 console.log(response);
                 var arrayOfMeals = response.meals;
+
+                // FIXME: not working somewhere here
+                console.log('arrayOfMeals: ', arrayOfMeals);
+                console.log('arrayOffMeals.length: ', arrayOfMeals.length);
+                
                 
                 // TODO: iterate over all of the results
                 for (let i = 0; i < arrayOfMeals.length; i++) {
@@ -71,7 +76,14 @@ $(document).ready(function() {
     function createCard(meal) {
         var mealTitle = meal.strMeal;
         var mealImg = meal.strMealThumb;
-        var mealTagsArray = meal.strTags.split(',');
+
+        // safety feature
+        var mealTagsArray;
+        if (meal.strTags != null) {
+            mealTagsArray = meal.strTags.split(',');
+        } else {
+            mealTagsArray = ['tag1', 'tag2'];
+        }
 
         var parentCard = $('<div>').addClass('card mx-auto');
         var cardBody = $('<div>').addClass('card-body');
@@ -96,6 +108,8 @@ $(document).ready(function() {
         titleDiv.append(divRow);
         var tagBox = $('<div>').addClass('container tag-box');
         divRow.append(tagBox);
+        
+        // might see problems here if there are no meal tags.
         for (let i = 0; i < mealTagsArray.length; i++) {
             const element = mealTagsArray[i];
             var spanTag = $('<span>').addClass('badge badge-pill badge-info').text(element);
