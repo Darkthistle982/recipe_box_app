@@ -101,13 +101,39 @@ $(document).ready(function() {
         
         // might see problems here if there are no meal tags.
         for (let i = 0; i < mealTagsArray.length; i++) {
-            const element = mealTagsArray[i];
-            var spanTag = $('<span>').addClass('badge badge-pill badge-info').text(element);
+            // const element = mealTagsArray[i];
+            var spanTag = createPillTag( mealTagsArray[i] );
+
             tagBox.append(spanTag);
         }
         parentCardRow.append(titleDiv);
 
         return parentCard;
+    }
+
+    function createPillTag(element) {
+        var lowerTag = element.toLowerCase();
+        // var pillColor = 'badge-light';
+
+        switch (lowerTag) {
+            case 'meat':
+                return $('<span>').addClass('badge badge-pill badge-danger').text(element);
+                break;
+
+            case 'dairy':
+                return $('<span>').addClass('badge badge-pill badge-info').text(element); 
+                break;
+
+            case 'mainmeal':
+                return $('<span>').addClass('badge badge-pill badge-primary').text(element); 
+                break;
+        
+            default:
+                return $('<span>').addClass('badge badge-pill badge-light').text(element);
+                break;
+        }
+
+
     }
 
 
