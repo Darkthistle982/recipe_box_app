@@ -192,7 +192,9 @@ $(document).ready(function() {
                 $('.recipe-card').on('click', function(event) {
                     console.log(this);
                     console.log(event);
-                    console.log('touched');
+                    
+                    console.log(event.currentTarget.textContent);
+                    
                 });
                 
 
@@ -201,8 +203,6 @@ $(document).ready(function() {
             // console.log('array of meals: ', arrayOfMeals);
             // console.log(arrayOfMeals);
             // console.log(resultsArray);
-            
-            
             
 
             return arrayOfMeals;
