@@ -273,14 +273,6 @@ $(document).ready(function () {
                             $('#ing19').html(ing19);
                             $('#ing20').html(ing20);
                             $('#instructions').text(instructions);
-                            $('#recall-button').addClass("btn btn-dark");
-                            $('#recall-button').text("Back");
-
-
-                            //Not sure how to get this callback working. i've tried a number of things.
-                            // $('#recall-button').on("click", function () {
-                            //     $('.recipe-box').html(searchResults);
-                            // });
                         });
 
                 });
