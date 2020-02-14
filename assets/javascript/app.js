@@ -74,7 +74,7 @@ $(document).ready(function () {
         // console.log('here is title: ' + title);
         addSuccessMessage('card-message');
     });
-    
+
 
     // ===================================================
     // EVENT - Search button
@@ -205,7 +205,7 @@ $(document).ready(function () {
                 // ===================================================
                 // ON CLICK - recipe card
                 // ===================================================
-                $('.recipe-card').on('click', function (event) {
+                $('.recipe-card').on('click', function () {
                     var key = $(this).attr('recipekey');
                     var queryURL = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=' + key;
 
@@ -242,7 +242,7 @@ $(document).ready(function () {
                             instructions = response.meals[0].strInstructions;
                             $('#mealName').html("<h3>" + mealName + "</h3>");
                             $('#exampleIMG').attr("src", mealIMG);
-                            $('#exampleIMG').attr("style", "height: 100px; width: 100px;");
+                            $('#exampleIMG').attr("style", "height: 200px; width: 200px;");
                             $('#categoryTag').html("Category: " + category);
                             $('#areaTag').html("Cuisine: " + cuisineType);
                             $('#ingredients-list').html("Ingredients: ");
@@ -258,22 +258,26 @@ $(document).ready(function () {
                             $('#ing10').html(ing10);
                             $('#ing11').html(ing11);
                             $('#ing12').html(ing12);
+                            $('#ing13').html(ing13);
+                            $('#ing14').html(ing14);
+                            $('#ing15').html(ing15);
+                            $('#ing16').html(ing16);
+                            $('#ing17').html(ing17);
+                            $('#ing18').html(ing18);
+                            $('#ing19').html(ing19);
+                            $('#ing20').html(ing20);
                             $('#instructions').text(instructions);
+                            $('#recall-button').addClass("btn btn-dark");
+                            $('#recall-button').text("Back");
 
 
-
-                            //come back
-                            // setTimeout(function() {
-                            //     $('.main-box').append(searchResultsCards);
-                            // }, 5 * 1000);
+                            //Not sure how to get this callback working. i've tried a number of things.
+                            // $('#recall-button').on("click", function () {
+                            //     $('.recipe-box').html(searchResults);
+                            // });
                         });
+
                 });
             });
-
-
-    }
-
-
-
-    // end of document ready
+    };
 });
