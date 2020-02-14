@@ -61,6 +61,11 @@ $(document).ready(function () {
     // ===================================================
     const apiSearchUrl = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
     const apiLookupUrl = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=";
+    const spoonRecipeLookup = "https://api.spoonacular.com/recipes/search?apiKey=8c9d7b8996c04b959597deda69934ea9&number=10&query=";
+    // get ingredient list
+    // https://api.spoonacular.com/recipes/246916/ingredientWidget.json?apiKey=8c9d7b8996c04b959597deda69934ea9
+    // render image
+    // https://spoonacular.com/cdn/ingredients_100x100/fresh-ground-beef.jpg
 
     var resultsArray = [];
     var clickedCardKey = '12345';
