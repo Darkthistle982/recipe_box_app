@@ -14,14 +14,15 @@ firebase.initializeApp(firebaseConfig);
 
 
 
-$(document).ready(function() {
+$(document).ready(function () {
 
     var resultsArray = [];
+    var clickedCardKey = '12345';
 
     // ===================================================
     // EVENT - save recipe ( + ) button 
     // ===================================================
-    $('#save-recipe-btn').on('click', function(event) {
+    $('#save-recipe-btn').on('click', function (event) {
         console.log('here is event', event);
         var title = $('#recipe-input').val();
         console.log('here is title: ' + title);
@@ -29,33 +30,33 @@ $(document).ready(function() {
         addSuccessMessage('card-message');
 
     });
-    
+
 
     // ===================================================
     // EVENT - Search buttons
     // ===================================================
-    $("#searchBtn").on("click", function(event) {
+    $("#searchBtn").on("click", function (event) {
         event.preventDefault();
         var trimSearchInputValue = $("#searchInput").val().trim();
 
-        resultsArray = ajaxCallSearch( trimSearchInputValue );
+        resultsArray = ajaxCallSearch(trimSearchInputValue);
         console.log('results array');
         console.log(resultsArray);
-        
+
     });
 
-    $("#searchBtn-below").on("click", function(event) {
+    $("#searchBtn-below").on("click", function (event) {
         event.preventDefault();
         var trimSearchInputValue = $("#searchInput-below").val().trim();
 
-        var someResultArray = ajaxCallSearch( trimSearchInputValue );
+        var someResultArray = ajaxCallSearch(trimSearchInputValue);
         console.log('someResultArray');
         console.log(someResultArray);
-        
+
     });
 
 
-    
+
 
 
 
@@ -65,6 +66,7 @@ $(document).ready(function() {
     function createCard(meal) {
         var mealTitle = meal.strMeal;
         var mealImg = meal.strMealThumb;
+        var recipeKey = meal.idMeal;
 
         // TODO: are there some default tags we want if no tags found.
         // safety feature
@@ -76,7 +78,7 @@ $(document).ready(function() {
         }
 
         var parentCard = $('<div>').addClass('card mx-auto');
-        var cardBody = $('<div>').addClass('card-body recipe-card');
+        var cardBody = $('<div>').addClass('card-body recipe-card').attr('recipeKey', recipeKey);
         var parentCardRow = $('<div>').addClass('row');
         parentCard.append(cardBody);
         cardBody.append(parentCardRow);
@@ -93,16 +95,16 @@ $(document).ready(function() {
         var titleP = $('<p>').addClass('text-right').text('This elegant dish can be made in under 30mins. Feeds 4. #dinner');
         titleDiv.append(titleH3);
         titleDiv.append(titleP);
-        
+
         var divRow = $('<div>').addClass('row');
         titleDiv.append(divRow);
         var tagBox = $('<div>').addClass('container tag-box');
         divRow.append(tagBox);
-        
+
         // might see problems here if there are no meal tags.
         for (let i = 0; i < mealTagsArray.length; i++) {
             // const element = mealTagsArray[i];
-            var spanTag = createPillTag( mealTagsArray[i] );
+            var spanTag = createPillTag(mealTagsArray[i]);
 
             tagBox.append(spanTag);
         }
@@ -110,6 +112,18 @@ $(document).ready(function() {
 
         return parentCard;
     }
+
+
+
+
+
+
+
+
+
+
+
+
 
     function createPillTag(element) {
         var lowerTag = element.toLowerCase();
@@ -121,13 +135,13 @@ $(document).ready(function() {
                 break;
 
             case 'dairy':
-                return $('<span>').addClass('badge badge-pill badge-info').text(element); 
+                return $('<span>').addClass('badge badge-pill badge-info').text(element);
                 break;
 
             case 'mainmeal':
-                return $('<span>').addClass('badge badge-pill badge-primary').text(element); 
+                return $('<span>').addClass('badge badge-pill badge-primary').text(element);
                 break;
-        
+
             default:
                 return $('<span>').addClass('badge badge-pill badge-light').text(element);
                 break;
@@ -152,7 +166,7 @@ $(document).ready(function() {
         $(elementClass).prepend(successMessage);
 
         // removes message after time
-        setTimeout(function() {
+        setTimeout(function () {
             $(elementClass).detach();
         }, 4 * 1000);
     }
@@ -165,50 +179,104 @@ $(document).ready(function() {
 
         //make the call
         $.ajax({
-                url: queryURL,
-                method: "GET"
-            })
-            .then(function(response) {
+            url: queryURL,
+            method: "GET"
+        })
+            .then(function (response) {
                 // console.log(response);
                 arrayOfMeals = response.meals;
-                
-                
+
+
                 // TODO: iterate over all of the results
                 for (let i = 0; i < arrayOfMeals.length; i++) {
                     const meal = arrayOfMeals[i];
                     // console.log('meals thing: ' + i );
                     // console.log(meal.strMeal);
                     // console.log(meal.strMealThumb);
-                    
+
                     // create card and append
                     var mealCard = createCard(meal);
                     appendCardTo('recipe-box', mealCard);
 
                     //push to array
                     // arrayOfMeals.push(meal);
-                    
+
                 }
 
-                $('.recipe-card').on('click', function(event) {
-                    console.log(this);
-                    console.log(event);
-                    
-                    console.log(event.currentTarget.textContent);
-                    
+                // ===================================================
+                // ON CLICK - recipe card
+                // ===================================================
+                $('.recipe-card').on('click', function (event) {
+                    // console.log(this);
+                    // console.log(event);
+
+                    // console.log(event.currentTarget.textContent);
+
+                    //TODO: GET the fridge method to get recipeKey
+                    //fridgeMagnet.text($(this).attr("data-letter"));
+                    var key = $(this).attr('recipekey');
+                    console.log('key thang: ', key);
+
+                    // clickedCardKey = '67891';
+
+                    //TODO: ajax call from recipeKey
+                    // console print again
+                    // AJAX -> queryURL - recipeKey
+                    // var qThing = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i='
+                    // ajaxQuery(qThing, key);
+                    // // console.log(daResponse);
+
+                    // var queryURL = queryString + key;
+
+                    var queryURL = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=' + key;
+                    $.ajax({
+                        url: queryURL,
+                        method: "GET"
+                    })
+                        .then(function (response) {
+                            console.log(response);
+
+                            //TODO: build details 'page' and fill with response data
+
+                            
+
+                        });
+
+
+
                 });
-                
+
 
             });
 
-            // console.log('array of meals: ', arrayOfMeals);
-            // console.log(arrayOfMeals);
-            // console.log(resultsArray);
-            
+        // console.log('array of meals: ', arrayOfMeals);
+        // console.log(arrayOfMeals);
+        // console.log(resultsArray);
 
-            return arrayOfMeals;
+
+        return arrayOfMeals;
+    }
+
+    function ajaxQuery(queryString, key) {
+        // https://www.themealdb.com/api/json/v1/1/lookup.php?i=
+        // var queryURL = "https://www.themealdb.com/api/json/v1/1/search.php?s=" + searchInput;
+        var queryURL = queryString + key;
+
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        })
+            .then(function (response) {
+                // console.log(response);
+
+                //TODO: build details 'page' and fill with response data
+
+                return response;
+
+            });
     }
 
 
 
-// end of document ready
+    // end of document ready
 });
