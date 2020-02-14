@@ -77,23 +77,21 @@ $(document).ready(function () {
     // ===================================================
     $("#searchBtn").on("click", function (event) {
         event.preventDefault();
-        // $('.recipe-box').empty();
         var trimSearchInputValue = $("#searchInput").val().trim();
         resultsArray = ajaxCallSearch(trimSearchInputValue);
+        $('#searchInput').val("");
         console.log('results array');
         console.log(resultsArray);
     });
-
+    
     $("#searchBtn-below").on("click", function (event) {
         event.preventDefault();
-        // $('.recipe-box').empty();
         var trimSearchInputValue = $("#searchInput-below").val().trim();
-
         // var someResultArray = ajaxCallSearch(trimSearchInputValue);
         // console.log('someResultArray');
         // console.log(someResultArray);
         ajaxCallSearch(trimSearchInputValue);
-
+        $('#searchInput-below').val("");
     });
 
     // ===================================================
@@ -235,17 +233,39 @@ $(document).ready(function () {
                             mealName = response.meals[0].strMeal;
                             mealIMG = response.meals[0].strMealThumb;
                             category = response.meals[0].strCategory;
-                            
-
+                            cuisineType = response.meals[0].strArea;
+                            ing1 = response.meals[0].strIngredient1 + ": " + response.meals[0].strMeasure1;
+                            ing2 = response.meals[0].strIngredient2 + ": " + response.meals[0].strMeasure2;
+                            ing3 = response.meals[0].strIngredient3 + ": " + response.meals[0].strMeasure3;
+                            ing4 = response.meals[0].strIngredient4 + ": " + response.meals[0].strMeasure4;
+                            ing5 = response.meals[0].strIngredient5 + ": " + response.meals[0].strMeasure5;
+                            ing6 = response.meals[0].strIngredient6 + ": " + response.meals[0].strMeasure6;
+                            ing7 = response.meals[0].strIngredient7 + ": " + response.meals[0].strMeasure7;
+                            ing8 = response.meals[0].strIngredient8 + ": " + response.meals[0].strMeasure8;
+                            ing9 = response.meals[0].strIngredient9 + ": " + response.meals[0].strMeasure9;
+                            ing10 = response.meals[0].strIngredient10 + ": " + response.meals[0].strMeasure10;
+                            ing11 = response.meals[0].strIngredient11 + ": " + response.meals[0].strMeasure11;
+                            ing12 = response.meals[0].strIngredient12 + ": " + response.meals[0].strMeasure12;
+                            instructions = response.meals[0].strInstructions;
                             $('#mealName').html("<h3>" + mealName + "</h3>");
                             $('#exampleIMG').attr("src", mealIMG);
                             $('#exampleIMG').attr("style", "height: 100px; width: 100px;");
-                            $('#categoryTag').html("Category:" + category);
-
-
-
-
-
+                            $('#categoryTag').html("Category: " + category);
+                            $('#areaTag').html("Cuisine: " + cuisineType);
+                            $('#ingredients-list').html("Ingredients: ");
+                            $('#ing1').html(ing1);
+                            $('#ing2').html(ing2);
+                            $('#ing3').html(ing3);
+                            $('#ing4').html(ing4);
+                            $('#ing5').html(ing5);
+                            $('#ing6').html(ing6);
+                            $('#ing7').html(ing7);
+                            $('#ing8').html(ing8);
+                            $('#ing9').html(ing9);
+                            $('#ing10').html(ing10);
+                            $('#ing11').html(ing11);
+                            $('#ing12').html(ing12);
+                            $('#instructions').text(instructions);
 
                             //come back
                             // setTimeout(function() {
