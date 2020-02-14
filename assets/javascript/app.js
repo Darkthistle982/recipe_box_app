@@ -1,20 +1,74 @@
-var firebaseConfig = {
+
+
+
+
+
+var config = {
     apiKey: "AIzaSyAggh_9HPrLN-IokUfsrCz2bCP_4ABUd4Y",
-    authDomain: "salty-beards-recipe-box.firebaseapp.com",
-    databaseURL: "https://salty-beards-recipe-box.firebaseio.com",
-    projectId: "salty-beards-recipe-box",
-    storageBucket: "salty-beards-recipe-box.appspot.com",
-    messagingSenderId: "655365438357",
-    appId: "1:655365438357:web:3b219292065eb7ad0e149c"
+    authDomain: "salty-beards-recipe-box.firebaseio.com",
+    databaseURL: "https://salty-beards-recipe-box.firebaseio.com/",
+    projectId: "salty-beards-recipe-box"
+    // storageBucket: "salty-beards-recipe-box.appspot.com",
+    // messagingSenderId: "655365438357",
+    // appId: "1:655365438357:web:3b219292065eb7ad0e149c"
 };
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-
-//some comment
-
+firebase.initializeApp(config);
+var dataRef = firebase.database();
 
 
+
+
+$('.test-save').on('click', function(event) {
+    dataRef.ref().push({
+      title: 'Bean Soup',
+      img: 'https://www.themealdb.com/images/media/meals/1529444830.jpg',
+      instructions: 'First get the pan. cook. then serve.',
+      dateAdded: firebase.database.ServerValue.TIMESTAMP
+    });
+
+  });
+
+  // Firebase watcher + initial loader HINT: This code behaves similarly to .on("value")
+  dataRef.ref().on("child_added", function(childSnapshot) {
+
+      // // Log everything that's coming out of snapshot
+      // console.log(childSnapshot.val().name);
+      // console.log(childSnapshot.val().name);
+      // console.log(childSnapshot.val().email);
+      // console.log(childSnapshot.val().age);
+      // console.log(childSnapshot.val().comment);
+      // console.log(childSnapshot.val().joinDate);
+
+      // // full list of items to the well
+      // $("#full-member-list").append("<div class='well'><span class='member-name'> " +
+      //   childSnapshot.val().name +
+      //   " </span><span class='member-email'> " + childSnapshot.val().email +
+      //   " </span><span class='member-age'> " + childSnapshot.val().age +
+      //   " </span><span class='member-comment'> " + childSnapshot.val().comment +
+      //   " </span></div>");
+
+      // // Handle the errors
+      console.log('anything happen?');
+      
+  }, function(errorObject) {
+      console.log("Errors handled: " + errorObject.code);
+  });
+
+
+
+
+
+
+// ===================================================
+// doc ready
+// ===================================================
 $(document).ready(function() {
+
+  
+
+  
+
 
     var resultsArray = [];
     var clickedCardKey = '12345';
@@ -30,6 +84,8 @@ $(document).ready(function() {
         addSuccessMessage('card-message');
 
     });
+
+    
 
 
     // ===================================================
