@@ -78,14 +78,6 @@ $(document).ready(function () {
     // ===================================================
     // EVENT - Search buttons
     // ===================================================
-    $("#searchBtn").on("click", function (event) {
-        event.preventDefault();
-        var trimSearchInputValue = $("#searchInput").val().trim();
-        resultsArray = ajaxCallSearch(trimSearchInputValue);
-        $('#searchInput').val("");
-        console.log('results array');
-        console.log(resultsArray);
-    });
     
     $("#searchBtn-below").on("click", function (event) {
         event.preventDefault();
@@ -279,7 +271,7 @@ $(document).ready(function () {
                             $('#instructions').text(instructions);
 
 
-                            
+
                             //come back
                             // setTimeout(function() {
                             //     $('.main-box').append(searchResultsCards);
@@ -289,8 +281,6 @@ $(document).ready(function () {
             });
 
 
-
-        return arrayOfMeals;
     }
 
 
