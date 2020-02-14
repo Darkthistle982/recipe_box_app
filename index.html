@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
     <!-- Google Fonts-->
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker|Rock+Salt&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Miltonian+Tattoo&display=swap" rel="stylesheet">
     <!-- Favorites Page link -->
     <link rel="favoritesPage" href="favoriteRecipes.html" />
     <!-- Saved recipes Page link -->
@@ -57,12 +58,6 @@
                     </div>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" id="searchInput" type="search" placeholder="Search" aria-label="Search" />
-                <button class="btn btn-outline-success my-2 my-sm-0" id="searchBtn" type="submit">
-                    Search
-                </button>
-            </form>
             <button class="btn btn-primary test-save">test-save</button>
         </div>
     </nav>
@@ -71,7 +66,6 @@
 
     <!-- MAIN container -->
     <div class=" container card main-box">
-        <!-- <div class="card-header"> -->
         <div class="jumbotron">
             <h1 class="display-4">Welcome!</h1>
             <p class="lead">Come sit by the hearth. Enjoy looking for and saving recipes. </p>
@@ -82,12 +76,13 @@
                 <button class="btn btn-outline-success my-2 my-sm-0" id="searchBtn-below" type="submit">Search</button>
             </form>
         </div>
-        <!-- <h1>Search Results</h1> -->
         <!-- ====== here is where message displays ================= -->
         <div class="card-message"></div>
-        <!-- </div> -->
 
+
+        <!-- ================================================================================================= -->
         <!-- place the cards in this container -->
+        <!-- ================================================================================================= -->
         <div class="container recipe-box row col-lg-12 ">
 
             <!-- card thing to compare -->
@@ -115,12 +110,13 @@
                 </div>
             </div>
         </div>
-        <!-- end of card row -->
+        <!-- end of recipe-box contianer -->
 
         <!-- here -->
         <div class="container">
             <div id="mealName" class=""></div>
             <img id="exampleIMG" src="" class="float-right">
+            <img id="exampleIMG" src="https://via.placeholder.com/100" class="float-right">
             <br>
             <div id="categoryTag"></div>
             <div id="areaTag"></div>
@@ -145,6 +141,7 @@
             <pre id="instructions"></pre>
         </div>
         <!-- end of main container -->
+    </div>
 
 
         <!-- fixed -->

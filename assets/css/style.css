@@ -2,7 +2,8 @@
 
 
 /* font-family: 'Permanent Marker', cursive;
-font-family: 'Rock Salt', cursive; */
+font-family: 'Rock Salt', cursive;
+font-family: 'Miltonian Tattoo', cursive; */
 
 * {
     box-sizing: border-box;
@@ -51,4 +52,8 @@ nav {
 
 .badge-pill {
     margin-right: 7px;
+}
+
+.jumbotron {
+    font-family: 'Miltonian Tattoo', cursive;
 }

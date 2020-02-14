@@ -59,6 +59,12 @@ dataRef.ref().on("child_added", function (childSnapshot) {
 // ===================================================
 $(document).ready(function () {
 
+    // ===================================================
+    // GLOBAL variables
+    // ===================================================
+    const apiSearchUrl = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
+    const apiLookupUrl = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=";
+
     var resultsArray = [];
     var clickedCardKey = '12345';
 
@@ -87,9 +93,6 @@ $(document).ready(function () {
     $("#searchBtn-below").on("click", function (event) {
         event.preventDefault();
         var trimSearchInputValue = $("#searchInput-below").val().trim();
-        // var someResultArray = ajaxCallSearch(trimSearchInputValue);
-        // console.log('someResultArray');
-        // console.log(someResultArray);
         ajaxCallSearch(trimSearchInputValue);
         $('#searchInput-below').val("");
     });
@@ -97,18 +100,33 @@ $(document).ready(function () {
     // ===================================================
     // helper functions
     // ===================================================
+    function goGetDataFromApi(qUrl, userInput) {
+        var queryURL = qUrl + userInput;
+
+        $.ajax({
+            method: "GET",
+            url: queryURL
+        }).then(function(response) {
+            console.log('here is my call');
+            console.log(response);
+            
+            return response;
+        });
+    }
+
+
     function createCard(meal) {
         var mealTitle = meal.strMeal;
         var mealImg = meal.strMealThumb;
         var recipeKey = meal.idMeal;
+        var areaTag = '';
+        areaTag = meal.strArea;
 
         // TODO: are there some default tags we want if no tags found. do we?
         // safety feature
-        var mealTagsArray;
+        var mealTagsArray = [];
         if (meal.strTags != null) {
             mealTagsArray = meal.strTags.split(',');
-        } else {
-            mealTagsArray = ['tag1', 'tag2'];
         }
 
         var parentCard = $('<div>').addClass('card mx-auto');
@@ -135,7 +153,11 @@ $(document).ready(function () {
         var tagBox = $('<div>').addClass('container tag-box');
         divRow.append(tagBox);
 
-        // might see problems here if there are no meal tags.
+        if (areaTag !== '') {
+            var mealArea = $('<span>').addClass('badge badge-pill badge-warning').text(areaTag);
+            tagBox.append(mealArea);
+        }
+
         for (let i = 0; i < mealTagsArray.length; i++) {
             // const element = mealTagsArray[i];
             var spanTag = createPillTag(mealTagsArray[i]);
@@ -153,19 +175,12 @@ $(document).ready(function () {
         switch (lowerTag) {
             case 'meat':
                 return $('<span>').addClass('badge badge-pill badge-danger').text(element);
-                break;
 
             case 'dairy':
                 return $('<span>').addClass('badge badge-pill badge-info').text(element);
-                break;
-
-            case 'mainmeal':
-                return $('<span>').addClass('badge badge-pill badge-primary').text(element);
-                break;
 
             default:
                 return $('<span>').addClass('badge badge-pill badge-light').text(element);
-                break;
         }
     }
 
@@ -267,6 +282,19 @@ $(document).ready(function () {
                             $('#ing12').html(ing12);
                             $('#instructions').text(instructions);
 
+
+                            //TODO: BUILD all of the html elements we need to show details.
+                            var parentDiv = $('<div>').addClass('container ');
+                            var h1Tag = $('<h1>').text(response.meals[0].strMeal);
+                            // FIXME: how should we get the index   ^^^^^^ assume that it's always 1 result. 
+                            parentDiv.append(h1Tag);
+                            console.log(response.meals[0].strInstructions);
+                            parentDiv.append($('<pre>').text(response.meals[0].strInstructions));
+
+
+                            $('.main-box').append(parentDiv);
+
+
                             //come back
                             // setTimeout(function() {
                             //     $('.main-box').append(searchResultsCards);
@@ -280,10 +308,10 @@ $(document).ready(function () {
         return arrayOfMeals;
     }
 
-    function ajaxQuery(queryString, key) {
-        // https://www.themealdb.com/api/json/v1/1/lookup.php?i=
-        // var queryURL = "https://www.themealdb.com/api/json/v1/1/search.php?s=" + searchInput;
-        var queryURL = queryString + key;
+    // function ajaxQuery(queryString, key) {
+    //     // https://www.themealdb.com/api/json/v1/1/lookup.php?i=
+    //     // var queryURL = "https://www.themealdb.com/api/json/v1/1/search.php?s=" + searchInput;
+    //     var queryURL = queryString + key;
 
         $.ajax({
             url: queryURL,
@@ -292,12 +320,12 @@ $(document).ready(function () {
             .then(function (response) {
                 // console.log(response);
 
-                //TODO: build details 'page' and fill with response data
+    //             //TODO: build details 'page' and fill with response data
 
-                return response;
+    //             return response;
 
-            });
-    }
+    //         });
+    // }
 
 
 
