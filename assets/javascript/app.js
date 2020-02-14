@@ -95,7 +95,6 @@ $(document).ready(function() {
     // ===================================================
     $("#searchBtn").on("click", function(event) {
         event.preventDefault();
-        $('.recipe-box').empty();
         var trimSearchInputValue = $("#searchInput").val().trim();
 
         resultsArray = ajaxCallSearch(trimSearchInputValue);
@@ -106,7 +105,6 @@ $(document).ready(function() {
 
     $("#searchBtn-below").on("click", function(event) {
         event.preventDefault();
-        $('.recipe-box').empty();
         var trimSearchInputValue = $("#searchInput-below").val().trim();
 
         // var someResultArray = ajaxCallSearch(trimSearchInputValue);
