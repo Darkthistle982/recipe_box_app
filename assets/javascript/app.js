@@ -128,6 +128,8 @@ $(document).ready(function() {
         var mealTitle = meal.strMeal;
         var mealImg = meal.strMealThumb;
         var recipeKey = meal.idMeal;
+        var areaTag = '';
+        areaTag = meal.strArea;
 
         // TODO: are there some default tags we want if no tags found. do we?
         // safety feature
@@ -169,6 +171,13 @@ $(document).ready(function() {
 
             tagBox.append(spanTag);
         }
+
+        if (areaTag !== '') {
+            var mealArea = $('<span>').addClass('badge badge-pill badge-primary').text(areaTag);
+            tagBox.append(mealArea);
+        }
+
+
 
         parentCardRow.append(titleDiv);
 
