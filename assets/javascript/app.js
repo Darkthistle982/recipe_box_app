@@ -1,8 +1,3 @@
-
-
-
-
-
 var config = {
     apiKey: "AIzaSyAggh_9HPrLN-IokUfsrCz2bCP_4ABUd4Y",
     authDomain: "salty-beards-recipe-box.firebaseio.com",
@@ -16,46 +11,43 @@ var config = {
 firebase.initializeApp(config);
 var dataRef = firebase.database();
 
-
-
-// ============ TEST push EVENT ==========
-$('.test-save').on('click', function(event) {
-    // dataRef.ref().push({
-    //   title: 'Bean bread',
-    //   img: 'https://www.themealdb.com/images/media/meals/1529444830.jpg',
-    //   instructions: 'First get the pan. cook. then serve.',
-    //   dateAdded: firebase.database.ServerValue.TIMESTAMP
-    // });
-
-  });
+// ============ TEST push ==========
+$('.test-save').on('click', function (event) {
+    dataRef.ref().push({
+        title: 'Bean bread',
+        img: 'https://www.themealdb.com/images/media/meals/1529444830.jpg',
+        instructions: 'First get the pan. cook. then serve.',
+        dateAdded: firebase.database.ServerValue.TIMESTAMP
+    });
+});
 
 // =========== firebase child added in db ============
-  dataRef.ref().on("child_added", function(childSnapshot) {
+dataRef.ref().on("child_added", function (childSnapshot) {
 
-      // // Log everything that's coming out of snapshot
-      console.log(childSnapshot.title);
-      
-      // console.log(childSnapshot.val().name);
-      // console.log(childSnapshot.val().name);
-      // console.log(childSnapshot.val().email);
-      // console.log(childSnapshot.val().age);
-      // console.log(childSnapshot.val().comment);
-      // console.log(childSnapshot.val().joinDate);
+    // // Log everything that's coming out of snapshot
+    // console.log(childSnapshot.title);
 
-      // // full list of items to the well
-      // $("#full-member-list").append("<div class='well'><span class='member-name'> " +
-      //   childSnapshot.val().name +
-      //   " </span><span class='member-email'> " + childSnapshot.val().email +
-      //   " </span><span class='member-age'> " + childSnapshot.val().age +
-      //   " </span><span class='member-comment'> " + childSnapshot.val().comment +
-      //   " </span></div>");
+    // console.log(childSnapshot.val().name);
+    // console.log(childSnapshot.val().name);
+    // console.log(childSnapshot.val().email);
+    // console.log(childSnapshot.val().age);
+    // console.log(childSnapshot.val().comment);
+    // console.log(childSnapshot.val().joinDate);
 
-      // // Handle the errors
-      console.log('anything happen?');
-      
-  }, function(errorObject) {
-      console.log("Errors handled: " + errorObject.code);
-  });
+    // // full list of items to the well
+    // $("#full-member-list").append("<div class='well'><span class='member-name'> " +
+    //   childSnapshot.val().name +
+    //   " </span><span class='member-email'> " + childSnapshot.val().email +
+    //   " </span><span class='member-age'> " + childSnapshot.val().age +
+    //   " </span><span class='member-comment'> " + childSnapshot.val().comment +
+    //   " </span></div>");
+
+    // // Handle the errors
+    // console.log('anything happen?');
+
+}, function (errorObject) {
+    // console.log("Errors handled: " + errorObject.code);
+});
 
 
 
@@ -65,7 +57,7 @@ $('.test-save').on('click', function(event) {
 // ===================================================
 // doc ready
 // ===================================================
-$(document).ready(function() {
+$(document).ready(function () {
 
     // ===================================================
     // GLOBAL variables
@@ -73,16 +65,17 @@ $(document).ready(function() {
     const apiSearchUrl = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
     const apiLookupUrl = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=";
 
+    var resultsArray = [];
+    var clickedCardKey = '12345';
+
     // ===================================================
     // EVENT - save recipe ( + ) button 
     // ===================================================
-    $('#save-recipe-btn').on('click', function(event) {
-        console.log('here is event', event);
+    $('#save-recipe-btn').on('click', function (event) {
+        // console.log('here is event', event);
         var title = $('#recipe-input').val();
-        console.log('here is title: ' + title);
-
+        // console.log('here is title: ' + title);
         addSuccessMessage('card-message');
-
     });
 
     // ============ TEST EVENT ==========
@@ -101,13 +94,8 @@ $(document).ready(function() {
         event.preventDefault();
         var trimSearchInputValue = $("#searchInput-below").val().trim();
         ajaxCallSearch(trimSearchInputValue);
-
+        $('#searchInput-below').val("");
     });
-
-
-
-
-
 
     // ===================================================
     // helper functions
@@ -181,10 +169,8 @@ $(document).ready(function() {
 
 
         parentCardRow.append(titleDiv);
-
         return parentCard;
     }
-
 
     function createPillTag(element) {
         var lowerTag = element.toLowerCase();
@@ -200,16 +186,12 @@ $(document).ready(function() {
             default:
                 return $('<span>').addClass('badge badge-pill badge-light').text(element);
         }
-
-
     }
-
 
     function appendCardTo(targetClass, card) {
         targetClass = '.' + targetClass;
         $(targetClass).append(card);
     }
-
 
     function addSuccessMessage(elementClass) {
         elementClass = '.' + elementClass;
@@ -220,11 +202,10 @@ $(document).ready(function() {
         $(elementClass).prepend(successMessage);
 
         // removes message after time
-        setTimeout(function() {
+        setTimeout(function () {
             $(elementClass).detach();
         }, 4 * 1000);
     }
-
 
     function ajaxCallSearch(inputString) {
         var searchInput = inputString;
@@ -233,13 +214,12 @@ $(document).ready(function() {
 
         //make the call
         $.ajax({
-                url: queryURL,
-                method: "GET"
-            })
-            .then(function(response) {
+            url: queryURL,
+            method: "GET"
+        })
+            .then(function (response) {
                 // console.log(response);
                 arrayOfMeals = response.meals;
-
 
                 // TODO: iterate over all of the results
                 for (let i = 0; i < arrayOfMeals.length; i++) {
@@ -254,29 +234,57 @@ $(document).ready(function() {
 
                     //push to array
                     // arrayOfMeals.push(meal);
-
                 }
 
                 // ===================================================
                 // ON CLICK - recipe card
                 // ===================================================
-                $('.recipe-card').on('click', function(event) {
-                    // to be safe, 
-                    var key = '52952';
-                    key = $(this).attr('recipekey');
-
-
-                    console.log('key thang: ', key);
-
+                $('.recipe-card').on('click', function (event) {
+                    var key = $(this).attr('recipekey');
                     var queryURL = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=' + key;
+
                     $.ajax({
-                            url: queryURL,
-                            method: "GET"
-                        })
-                        .then(function(response) {
-                            console.log('here is response');
-                            console.log(response);
-                            var searchResultsCards = $('.recipe-box').detach();
+                        url: queryURL,
+                        method: "GET"
+                    })
+                        .then(function (response) {
+                            $('.recipe-box').detach();
+                            mealName = response.meals[0].strMeal;
+                            mealIMG = response.meals[0].strMealThumb;
+                            category = response.meals[0].strCategory;
+                            cuisineType = response.meals[0].strArea;
+                            ing1 = response.meals[0].strIngredient1 + ": " + response.meals[0].strMeasure1;
+                            ing2 = response.meals[0].strIngredient2 + ": " + response.meals[0].strMeasure2;
+                            ing3 = response.meals[0].strIngredient3 + ": " + response.meals[0].strMeasure3;
+                            ing4 = response.meals[0].strIngredient4 + ": " + response.meals[0].strMeasure4;
+                            ing5 = response.meals[0].strIngredient5 + ": " + response.meals[0].strMeasure5;
+                            ing6 = response.meals[0].strIngredient6 + ": " + response.meals[0].strMeasure6;
+                            ing7 = response.meals[0].strIngredient7 + ": " + response.meals[0].strMeasure7;
+                            ing8 = response.meals[0].strIngredient8 + ": " + response.meals[0].strMeasure8;
+                            ing9 = response.meals[0].strIngredient9 + ": " + response.meals[0].strMeasure9;
+                            ing10 = response.meals[0].strIngredient10 + ": " + response.meals[0].strMeasure10;
+                            ing11 = response.meals[0].strIngredient11 + ": " + response.meals[0].strMeasure11;
+                            ing12 = response.meals[0].strIngredient12 + ": " + response.meals[0].strMeasure12;
+                            instructions = response.meals[0].strInstructions;
+                            $('#mealName').html("<h3>" + mealName + "</h3>");
+                            $('#exampleIMG').attr("src", mealIMG);
+                            $('#exampleIMG').attr("style", "height: 100px; width: 100px;");
+                            $('#categoryTag').html("Category: " + category);
+                            $('#areaTag').html("Cuisine: " + cuisineType);
+                            $('#ingredients-list').html("Ingredients: ");
+                            $('#ing1').html(ing1);
+                            $('#ing2').html(ing2);
+                            $('#ing3').html(ing3);
+                            $('#ing4').html(ing4);
+                            $('#ing5').html(ing5);
+                            $('#ing6').html(ing6);
+                            $('#ing7').html(ing7);
+                            $('#ing8').html(ing8);
+                            $('#ing9').html(ing9);
+                            $('#ing10').html(ing10);
+                            $('#ing11').html(ing11);
+                            $('#ing12').html(ing12);
+                            $('#instructions').text(instructions);
 
 
                             //TODO: BUILD all of the html elements we need to show details.
@@ -296,17 +304,9 @@ $(document).ready(function() {
                             //     $('.main-box').append(searchResultsCards);
                             // }, 5 * 1000);
                         });
-
-
-
                 });
-
-
             });
 
-        // console.log('array of meals: ', arrayOfMeals);
-        // console.log(arrayOfMeals);
-        // console.log(resultsArray);
 
 
         return arrayOfMeals;
@@ -317,12 +317,12 @@ $(document).ready(function() {
     //     // var queryURL = "https://www.themealdb.com/api/json/v1/1/search.php?s=" + searchInput;
     //     var queryURL = queryString + key;
 
-    //     $.ajax({
-    //             url: queryURL,
-    //             method: "GET"
-    //         })
-    //         .then(function(response) {
-    //             // console.log(response);
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        })
+            .then(function (response) {
+                // console.log(response);
 
     //             //TODO: build details 'page' and fill with response data
 

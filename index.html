@@ -85,7 +85,6 @@
         <!-- ================================================================================================= -->
         <div class="container recipe-box row col-lg-12 ">
 
-
             <!-- card thing to compare -->
             <div class="card mx-auto">
                 <div class="card-body recipe-card">
@@ -115,58 +114,35 @@
 
         <!-- container that holds the details of the recipe clicked  -->
         <div class="container detail-box">
-            <h3 id="mealName" class="">TEMP Recipe Title</h3>
+            <div id="mealName" class=""></div>
             <img id="exampleIMG" src="https://via.placeholder.com/100" class="float-right">
             <br>
-            <div id="categoryTag">recipe tag</div>
-            <div id="areaTag">cuisine tag</div>
+            <div id="categoryTag"></div>
+            <div id="areaTag"></div>
+            <br>
+            <div id="ingredients-list"></div>
             <ul>
-                <li id="ing1" class="d-inline mr-1">
-                    <p id="meas1" class="d-inline"></p>
-                </li>
-                <li id="ing2" class="d-inline mr-1">
-                    <p id="meas2" class="d-inline"></p>
-                </li>
-                <li id="ing3" class="d-inline mr-1">
-                    <p id="meas3" class="d-inline"></p>
-                </li>
-                <li id="ing4" class="d-inline mr-1">
-                    <p id="meas4" class="d-inline"></p>
-                </li>
-                <li id="ing5" class="d-inline mr-1">
-                    <p id="meas5" class="d-inline"></p>
-                </li>
-                <li id="ing6" class="d-inline mr-1">
-                    <p id="meas6" class="d-inline"></p>
-                </li>
-                <li id="ing7" class="d-inline mr-1">
-                    <p id="meas7" class="d-inline"></p>
-                </li>
-                <li id="ing8" class="d-inline mr-1">
-                    <p id="meas8" class="d-inline"></p>
-                </li>
-                <li id="ing9" class="d-inline mr-1">
-                    <p id="meas9" class="d-inline"></p>
-                </li>
-                <li id="ing10" class="d-inline mr-1">
-                    <p id="meas10" class="d-inline"></p>
-                </li>
-                <li id="ing11" class="d-inline mr-1">
-                    <p id="meas11" class="d-inline"></p>
-                </li>
-                <li id="ing12" class="d-inline mr-1">
-                    <p id="meas12" class="d-inline"></p>
-                </li>
+                <li id="ing1" class=""></li>
+                <li id="ing2" class=""></li>
+                <li id="ing3" class=""></li>
+                <li id="ing4" class=""></li>
+                <li id="ing5" class=""></li>
+                <li id="ing6" class=""></li>
+                <li id="ing7" class=""></li>
+                <li id="ing8" class=""></li>
+                <li id="ing9" class=""></li>
+                <li id="ing10" class=""></li>
+                <li id="ing11" class=""></li>
+                <li id="ing12" class=""></li>
             </ul>
+            <br>
+            <br>
             <pre id="instructions"></pre>
         </div>
         <!-- end of main container -->
     </div>
 
 
-
-
-        <!-- Add new recipe button link -->
         <!-- fixed -->
         <footer class="footer mt-auto py-3">
             <div class="container">
@@ -186,9 +162,7 @@
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                             <div class="modal-body">
-                                <p>add new recipe form will go here</p>
-                                <!-- <div class="card-message"></div> -->
-
+                                <div class="card-message"></div>
                                 <!-- ===================== FORM ================================= -->
                                 <form role="form">
                                     <div class="form-group row">
@@ -203,9 +177,8 @@
                                         <label for="instructions-input">Cooking Instructions</label>
                                         <textarea class="form-control" rows="5" id="instructions-input"></textarea>
                                     </div>
-                                    <!-- <button class="btn btn-default" id="add-user" type="submit"> Submit </button> -->
+                                    <button class="btn btn-default" id="add-user" type="submit"> Submit </button>
                                 </form>
-
                             </div>
 
                             <div class="modal-footer">
@@ -231,7 +204,5 @@
         <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-database.js"></script>
         <script src="./assets/javascript/app.js"></script>
 </body>
-
-</html>
 
 </html>
