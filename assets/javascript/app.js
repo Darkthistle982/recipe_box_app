@@ -284,15 +284,15 @@ $(document).ready(function () {
 
 
                             //TODO: BUILD all of the html elements we need to show details.
-                            var parentDiv = $('<div>').addClass('container ');
-                            var h1Tag = $('<h1>').text(response.meals[0].strMeal);
+                            // var parentDiv = $('<div>').addClass('container ');
+                            // var h1Tag = $('<h1>').text(response.meals[0].strMeal);
                             // FIXME: how should we get the index   ^^^^^^ assume that it's always 1 result. 
-                            parentDiv.append(h1Tag);
-                            console.log(response.meals[0].strInstructions);
-                            parentDiv.append($('<pre>').text(response.meals[0].strInstructions));
+                            // parentDiv.append(h1Tag);
+                            // console.log(response.meals[0].strInstructions);
+                            // parentDiv.append($('<pre>').text(response.meals[0].strInstructions));
 
 
-                            $('.main-box').append(parentDiv);
+                            // $('.main-box').append(parentDiv);
 
 
                             //come back
@@ -308,10 +308,13 @@ $(document).ready(function () {
         return arrayOfMeals;
     }
 
-    // function ajaxQuery(queryString, key) {
-    //     // https://www.themealdb.com/api/json/v1/1/lookup.php?i=
-    //     // var queryURL = "https://www.themealdb.com/api/json/v1/1/search.php?s=" + searchInput;
-    //     var queryURL = queryString + key;
+
+
+    // ***** maybe get rid of this one ******************
+    function ajaxQuery(queryString, key) {
+        // https://www.themealdb.com/api/json/v1/1/lookup.php?i=
+        // var queryURL = "https://www.themealdb.com/api/json/v1/1/search.php?s=" + searchInput;
+        var queryURL = queryString + key;
 
         $.ajax({
             url: queryURL,
@@ -322,10 +325,10 @@ $(document).ready(function () {
 
     //             //TODO: build details 'page' and fill with response data
 
-    //             return response;
+                return response;
 
-    //         });
-    // }
+            });
+    }
 
 
 
