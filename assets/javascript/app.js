@@ -18,10 +18,10 @@ var dataRef = firebase.database();
 
 
 
-
+// ============ TEST push ==========
 $('.test-save').on('click', function(event) {
     dataRef.ref().push({
-      title: 'Bean Soup',
+      title: 'Bean bread',
       img: 'https://www.themealdb.com/images/media/meals/1529444830.jpg',
       instructions: 'First get the pan. cook. then serve.',
       dateAdded: firebase.database.ServerValue.TIMESTAMP
@@ -29,10 +29,12 @@ $('.test-save').on('click', function(event) {
 
   });
 
-  // Firebase watcher + initial loader HINT: This code behaves similarly to .on("value")
+// =========== firebase child added in db ============
   dataRef.ref().on("child_added", function(childSnapshot) {
 
       // // Log everything that's coming out of snapshot
+      console.log(childSnapshot.title);
+      
       // console.log(childSnapshot.val().name);
       // console.log(childSnapshot.val().name);
       // console.log(childSnapshot.val().email);
