@@ -217,17 +217,6 @@ $(document).ready(function () {
                     var key = $(this).attr('recipekey');
                     console.log('key thang: ', key);
 
-                    // clickedCardKey = '67891';
-
-                    //TODO: ajax call from recipeKey
-                    // console print again
-                    // AJAX -> queryURL - recipeKey
-                    // var qThing = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i='
-                    // ajaxQuery(qThing, key);
-                    // // console.log(daResponse);
-
-                    // var queryURL = queryString + key;
-
                     var queryURL = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=' + key;
                     $.ajax({
                         url: queryURL,
