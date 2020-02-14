@@ -7,7 +7,7 @@ var config = {
     messagingSenderId: "655365438357",
     appId: "1:655365438357:web:3b219292065eb7ad0e149c"
 };
-// Initialize Firebase
+
 firebase.initializeApp(config);
 var dataRef = firebase.database();
 
@@ -21,12 +21,17 @@ $('.test-save').on('click', function (event) {
     });
 });
 
-// =========== firebase child added in db ============
+
+// ===================================================
+// child added to firebase
+// ===================================================
 dataRef.ref().on("child_added", function (childSnapshot) {
+
+    // ==== got this code from an activity ======================
+
 
     // // Log everything that's coming out of snapshot
     // console.log(childSnapshot.title);
-
     // console.log(childSnapshot.val().name);
     // console.log(childSnapshot.val().name);
     // console.log(childSnapshot.val().email);
@@ -34,16 +39,8 @@ dataRef.ref().on("child_added", function (childSnapshot) {
     // console.log(childSnapshot.val().comment);
     // console.log(childSnapshot.val().joinDate);
 
-    // // full list of items to the well
-    // $("#full-member-list").append("<div class='well'><span class='member-name'> " +
-    //   childSnapshot.val().name +
-    //   " </span><span class='member-email'> " + childSnapshot.val().email +
-    //   " </span><span class='member-age'> " + childSnapshot.val().age +
-    //   " </span><span class='member-comment'> " + childSnapshot.val().comment +
-    //   " </span></div>");
+    // ==================================++======================
 
-    // // Handle the errors
-    // console.log('anything happen?');
 
 }, function (errorObject) {
     // console.log("Errors handled: " + errorObject.code);
@@ -122,7 +119,6 @@ $(document).ready(function () {
         var areaTag = '';
         areaTag = meal.strArea;
 
-        // TODO: are there some default tags we want if no tags found. do we?
         // safety feature
         var mealTagsArray = [];
         if (meal.strTags != null) {
@@ -159,25 +155,25 @@ $(document).ready(function () {
         }
 
         for (let i = 0; i < mealTagsArray.length; i++) {
-            // const element = mealTagsArray[i];
             var spanTag = createPillTag(mealTagsArray[i]);
 
             tagBox.append(spanTag);
         }
+
         parentCardRow.append(titleDiv);
+
         return parentCard;
     }
 
     function createPillTag(element) {
         var lowerTag = element.toLowerCase();
-        // var pillColor = 'badge-light';
 
         switch (lowerTag) {
             case 'meat':
                 return $('<span>').addClass('badge badge-pill badge-danger').text(element);
 
             case 'dairy':
-                return $('<span>').addClass('badge badge-pill badge-info').text(element);
+                return $('<span>').addClass('badge badge-pill badge-light').text(element);
 
             default:
                 return $('<span>').addClass('badge badge-pill badge-light').text(element);
@@ -208,28 +204,20 @@ $(document).ready(function () {
         var queryURL = "https://www.themealdb.com/api/json/v1/1/search.php?s=" + searchInput;
         var arrayOfMeals = [];
 
-        //make the call
         $.ajax({
             url: queryURL,
             method: "GET"
         })
             .then(function (response) {
-                // console.log(response);
                 arrayOfMeals = response.meals;
 
-                // TODO: iterate over all of the results
                 for (let i = 0; i < arrayOfMeals.length; i++) {
                     const meal = arrayOfMeals[i];
-                    // console.log('meals thing: ' + i );
-                    // console.log(meal.strMeal);
-                    // console.log(meal.strMealThumb);
 
                     // create card and append
                     var mealCard = createCard(meal);
                     appendCardTo('recipe-box', mealCard);
 
-                    //push to array
-                    // arrayOfMeals.push(meal);
                 }
 
                 // ===================================================
@@ -291,18 +279,7 @@ $(document).ready(function () {
                             $('#instructions').text(instructions);
 
 
-                            //TODO: BUILD all of the html elements we need to show details.
-                            // var parentDiv = $('<div>').addClass('container ');
-                            // var h1Tag = $('<h1>').text(response.meals[0].strMeal);
-                            // FIXME: how should we get the index   ^^^^^^ assume that it's always 1 result. 
-                            // parentDiv.append(h1Tag);
-                            // console.log(response.meals[0].strInstructions);
-                            // parentDiv.append($('<pre>').text(response.meals[0].strInstructions));
-
-
-                            // $('.main-box').append(parentDiv);
-
-
+                            
                             //come back
                             // setTimeout(function() {
                             //     $('.main-box').append(searchResultsCards);
@@ -314,28 +291,6 @@ $(document).ready(function () {
 
 
         return arrayOfMeals;
-    }
-
-
-
-    // ***** maybe get rid of this one ******************
-    function ajaxQuery(queryString, key) {
-        // https://www.themealdb.com/api/json/v1/1/lookup.php?i=
-        // var queryURL = "https://www.themealdb.com/api/json/v1/1/search.php?s=" + searchInput;
-        var queryURL = queryString + key;
-
-        $.ajax({
-            url: queryURL,
-            method: "GET"
-        })
-            .then(function (response) {
-                // console.log(response);
-
-    //             //TODO: build details 'page' and fill with response data
-
-                return response;
-
-            });
     }
 
 
