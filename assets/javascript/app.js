@@ -1,8 +1,3 @@
-
-
-
-
-
 var config = {
     apiKey: "AIzaSyAggh_9HPrLN-IokUfsrCz2bCP_4ABUd4Y",
     authDomain: "salty-beards-recipe-box.firebaseio.com",
@@ -16,46 +11,43 @@ var config = {
 firebase.initializeApp(config);
 var dataRef = firebase.database();
 
-
-
 // ============ TEST push ==========
-$('.test-save').on('click', function(event) {
+$('.test-save').on('click', function (event) {
     dataRef.ref().push({
-      title: 'Bean bread',
-      img: 'https://www.themealdb.com/images/media/meals/1529444830.jpg',
-      instructions: 'First get the pan. cook. then serve.',
-      dateAdded: firebase.database.ServerValue.TIMESTAMP
+        title: 'Bean bread',
+        img: 'https://www.themealdb.com/images/media/meals/1529444830.jpg',
+        instructions: 'First get the pan. cook. then serve.',
+        dateAdded: firebase.database.ServerValue.TIMESTAMP
     });
-
-  });
+});
 
 // =========== firebase child added in db ============
-  dataRef.ref().on("child_added", function(childSnapshot) {
+dataRef.ref().on("child_added", function (childSnapshot) {
 
-      // // Log everything that's coming out of snapshot
-      console.log(childSnapshot.title);
-      
-      // console.log(childSnapshot.val().name);
-      // console.log(childSnapshot.val().name);
-      // console.log(childSnapshot.val().email);
-      // console.log(childSnapshot.val().age);
-      // console.log(childSnapshot.val().comment);
-      // console.log(childSnapshot.val().joinDate);
+    // // Log everything that's coming out of snapshot
+    // console.log(childSnapshot.title);
 
-      // // full list of items to the well
-      // $("#full-member-list").append("<div class='well'><span class='member-name'> " +
-      //   childSnapshot.val().name +
-      //   " </span><span class='member-email'> " + childSnapshot.val().email +
-      //   " </span><span class='member-age'> " + childSnapshot.val().age +
-      //   " </span><span class='member-comment'> " + childSnapshot.val().comment +
-      //   " </span></div>");
+    // console.log(childSnapshot.val().name);
+    // console.log(childSnapshot.val().name);
+    // console.log(childSnapshot.val().email);
+    // console.log(childSnapshot.val().age);
+    // console.log(childSnapshot.val().comment);
+    // console.log(childSnapshot.val().joinDate);
 
-      // // Handle the errors
-      console.log('anything happen?');
-      
-  }, function(errorObject) {
-      console.log("Errors handled: " + errorObject.code);
-  });
+    // // full list of items to the well
+    // $("#full-member-list").append("<div class='well'><span class='member-name'> " +
+    //   childSnapshot.val().name +
+    //   " </span><span class='member-email'> " + childSnapshot.val().email +
+    //   " </span><span class='member-age'> " + childSnapshot.val().age +
+    //   " </span><span class='member-comment'> " + childSnapshot.val().comment +
+    //   " </span></div>");
+
+    // // Handle the errors
+    // console.log('anything happen?');
+
+}, function (errorObject) {
+    // console.log("Errors handled: " + errorObject.code);
+});
 
 
 
@@ -65,12 +57,7 @@ $('.test-save').on('click', function(event) {
 // ===================================================
 // doc ready
 // ===================================================
-$(document).ready(function() {
-
-  
-
-  
-
+$(document).ready(function () {
 
     var resultsArray = [];
     var clickedCardKey = '12345';
@@ -78,35 +65,28 @@ $(document).ready(function() {
     // ===================================================
     // EVENT - save recipe ( + ) button 
     // ===================================================
-    $('#save-recipe-btn').on('click', function(event) {
-        console.log('here is event', event);
+    $('#save-recipe-btn').on('click', function (event) {
+        // console.log('here is event', event);
         var title = $('#recipe-input').val();
-        console.log('here is title: ' + title);
-
+        // console.log('here is title: ' + title);
         addSuccessMessage('card-message');
-
     });
-
-    
-
 
     // ===================================================
     // EVENT - Search buttons
     // ===================================================
-    $("#searchBtn").on("click", function(event) {
+    $("#searchBtn").on("click", function (event) {
         event.preventDefault();
-        $('.recipe-box').empty();
+        // $('.recipe-box').empty();
         var trimSearchInputValue = $("#searchInput").val().trim();
-
         resultsArray = ajaxCallSearch(trimSearchInputValue);
         console.log('results array');
         console.log(resultsArray);
-
     });
 
-    $("#searchBtn-below").on("click", function(event) {
+    $("#searchBtn-below").on("click", function (event) {
         event.preventDefault();
-        $('.recipe-box').empty();
+        // $('.recipe-box').empty();
         var trimSearchInputValue = $("#searchInput-below").val().trim();
 
         // var someResultArray = ajaxCallSearch(trimSearchInputValue);
@@ -115,11 +95,6 @@ $(document).ready(function() {
         ajaxCallSearch(trimSearchInputValue);
 
     });
-
-
-
-
-
 
     // ===================================================
     // helper functions
@@ -169,12 +144,9 @@ $(document).ready(function() {
 
             tagBox.append(spanTag);
         }
-
         parentCardRow.append(titleDiv);
-
         return parentCard;
     }
-
 
     function createPillTag(element) {
         var lowerTag = element.toLowerCase();
@@ -197,16 +169,12 @@ $(document).ready(function() {
                 return $('<span>').addClass('badge badge-pill badge-light').text(element);
                 break;
         }
-
-
     }
-
 
     function appendCardTo(targetClass, card) {
         targetClass = '.' + targetClass;
         $(targetClass).append(card);
     }
-
 
     function addSuccessMessage(elementClass) {
         elementClass = '.' + elementClass;
@@ -217,11 +185,10 @@ $(document).ready(function() {
         $(elementClass).prepend(successMessage);
 
         // removes message after time
-        setTimeout(function() {
+        setTimeout(function () {
             $(elementClass).detach();
         }, 4 * 1000);
     }
-
 
     function ajaxCallSearch(inputString) {
         var searchInput = inputString;
@@ -230,13 +197,12 @@ $(document).ready(function() {
 
         //make the call
         $.ajax({
-                url: queryURL,
-                method: "GET"
-            })
-            .then(function(response) {
+            url: queryURL,
+            method: "GET"
+        })
+            .then(function (response) {
                 // console.log(response);
                 arrayOfMeals = response.meals;
-
 
                 // TODO: iterate over all of the results
                 for (let i = 0; i < arrayOfMeals.length; i++) {
@@ -251,46 +217,34 @@ $(document).ready(function() {
 
                     //push to array
                     // arrayOfMeals.push(meal);
-
                 }
 
                 // ===================================================
                 // ON CLICK - recipe card
                 // ===================================================
-                $('.recipe-card').on('click', function(event) {
-                    // to be safe, 
-                    var key = '52952';
-                    key = $(this).attr('recipekey');
-
-
-                    console.log('key thang: ', key);
-
+                $('.recipe-card').on('click', function (event) {
+                    var key = $(this).attr('recipekey');
                     var queryURL = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=' + key;
+
                     $.ajax({
-                            url: queryURL,
-                            method: "GET"
-                        })
-                        .then(function(response) {
-                            console.log('here is response');
-                            console.log(response);
-                            var searchResultsCards = $('.recipe-box').detach();
+                        url: queryURL,
+                        method: "GET"
+                    })
+                        .then(function (response) {
+                            $('.recipe-box').detach();
+                            mealName = response.meals[0].strMeal;
+                            mealIMG = response.meals[0].strMealThumb;
+                            category = response.meals[0].strCategory;
+                            
 
-
-                            //TODO: BUILD all of the html elements we need to show details.
-                            var parentDiv = $('<div>').addClass('container ');
-                            var h1Tag = $('<h1>').text(response.meals[0].strMeal);
-                            // FIXME: how should we get the index   ^^^^^^ assume that it's always 1 result. 
-                            parentDiv.append(h1Tag);
-                            console.log(response.meals[0].strInstructions);
-                            parentDiv.append($('<pre>').text(response.meals[0].strInstructions));
-                            // var mealTitle = meal.strMeal;
-                            // var mealImg = meal.strMealThumb;
-                            // var recipeKey = meal.idMeal;
-                            // var pTag = $('<p>').text(response.strMeal;
+                            $('#mealName').html("<h3>" + mealName + "</h3>");
+                            $('#exampleIMG').attr("src", mealIMG);
+                            $('#exampleIMG').attr("style", "height: 100px; width: 100px;");
+                            $('#categoryTag').html("Category:" + category);
 
 
 
-                            $('.main-box').append(parentDiv);
+
 
 
                             //come back
@@ -298,17 +252,9 @@ $(document).ready(function() {
                             //     $('.main-box').append(searchResultsCards);
                             // }, 5 * 1000);
                         });
-
-
-
                 });
-
-
             });
 
-        // console.log('array of meals: ', arrayOfMeals);
-        // console.log(arrayOfMeals);
-        // console.log(resultsArray);
 
 
         return arrayOfMeals;
@@ -320,10 +266,10 @@ $(document).ready(function() {
         var queryURL = queryString + key;
 
         $.ajax({
-                url: queryURL,
-                method: "GET"
-            })
-            .then(function(response) {
+            url: queryURL,
+            method: "GET"
+        })
+            .then(function (response) {
                 // console.log(response);
 
                 //TODO: build details 'page' and fill with response data
