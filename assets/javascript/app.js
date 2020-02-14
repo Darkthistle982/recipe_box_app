@@ -18,14 +18,14 @@ var dataRef = firebase.database();
 
 
 
-// ============ TEST push ==========
+// ============ TEST push EVENT ==========
 $('.test-save').on('click', function(event) {
-    dataRef.ref().push({
-      title: 'Bean bread',
-      img: 'https://www.themealdb.com/images/media/meals/1529444830.jpg',
-      instructions: 'First get the pan. cook. then serve.',
-      dateAdded: firebase.database.ServerValue.TIMESTAMP
-    });
+    // dataRef.ref().push({
+    //   title: 'Bean bread',
+    //   img: 'https://www.themealdb.com/images/media/meals/1529444830.jpg',
+    //   instructions: 'First get the pan. cook. then serve.',
+    //   dateAdded: firebase.database.ServerValue.TIMESTAMP
+    // });
 
   });
 
@@ -67,13 +67,11 @@ $('.test-save').on('click', function(event) {
 // ===================================================
 $(document).ready(function() {
 
-  
-
-  
-
-
-    var resultsArray = [];
-    var clickedCardKey = '12345';
+    // ===================================================
+    // GLOBAL variables
+    // ===================================================
+    const apiSearchUrl = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
+    const apiLookupUrl = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=";
 
     // ===================================================
     // EVENT - save recipe ( + ) button 
@@ -87,29 +85,21 @@ $(document).ready(function() {
 
     });
 
+    // ============ TEST EVENT ==========
+    $('.test-save').on('click', function(event) {
+        var myCall = goGetDataFromApi(apiLookupUrl, '52834');
+    });
+
     
 
 
     // ===================================================
     // EVENT - Search buttons
     // ===================================================
-    $("#searchBtn").on("click", function(event) {
-        event.preventDefault();
-        var trimSearchInputValue = $("#searchInput").val().trim();
-
-        resultsArray = ajaxCallSearch(trimSearchInputValue);
-        console.log('results array');
-        console.log(resultsArray);
-
-    });
 
     $("#searchBtn-below").on("click", function(event) {
         event.preventDefault();
         var trimSearchInputValue = $("#searchInput-below").val().trim();
-
-        // var someResultArray = ajaxCallSearch(trimSearchInputValue);
-        // console.log('someResultArray');
-        // console.log(someResultArray);
         ajaxCallSearch(trimSearchInputValue);
 
     });
@@ -122,6 +112,21 @@ $(document).ready(function() {
     // ===================================================
     // helper functions
     // ===================================================
+    function goGetDataFromApi(qUrl, userInput) {
+        var queryURL = qUrl + userInput;
+
+        $.ajax({
+            method: "GET",
+            url: queryURL
+        }).then(function(response) {
+            console.log('here is my call');
+            console.log(response);
+            
+            return response;
+        });
+    }
+
+
     function createCard(meal) {
         var mealTitle = meal.strMeal;
         var mealImg = meal.strMealThumb;
@@ -135,7 +140,7 @@ $(document).ready(function() {
         if (meal.strTags != null) {
             mealTagsArray = meal.strTags.split(',');
         } else {
-            mealTagsArray = ['tag1', 'tag2'];
+            mealTagsArray = ['yummy', 'food'];
         }
 
         var parentCard = $('<div>').addClass('card mx-auto');
@@ -290,11 +295,6 @@ $(document).ready(function() {
                             parentDiv.append(h1Tag);
                             console.log(response.meals[0].strInstructions);
                             parentDiv.append($('<pre>').text(response.meals[0].strInstructions));
-                            // var mealTitle = meal.strMeal;
-                            // var mealImg = meal.strMealThumb;
-                            // var recipeKey = meal.idMeal;
-                            // var pTag = $('<p>').text(response.strMeal;
-
 
 
                             $('.main-box').append(parentDiv);
@@ -321,24 +321,24 @@ $(document).ready(function() {
         return arrayOfMeals;
     }
 
-    function ajaxQuery(queryString, key) {
-        // https://www.themealdb.com/api/json/v1/1/lookup.php?i=
-        // var queryURL = "https://www.themealdb.com/api/json/v1/1/search.php?s=" + searchInput;
-        var queryURL = queryString + key;
+    // function ajaxQuery(queryString, key) {
+    //     // https://www.themealdb.com/api/json/v1/1/lookup.php?i=
+    //     // var queryURL = "https://www.themealdb.com/api/json/v1/1/search.php?s=" + searchInput;
+    //     var queryURL = queryString + key;
 
-        $.ajax({
-                url: queryURL,
-                method: "GET"
-            })
-            .then(function(response) {
-                // console.log(response);
+    //     $.ajax({
+    //             url: queryURL,
+    //             method: "GET"
+    //         })
+    //         .then(function(response) {
+    //             // console.log(response);
 
-                //TODO: build details 'page' and fill with response data
+    //             //TODO: build details 'page' and fill with response data
 
-                return response;
+    //             return response;
 
-            });
-    }
+    //         });
+    // }
 
 
 
