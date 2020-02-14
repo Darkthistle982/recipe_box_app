@@ -74,11 +74,11 @@ $(document).ready(function () {
         // console.log('here is title: ' + title);
         addSuccessMessage('card-message');
     });
+    
 
     // ===================================================
-    // EVENT - Search buttons
+    // EVENT - Search button
     // ===================================================
-    
     $("#searchBtn-below").on("click", function (event) {
         event.preventDefault();
         var trimSearchInputValue = $("#searchInput-below").val().trim();
@@ -86,23 +86,10 @@ $(document).ready(function () {
         $('#searchInput-below').val("");
     });
 
+
     // ===================================================
     // helper functions
     // ===================================================
-    function goGetDataFromApi(qUrl, userInput) {
-        var queryURL = qUrl + userInput;
-
-        $.ajax({
-            method: "GET",
-            url: queryURL
-        }).then(function(response) {
-            console.log('here is my call');
-            console.log(response);
-            
-            return response;
-        });
-    }
-
 
     function createCard(meal) {
         var mealTitle = meal.strMeal;
@@ -159,16 +146,19 @@ $(document).ready(function () {
 
     function createPillTag(element) {
         var lowerTag = element.toLowerCase();
+        var newTag = $('<span>').addClass('badge badge-pill').text(element);
 
         switch (lowerTag) {
             case 'meat':
-                return $('<span>').addClass('badge badge-pill badge-danger').text(element);
+                newTag.addClass('badge-danger');
+                return newTag;
 
             case 'dairy':
-                return $('<span>').addClass('badge badge-pill badge-light').text(element);
+                newTag.addClass('badge-light');
+                return newTag;
 
             default:
-                return $('<span>').addClass('badge badge-pill badge-light').text(element);
+                return newTag;
         }
     }
 
