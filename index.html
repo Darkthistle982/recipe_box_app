@@ -8,8 +8,6 @@
     <title>The Salty Beards | recipe app</title>
     <!-- reset.css -->
     <link rel="stylesheet" href="./assets/css/reset.css" />
-    <!--Jquery-->
-    <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script> -->
     <!-- bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
     <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
@@ -62,7 +60,6 @@
         </div>
     </nav>
     <!-- end of navbar -->
-
 
     <!-- MAIN container -->
     <div class=" container card main-box">
@@ -146,21 +143,20 @@
             <br>
             <br>
             <pre id="instructions"></pre>
-
+            <br>
+            <br>
+            <div id="recall-button" data-toggle="tooltip" data-placement="top" title="Back to Search Window"></div>
         </div>
-
-
-
         <!-- end of main container -->
     </div>
 
 
-        <!-- fixed -->
+        <!-- Modal button to add a new recipe -->
         <footer class="footer mt-auto py-3">
             <div class="container">
 
                 <!-- PLUS ( + ) button  -->
-                <button class="float-right rounded-circle btn btn-secondary bt-info" id="plusAdd" data-toggle="modal" data-target="#addNewRecipe">
+                <button class="float-right rounded-circle btn btn-secondary bt-info" id="plusAdd" data-toggle="modal tooltip" data-placement="left" title="Add a new recipe" data-target="#addNewRecipe">
                     <i class="fas fa-plus fa-2x"></i>
                 </button>
 
