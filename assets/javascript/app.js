@@ -87,7 +87,7 @@ $(document).ready(function() {
 
     // ============ TEST EVENT ==========
     $('.test-save').on('click', function(event) {
-        var myCall = goGetDataFromApi(apiLookupUrl, '52834');
+        // var myCall = goGetDataFromApi(apiLookupUrl, '52834');
     });
 
     
@@ -136,11 +136,9 @@ $(document).ready(function() {
 
         // TODO: are there some default tags we want if no tags found. do we?
         // safety feature
-        var mealTagsArray;
+        var mealTagsArray = [];
         if (meal.strTags != null) {
             mealTagsArray = meal.strTags.split(',');
-        } else {
-            mealTagsArray = ['yummy', 'food'];
         }
 
         var parentCard = $('<div>').addClass('card mx-auto');
@@ -167,7 +165,11 @@ $(document).ready(function() {
         var tagBox = $('<div>').addClass('container tag-box');
         divRow.append(tagBox);
 
-        // might see problems here if there are no meal tags.
+        if (areaTag !== '') {
+            var mealArea = $('<span>').addClass('badge badge-pill badge-warning').text(areaTag);
+            tagBox.append(mealArea);
+        }
+
         for (let i = 0; i < mealTagsArray.length; i++) {
             // const element = mealTagsArray[i];
             var spanTag = createPillTag(mealTagsArray[i]);
@@ -175,10 +177,6 @@ $(document).ready(function() {
             tagBox.append(spanTag);
         }
 
-        if (areaTag !== '') {
-            var mealArea = $('<span>').addClass('badge badge-pill badge-primary').text(areaTag);
-            tagBox.append(mealArea);
-        }
 
 
 
@@ -195,19 +193,12 @@ $(document).ready(function() {
         switch (lowerTag) {
             case 'meat':
                 return $('<span>').addClass('badge badge-pill badge-danger').text(element);
-                break;
 
             case 'dairy':
                 return $('<span>').addClass('badge badge-pill badge-info').text(element);
-                break;
-
-            case 'mainmeal':
-                return $('<span>').addClass('badge badge-pill badge-primary').text(element);
-                break;
 
             default:
                 return $('<span>').addClass('badge badge-pill badge-light').text(element);
-                break;
         }
 
 
