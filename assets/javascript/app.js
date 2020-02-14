@@ -75,6 +75,15 @@ $(document).ready(function () {
         addSuccessMessage('card-message');
     });
 
+<<<<<<< HEAD
+=======
+    // ===================================================
+    // EVENT - go back button
+    // ===================================================
+    $('.go-back-btn').on('click', function(event) {
+        // TODO: handle the go back button
+    });
+>>>>>>> b96d394f6dded3e98fda45544db38be719b42657
 
     // ===================================================
     // EVENT - Search button
