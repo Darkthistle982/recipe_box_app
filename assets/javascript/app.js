@@ -74,7 +74,13 @@ $(document).ready(function () {
         // console.log('here is title: ' + title);
         addSuccessMessage('card-message');
     });
-    
+
+    // ===================================================
+    // EVENT - go back button
+    // ===================================================
+    $('.go-back-btn').on('click', function(event) {
+        // TODO: handle the go back button
+    });
 
     // ===================================================
     // EVENT - Search button
