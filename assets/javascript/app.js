@@ -147,26 +147,36 @@ $(document).ready(function () {
 
     function createSpoonCard(meal) {
 
-        var mainCard = $('<div>').addClass('card mx-auto col-md-11');
-        var rowContainer = $('<div>').addClass('row');
-        mainCard.append(rowContainer);
-        var imgBox = $('<div>').addClass('container img-box');
-        // TODO: left off here
-        rowContainer.append( imgBox );
-        var titleBox = $('<div>').addClass('container');
-        rowContainer.append( titleBox );
-
-
         var id = meal.id;
         var title = meal.title;
         var readyInMins = meal.readyInMinutes;
         var servings = meal.servings;
         var imgName = meal.image;
         var imgSize = '240x150';
-        var imgSrc = "https://spoonacular.com/recipeImages/" + id + imgSize + "-.jpg";
+        var imgSrc = "https://spoonacular.com/recipeImages/" + id + "-" + imgSize + ".jpg";
+
+
+        var mainCard = $('<div>').addClass('card mx-auto col-md-11');
+        var rowContainer = $('<div>').addClass('row');
+        mainCard.append(rowContainer);
+        var imgBox = $('<div>').addClass('container img-box col-xs-12 col-md-3');
+        var imgThing = $('<img>').attr('src', imgSrc);
+        imgThing.appendTo(imgBox);
+        // TODO: left off here
+        var textBox = $('<div>').addClass('container col-xs-12 col-md-9');
+        textBox.append( $('<h3>').addClass('float-right ').text(title) );
+        textBox.append( $('<h4>').text('servings: ' + servings) );
+        textBox.append( $('<h5>').text('Ready in: ' + readyInMins + ' in mins. ') );
+
+        rowContainer.append( imgBox );
+        rowContainer.append( textBox );
+        // var titleBox = $('<div>').addClass('container');
+        // textBox.append( titleBox );
+
+
 
         // TODO: dynamic make the card.
-        rowContainer.append( $('<h3>').text(title) );
+        // imgBox.append(imgSrc);
 
 
 
