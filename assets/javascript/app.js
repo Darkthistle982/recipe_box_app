@@ -12,7 +12,7 @@ firebase.initializeApp(config);
 var dataRef = firebase.database();
 
 // ============ TEST push ==========
-$('.test-save').on('click', function(event) {
+$('.test-save').on('click', function (event) {
     dataRef.ref().push({
         title: 'Bean bread',
         img: 'https://www.themealdb.com/images/media/meals/1529444830.jpg',
@@ -25,7 +25,7 @@ $('.test-save').on('click', function(event) {
 // ===================================================
 // child added to firebase
 // ===================================================
-dataRef.ref().on("child_added", function(childSnapshot) {
+dataRef.ref().on("child_added", function (childSnapshot) {
 
     // ==== got this code from an activity ======================
 
@@ -42,7 +42,7 @@ dataRef.ref().on("child_added", function(childSnapshot) {
     // ==================================++======================
 
 
-}, function(errorObject) {
+}, function (errorObject) {
     // console.log("Errors handled: " + errorObject.code);
 });
 
@@ -50,7 +50,7 @@ dataRef.ref().on("child_added", function(childSnapshot) {
 // ===================================================
 // doc ready
 // ===================================================
-$(document).ready(function() {
+$(document).ready(function () {
 
     $('.details-box').hide();
     $('.main-box').css('background-color', '#333333');
@@ -72,7 +72,7 @@ $(document).ready(function() {
     // ===================================================
     // EVENT - save recipe ( + ) button 
     // ===================================================
-    $('#save-recipe-btn').on('click', function(event) {
+    $('#save-recipe-btn').on('click', function (event) {
         var title = $('#recipe-input').val();
         addSuccessMessage('card-message');
     });
@@ -80,7 +80,7 @@ $(document).ready(function() {
     // ===================================================
     // EVENT - go back button
     // ===================================================
-    $('.go-back-btn').on('click', function(event) {
+    $('.go-back-btn').on('click', function (event) {
         // TODO: handle the go back button
         $('.details-box').hide();
         $('.main-box').append(masterCardsList);
@@ -92,7 +92,7 @@ $(document).ready(function() {
     // ===================================================
     // EVENT - Search button
     // ===================================================
-    $("#searchBtn-below").on("click", function(event) {
+    $("#searchBtn-below").on("click", function (event) {
         event.preventDefault();
         var trimSearchInputValue = $("#searchInput-below").val().trim();
         ajaxCallSearch(trimSearchInputValue);
@@ -189,7 +189,7 @@ $(document).ready(function() {
         $(elementClass).prepend(successMessage);
 
         // removes message after time
-        setTimeout(function() {
+        setTimeout(function () {
             $(elementClass).detach();
         }, 4 * 1000);
     }
@@ -200,10 +200,10 @@ $(document).ready(function() {
         var arrayOfMeals = [];
 
         $.ajax({
-                url: queryURL,
-                method: "GET"
-            })
-            .then(function(response) {
+            url: queryURL,
+            method: "GET"
+        })
+            .then(function (response) {
                 arrayOfMeals = response.meals;
 
                 for (let i = 0; i < arrayOfMeals.length; i++) {
@@ -218,7 +218,7 @@ $(document).ready(function() {
                 // ===================================================
                 // ON CLICK - recipe card
                 // ===================================================
-                $('.recipe-card').on('click', function() {
+                $('.recipe-card').on('click', function () {
                     // FIXME: details box doesn't come back second time
                     $('.details-box').show();
                     var key = $(this).attr('recipekey');
@@ -231,113 +231,107 @@ $(document).ready(function() {
                     })
 
 
-                    .then(function(response) {
-                        masterCardsList = $('.recipe-box').detach();
-                        mealName = response.meals[0].strMeal;
-                        mealIMG = response.meals[0].strMealThumb;
-                        category = response.meals[0].strCategory;
-                        cuisineType = response.meals[0].strArea;
-                        ing1 = response.meals[0].strMeasure1 + "\t " + response.meals[0].strIngredient1;
-                        ing2 = response.meals[0].strMeasure2 + "  " + response.meals[0].strIngredient2;
-                        ing3 = response.meals[0].strMeasure3 + "  " + response.meals[0].strIngredient3;
-                        ing4 = response.meals[0].strMeasure4 + "  " + response.meals[0].strIngredient4;
-                        ing5 = response.meals[0].strMeasure5 + "  " + response.meals[0].strIngredient5;
-                        ing6 = response.meals[0].strMeasure6 + "  " + response.meals[0].strIngredient6;
-                        ing7 = response.meals[0].strMeasure7 + "  " + response.meals[0].strIngredient7;
-                        ing8 = response.meals[0].strMeasure8 + "  " + response.meals[0].strIngredient8;
-                        ing9 = response.meals[0].strMeasure9 + "  " + response.meals[0].strIngredient9;
-                        ing10 = response.meals[0].strMeasure10 + "  " + response.meals[0].strIngredient10;
-                        ing11 = response.meals[0].strMeasure11 + "  " + response.meals[0].strIngredient11;
-                        ing12 = response.meals[0].strMeasure12 + "  " + response.meals[0].strIngredient12;
-                        ing13 = response.meals[0].strMeasure13 + "  " + response.meals[0].strIngredient13;
-                        ing14 = response.meals[0].strMeasure14 + "  " + response.meals[0].strIngredient14;
-                        ing15 = response.meals[0].strMeasure15 + "  " + response.meals[0].strIngredient15;
-                        ing16 = response.meals[0].strMeasure16 + "  " + response.meals[0].strIngredient16;
-                        ing17 = response.meals[0].strMeasure17 + "  " + response.meals[0].strIngredient17;
-                        ing18 = response.meals[0].strMeasure18 + "  " + response.meals[0].strIngredient18;
-                        ing19 = response.meals[0].strMeasure19 + "  " + response.meals[0].strIngredient19;
-                        ing20 = response.meals[0].strMeasure20 + "  " + response.meals[0].strIngredient20;
+                        .then(function (response) {
+                            masterCardsList = $('.recipe-box').detach();
+                            mealName = response.meals[0].strMeal;
+                            mealIMG = response.meals[0].strMealThumb;
+                            category = response.meals[0].strCategory;
+                            cuisineType = response.meals[0].strArea;
+                            ing20 = response.meals[0].strMeasure20 + "  " + response.meals[0].strIngredient20;
 
 
-                        // maybe one day
-                        // for (let i = 1; i <= 20; i++) {
-                        //     var ing = ing + i;
-                        //     ing = response.meals[0].strMeasure + i + "\t " + response.meals[0].strIngredient + i;
-                        //     console.log('i have looped: ', i);
-                        //     $('#ing' + i).text(ing + i);
-                        // }
+                            // maybe one day
+                            // for (let i = 1; i <= 20; i++) {
+                            //     var ing = ing + i;
+                            //     ing = response.meals[0].strMeasure + i + "\t " + response.meals[0].strIngredient + i;
+                            //     console.log('i have looped: ', i);
+                            //     $('#ing' + i).text(ing + i);
+                            // }
 
-                        instructions = response.meals[0].strInstructions;
-                        var recipeOutput = '<p>' + instructions.replace(/(\r?\n){2}/g, '</p><p>').replace(/(\r?\n)+/g, '<br/>') + '</p>';
+                            instructions = response.meals[0].strInstructions;
+                            var recipeOutput = '<p>' + instructions.replace(/(\r?\n){2}/g, '</p><p>').replace(/(\r?\n)+/g, '<br/>') + '</p>';
+                            //logic to eliminate the null status from JSON object results applied to some recipe data
 
-                        $('#mealName').html("<h3>" + mealName + "</h3>");
-                        $('#exampleIMG').attr("src", mealIMG);
-                        $('#exampleIMG').attr("style", "height: 200px; width: 200px;");
-                        $('#categoryTag').html("Category: " + category);
-                        $('#areaTag').html("Cuisine: " + cuisineType);
-                        $('#ingredients-list').html("Ingredients: ");
-                        $('#ing1').text(ing1);
-                        $('#ing2').html(ing2);
-                        $('#ing3').html(ing3);
-                        $('#ing4').html(ing4);
-                        $('#ing5').html(ing5);
-                        $('#ing6').html(ing6);
-                        $('#ing7').html(ing7);
-                        $('#ing8').html(ing8);
-                        $('#ing9').html(ing9);
-                        $('#ing10').html(ing10);
-                        $('#ing11').html(ing11);
-                        $('#ing12').html(ing12);
-                        $('#ing13').html(ing13);
-                        $('#ing14').html(ing14);
-                        $('#ing15').html(ing15);
-                        $('#ing16').html(ing16);
-                        $('#ing17').html(ing17);
-                        $('#ing18').html(ing18);
-                        $('#ing19').html(ing19);
-                        $('#ing20').html(ing20);
-                        $('#instructions').html(recipeOutput);
+                            //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                            //pretty sure this is the issue with the null. as the display is still just pulling from the initial json. 
+                            // Need to figure out how to shift this to pull from our loop data instead
+                            //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                            ing1 = response.meals[0].strMeasure1 + "  " + response.meals[0].strIngredient1;
+                            ing2 = response.meals[0].strMeasure2 + "  " + response.meals[0].strIngredient2;
+                            ing3 = response.meals[0].strMeasure3 + "  " + response.meals[0].strIngredient3;
+                            ing4 = response.meals[0].strMeasure4 + "  " + response.meals[0].strIngredient4;
+                            ing5 = response.meals[0].strMeasure5 + "  " + response.meals[0].strIngredient5;
+                            ing6 = response.meals[0].strMeasure6 + "  " + response.meals[0].strIngredient6;
+                            ing7 = response.meals[0].strMeasure7 + "  " + response.meals[0].strIngredient7;
+                            ing8 = response.meals[0].strMeasure8 + "  " + response.meals[0].strIngredient8;
+                            ing9 = response.meals[0].strMeasure9 + "  " + response.meals[0].strIngredient9;
+                            ing10 = response.meals[0].strMeasure10 + "  " + response.meals[0].strIngredient10;
+                            ing11 = response.meals[0].strMeasure11 + "  " + response.meals[0].strIngredient11;
+                            ing12 = response.meals[0].strMeasure12 + "  " + response.meals[0].strIngredient12;
+                            ing13 = response.meals[0].strMeasure13 + "  " + response.meals[0].strIngredient13;
+                            ing14 = response.meals[0].strMeasure14 + "  " + response.meals[0].strIngredient14;
+                            ing15 = response.meals[0].strMeasure15 + "  " + response.meals[0].strIngredient15;
+                            ing16 = response.meals[0].strMeasure16 + "  " + response.meals[0].strIngredient16;
+                            ing17 = response.meals[0].strMeasure17 + "  " + response.meals[0].strIngredient17;
+                            ing18 = response.meals[0].strMeasure18 + "  " + response.meals[0].strIngredient18;
+                            ing19 = response.meals[0].strMeasure19 + "  " + response.meals[0].strIngredient19;
 
 
+                            var meals = response.meals[0];
+                            var i = 1;
+                            var ingredient = '';
+                            var measure = '';
+                            do {
+                                ingredient = [meals.strIngredient + i.toString()];
+                                ingredient = response.meals[0]["strIngredient" + i.toString()];
 
-                        var meals = response.meals[0];
-                        var i = 1;
-                        var ingredient = '';
-                        var measure = '';
-                        do {
-                            // var ing = meals.strIngredient;
-                            // console.log('ing thing ', ing + i);
-                            // ingredient = ing + i;
-                            // var msr = meals.strMeasure + i;
+                                measure = [meals.strMeasure + i.toString()];
+                                measure = response.meals[0]["strMeasure" + i.toString()];
 
-                            ingredient = [meals.strIngredient + i.toString()];
-                            ingredient = response.meals[0]["strIngredient" + i.toString()];
+                                if ((ingredient === null || measure === null)) {
+                                    ingredient = '';
+                                    measure = '';
+                                }
+                                console.log('ingredient: ', ingredient);
+                                console.log('measure: ', measure);
+
+                                i++;
+                            } while (i <= 20);
+
+                            $('#mealName').html("<h3>" + mealName + "</h3>");
+                            $('#exampleIMG').attr("src", mealIMG);
+                            $('#exampleIMG').attr("style", "height: 200px; width: 200px;");
+                            $('#categoryTag').html("Category: " + category);
+                            $('#areaTag').html("Cuisine: " + cuisineType);
+                            $('#ingredients-list').html("Ingredients: ");
+                            $('#ing1').text(ing1);
+                            $('#ing2').html(ing2);
+                            $('#ing3').html(ing3);
+                            $('#ing4').html(ing4);
+                            $('#ing5').html(ing5);
+                            $('#ing6').html(ing6);
+                            $('#ing7').html(ing7);
+                            $('#ing8').html(ing8);
+                            $('#ing9').html(ing9);
+                            $('#ing10').html(ing10);
+                            $('#ing11').html(ing11);
+                            $('#ing12').html(ing12);
+                            $('#ing13').html(ing13);
+                            $('#ing14').html(ing14);
+                            $('#ing15').html(ing15);
+                            $('#ing16').html(ing16);
+                            $('#ing17').html(ing17);
+                            $('#ing18').html(ing18);
+                            $('#ing19').html(ing19);
+                            $('#ing20').html(ing20);
+                            $('#instructions').html(recipeOutput);
 
 
-                            response.meals[0]["strIngredient1"];
-                            response.meals[0].strIngredient1;
 
 
-                            console.log('ingredient: ', ingredient);
-                            measure = meals.strMeasure + i.toString();
 
 
-                            console.log('im inside the do while', i);
-                            if (isNaN(ingredient) || (measure === null || measure === NaN)) {
-                                ingredient = '';
-                                measure = '';
-                                console.log('I am inside the if statement!!!');
-
-                            }
-
-                            i++;
-                        } while (i <= 20);
-
-                        console.log(ingredient);
-                        console.log(measure);
-
-
-                    });
+                        });
 
 
                     //CSS onclick functions

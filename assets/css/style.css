@@ -11,11 +11,16 @@ font-family: 'Miltonian Tattoo', cursive; */
 
 body {
     color: #333;
+    background-image: url("../imgs/pink dust.png");
     background-color: #333;
     color: #333;
     font-size: 100%;
     /* font-family: 'Rock Salt', cursive; */
 }
+
+/* .main-box {
+     background-color: rgba(65, 60, 62, 1) !important;
+ } */
 
 .card-body,
 pre {
