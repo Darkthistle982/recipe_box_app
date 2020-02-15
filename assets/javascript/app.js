@@ -61,14 +61,16 @@ $(document).ready(function () {
     // ===================================================
     const apiSearchUrl = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
     const apiLookupUrl = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=";
+
+    // ======== spoontacular ===============================
     const spoonRecipeLookup = "https://api.spoonacular.com/recipes/search?apiKey=8c9d7b8996c04b959597deda69934ea9&number=10&query=";
     // get ingredient list
     // https://api.spoonacular.com/recipes/246916/ingredientWidget.json?apiKey=8c9d7b8996c04b959597deda69934ea9
     // render image
     // https://spoonacular.com/cdn/ingredients_100x100/fresh-ground-beef.jpg
 
-    var resultsArray = [];
-    var clickedCardKey = '12345';
+    // var resultsArray = [];
+    // var clickedCardKey = '12345';
 
     // ===================================================
     // EVENT - save recipe ( + ) button 
@@ -93,7 +95,10 @@ $(document).ready(function () {
     $("#searchBtn-below").on("click", function (event) {
         event.preventDefault();
         var trimSearchInputValue = $("#searchInput-below").val().trim();
-        ajaxCallSearch(trimSearchInputValue);
+
+        // TODO: write new ajax function
+        getSpoonData('search', trimSearchInputValue);
+        // ajaxCallSearch(trimSearchInputValue);
         $('#searchInput-below').val("");
     });
 
@@ -101,6 +106,74 @@ $(document).ready(function () {
     // ===================================================
     // helper functions
     // ===================================================
+    function getSpoonData(typeSearch, key) {
+        var qURL = '';
+
+        switch (typeSearch) {
+            case 'search':
+                qURL = "https://api.spoonacular.com/recipes/search?apiKey=8c9d7b8996c04b959597deda69934ea9&number=10&query=" + key;
+                break;
+            case 'ingredientList':
+                qURL = "https://api.spoonacular.com/recipes/" + key + "/ingredientWidget.json?apiKey=8c9d7b8996c04b959597deda69934ea9";
+                break;
+            default:
+                break;
+        }
+
+        $.ajax({
+            url: qURL,
+            method: 'GET'
+        }).then(function(response){
+            // TODO: do something with response data
+            // 1. create cards
+            // 2. append cards
+            console.log(response.results);
+
+            var arrayOfMeals = response.results;
+
+                for (let i = 0; i < arrayOfMeals.length; i++) {
+                    const meal = arrayOfMeals[i];
+
+                    // create card and append
+                    // var mealCard = createCard(meal);
+                    var mealCard = createSpoonCard(meal);
+                    appendCardTo('recipe-box', mealCard);
+
+                }
+            
+        });
+
+    }
+
+    function createSpoonCard(meal) {
+        //stuff
+        var mainCard = $('<div>');
+        var id = meal.id;
+        var title = meal.title;
+        var readyInMins = meal.readyInMinutes;
+        var servings = meal.servings;
+        var imgName = meal.image;
+        var imgSize = '240x150';
+        var imgSrc = "https://spoonacular.com/recipeImages/" + id + imgSize + "-.jpg";
+
+        // TODO: dynamic make the card.
+        mainCard.append( $('<h1>').text(title) );
+
+
+
+
+        return mainCard;
+
+        // https://spoonacular.com/recipeImages/{ID}-{SIZE}.{TYPE}
+        // 90x90
+        // 240x150
+        // 312x150
+        // 312x231
+        // 480x360
+        // 556x370
+        // 636x393
+        // https://spoonacular.com/recipeImages/579247-556x370.jpg
+    }
 
     function createCard(meal) {
         var mealTitle = meal.strMeal;
