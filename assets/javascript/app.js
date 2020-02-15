@@ -47,10 +47,6 @@ dataRef.ref().on("child_added", function(childSnapshot) {
 });
 
 
-
-
-
-
 // ===================================================
 // doc ready
 // ===================================================
@@ -71,6 +67,7 @@ $(document).ready(function() {
     var clickedCardKey = '12345';
 
     var masterCardsList = $('<div>');
+    // var ing1 = 'blahblahblahb';
 
     // ===================================================
     // EVENT - save recipe ( + ) button 
@@ -88,8 +85,8 @@ $(document).ready(function() {
         $('.details-box').hide();
         $('.main-box').append(masterCardsList);
         $('.jumbotron').show();
-        $('.main-box').css('background-color', '#ffffff');
-        $('.main-box').css('border', '1px');
+        // $('.main-box').css('background-color', '#ffffff');
+        // $('.main-box').css('border', '1px');
     });
 
     // ===================================================
@@ -240,7 +237,7 @@ $(document).ready(function() {
                         mealIMG = response.meals[0].strMealThumb;
                         category = response.meals[0].strCategory;
                         cuisineType = response.meals[0].strArea;
-                        ing1 = response.meals[0].strMeasure1 + "  " + response.meals[0].strIngredient1;
+                        ing1 = response.meals[0].strMeasure1 + "\t " + response.meals[0].strIngredient1;
                         ing2 = response.meals[0].strMeasure2 + "  " + response.meals[0].strIngredient2;
                         ing3 = response.meals[0].strMeasure3 + "  " + response.meals[0].strIngredient3;
                         ing4 = response.meals[0].strMeasure4 + "  " + response.meals[0].strIngredient4;
@@ -260,14 +257,26 @@ $(document).ready(function() {
                         ing18 = response.meals[0].strMeasure18 + "  " + response.meals[0].strIngredient18;
                         ing19 = response.meals[0].strMeasure19 + "  " + response.meals[0].strIngredient19;
                         ing20 = response.meals[0].strMeasure20 + "  " + response.meals[0].strIngredient20;
+
+
+                        // maybe one day
+                        // for (let i = 1; i <= 20; i++) {
+                        //     var ing = ing + i;
+                        //     ing = response.meals[0].strMeasure + i + "\t " + response.meals[0].strIngredient + i;
+                        //     console.log('i have looped: ', i);
+                        //     $('#ing' + i).text(ing + i);
+                        // }
+
                         instructions = response.meals[0].strInstructions;
+                        var recipeOutput = '<p>' + instructions.replace(/(\r?\n){2}/g, '</p><p>').replace(/(\r?\n)+/g, '<br/>') + '</p>';
+
                         $('#mealName').html("<h3>" + mealName + "</h3>");
                         $('#exampleIMG').attr("src", mealIMG);
                         $('#exampleIMG').attr("style", "height: 200px; width: 200px;");
                         $('#categoryTag').html("Category: " + category);
                         $('#areaTag').html("Cuisine: " + cuisineType);
                         $('#ingredients-list').html("Ingredients: ");
-                        $('#ing1').html(ing1);
+                        $('#ing1').text(ing1);
                         $('#ing2').html(ing2);
                         $('#ing3').html(ing3);
                         $('#ing4').html(ing4);
@@ -287,8 +296,49 @@ $(document).ready(function() {
                         $('#ing18').html(ing18);
                         $('#ing19').html(ing19);
                         $('#ing20').html(ing20);
-                        $('#instructions').text(instructions);
+                        $('#instructions').html(recipeOutput);
+
+
+
+                        var meals = response.meals[0];
+                        var i = 1;
+                        var ingredient = '';
+                        var measure = '';
+                        do {
+                            // var ing = meals.strIngredient;
+                            // console.log('ing thing ', ing + i);
+                            // ingredient = ing + i;
+                            // var msr = meals.strMeasure + i;
+
+                            ingredient = [meals.strIngredient + i.toString()];
+                            ingredient = response.meals[0]["strIngredient" + i.toString()];
+
+
+                            response.meals[0]["strIngredient1"];
+                            response.meals[0].strIngredient1;
+
+
+                            console.log('ingredient: ', ingredient);
+                            measure = meals.strMeasure + i.toString();
+
+
+                            console.log('im inside the do while', i);
+                            if (isNaN(ingredient) || (measure === null || measure === NaN)) {
+                                ingredient = '';
+                                measure = '';
+                                console.log('I am inside the if statement!!!');
+
+                            }
+
+                            i++;
+                        } while (i <= 20);
+
+                        console.log(ingredient);
+                        console.log(measure);
+
+
                     });
+
 
                     //CSS onclick functions
                     $('.jumbotron').hide();
