@@ -146,8 +146,17 @@ $(document).ready(function () {
     }
 
     function createSpoonCard(meal) {
-        //stuff
+
         var mainCard = $('<div>').addClass('card mx-auto col-md-11');
+        var rowContainer = $('<div>').addClass('row');
+        mainCard.append(rowContainer);
+        var imgBox = $('<div>').addClass('container img-box');
+        // TODO: left off here
+        rowContainer.append( imgBox );
+        var titleBox = $('<div>').addClass('container');
+        rowContainer.append( titleBox );
+
+
         var id = meal.id;
         var title = meal.title;
         var readyInMins = meal.readyInMinutes;
@@ -157,7 +166,7 @@ $(document).ready(function () {
         var imgSrc = "https://spoonacular.com/recipeImages/" + id + imgSize + "-.jpg";
 
         // TODO: dynamic make the card.
-        mainCard.append( $('<h3>').text(title) );
+        rowContainer.append( $('<h3>').text(title) );
 
 
 
