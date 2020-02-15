@@ -165,8 +165,8 @@ $(document).ready(function () {
         // TODO: left off here
         var textBox = $('<div>').addClass('container col-xs-12 col-md-9');
         textBox.append( $('<h3>').addClass('float-right ').text(title) );
-        textBox.append( $('<h4>').text('servings: ' + servings) );
-        textBox.append( $('<h5>').text('Ready in: ' + readyInMins + ' in mins. ') );
+        textBox.append( $('<h4>').addClass('float-right').text('servings: ' + servings) );
+        textBox.append( $('<h5>').addClass('float-right').text('Ready in: ' + readyInMins + ' in mins. ') );
 
         rowContainer.append( imgBox );
         rowContainer.append( textBox );
