@@ -73,6 +73,10 @@ nav {
     font-family: 'Miltonian Tattoo', cursive;
 }
 
-.steps-box {
+/* .steps-box {
     word-wrap: break-word;
+} */
+
+.ingredient-box, .steps-box {
+    font-family: Arial, Helvetica, sans-serif;
 }
