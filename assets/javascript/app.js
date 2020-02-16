@@ -1,3 +1,5 @@
+//dev stuff
+
 var config = {
     apiKey: "AIzaSyAggh_9HPrLN-IokUfsrCz2bCP_4ABUd4Y",
     authDomain: "salty-beards-recipe-box.firebaseio.com",
