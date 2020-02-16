@@ -103,7 +103,6 @@ $(document).ready(function () {
     // ===================================================
     // helper functions
     // ===================================================
-
     function createCard(meal) {
         var mealTitle = meal.strMeal;
         var mealImg = meal.strMealThumb;
