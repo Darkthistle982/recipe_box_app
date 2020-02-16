@@ -27,20 +27,6 @@ $('.test-save').on('click', function (event) {
 // ===================================================
 dataRef.ref().on("child_added", function (childSnapshot) {
 
-    // ==== got this code from an activity ======================
-
-
-    // // Log everything that's coming out of snapshot
-    // console.log(childSnapshot.title);
-    // console.log(childSnapshot.val().name);
-    // console.log(childSnapshot.val().name);
-    // console.log(childSnapshot.val().email);
-    // console.log(childSnapshot.val().age);
-    // console.log(childSnapshot.val().comment);
-    // console.log(childSnapshot.val().joinDate);
-
-    // ==================================++======================
-
 
 }, function (errorObject) {
     // console.log("Errors handled: " + errorObject.code);
