@@ -74,7 +74,7 @@ $(document).ready(function () {
     // ===================================================
     // child added to firebase
     // ===================================================
-    dataRef.ref().on("child_added", function (childSnapshot) {
+    dataRef.ref('user-added-recipes/').on("child_added", function (childSnapshot) {
         // push snapshot to local array
         myTastyRecipes.push(childSnapshot);
         console.log(myTastyRecipes);
