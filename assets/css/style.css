@@ -3,9 +3,7 @@
 }
 
 body {
-    /* color: #333; */
     background-image: url("../imgs/pink dust.png");
-    /* background-image: url("../imgs/mobile-logo.png"); */
     /* background-color: #333; */
     /* color: #333; */
     font-size: 100%;
@@ -73,16 +71,6 @@ nav {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-nav {
-    /* background-color: whitesmoke; */
-    /* background-image: url("../imgs/mobile-logo.png"); */
-}
-
-.img-part {
-    /* background-image: url("../imgs/mobile-logo.png"); */
-    /* margin-bottom: 300px; */
-}
-
 .top-box {
     background-color: white;
     background-image: url("../imgs/main-logo.png");
@@ -104,7 +92,5 @@ nav {
         background-size: 300px 200px;
         height: 210px;
         background-repeat: no-repeat;
-        /* background-color: aqua; */
-        /* background-color: chartreuse; */
     }
 }
