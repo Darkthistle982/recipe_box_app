@@ -70,13 +70,14 @@ $(document).ready(function () {
         });
     });
 
-    $('.details-box').hide();
+    // $('.details-box').hide();
     // ===================================================
     // child added to firebase
     // ===================================================
     dataRef.ref().on("child_added", function (childSnapshot) {
         // push snapshot to local array
         myTastyRecipes.push(childSnapshot);
+        console.log(myTastyRecipes);
 
 
     }, function (errorObject) {
@@ -108,6 +109,7 @@ $(document).ready(function () {
     // ===================================================
     // EVENT - show saved recipes
     // ===================================================
+    // FIXME: not showing the saved recipes
     $('#my-meals').on('click', function (event) {
 
         console.log('my recipes inside button: ', myTastyRecipes[0].key);
