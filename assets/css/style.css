@@ -18,10 +18,6 @@ body {
     /* font-family: 'Rock Salt', cursive; */
 }
 
-/* .main-box {
-     background-color: rgba(65, 60, 62, 1) !important;
- } */
-
 .card-body,
 pre {
     max-width: auto;
@@ -29,15 +25,9 @@ pre {
 }
 
 .recipe-box .card {
-    /* background-image: linear-gradient(180deg, white 3rem, #F0A4A4 calc(3rem), #F0A4A4 calc(3rem + 2px), transparent 1px), repeating-linear-gradient(0deg, transparent, transparent 1.5rem, #DDD 1px, #DDD calc(1.5rem + 1px)); */
-    /* box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25); */
-    /* font-family: "Permanent Marker", cursive; */
     max-width: 730px;
     font-size: 1.1em;
     margin-bottom: 20px;
-    /* margin: auto; */
-    /* margin-right: auto; */
-    /* margin-left: auto; */
 }
 
 .card-header {
