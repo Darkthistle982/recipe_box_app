@@ -111,6 +111,7 @@ $(document).ready(function () {
     // ===================================================
     // FIXME: not showing the saved recipes
     $('#my-meals').on('click', function (event) {
+        event.preventDefault();
 
         console.log('my recipes inside button: ', myTastyRecipes[0].key);
         console.log('my recipes inside button: ', myTastyRecipes[0].val().instructions);
