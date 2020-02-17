@@ -1,10 +1,3 @@
-// Project 1
-
-
-
-
-
-
 // ===================================================
 // doc ready
 // ===================================================
@@ -39,9 +32,6 @@ $(document).ready(function () {
     $('.main-box').css('margin-top', '+15px');
 
 
-
-
-
     // ===================================================
     // child added to firebase
     // ===================================================
@@ -54,7 +44,6 @@ $(document).ready(function () {
         myTastyRecipes.push(childSnapshot);
         console.log('myTastyRecipes', myTastyRecipes);
         
-        
 
     }, function (errorObject) {
         // console.log("Errors handled: " + errorObject.code);
@@ -63,10 +52,8 @@ $(document).ready(function () {
         } else {
             //hooray!
             addSuccessMessage('card-message');
-
         }
     });
-
 
 
     // ===================================================
@@ -106,11 +93,8 @@ $(document).ready(function () {
                 //hooray!
                 addSuccessMessage('card-message');
                 loadRecipeCards(myTastyRecipes);
-    
             }
-        });
-        
-        // addSuccessMessage('card-message');
+        });       
     });
 
     // ===================================================
@@ -132,7 +116,6 @@ $(document).ready(function () {
             
             appendCardTo('recipe-box', mealCard);
         }
-
     });
 
     function loadRecipeCards(arr) {
@@ -145,7 +128,6 @@ $(document).ready(function () {
             appendCardTo('recipe-box', mealCard);
         }
     }
-
 
     // ===================================================
     // EVENT - go back button
@@ -170,12 +152,10 @@ $(document).ready(function () {
         $('#searchInput-below').val("");
     });
 
-
     // ===================================================
     // helper functions
     // ===================================================
     function createMyCard(meal) {
-        // console.log('meal', meal);
         
         var mealTitle = meal.title;
         var mealImg = 'https://www.themealdb.com/images/media/meals/1529444830.jpg';
@@ -197,7 +177,6 @@ $(document).ready(function () {
         // === right side ===
         var titleDiv = $('<div>').addClass('container col-xs-12 col-md-9');
         var titleH3 = $('<h3>').addClass('text-right text-break').text(mealTitle);
-        var titleP = $('<p>').addClass('text-right').text('This elegant dish can be made in under 30mins. Feeds 4. #dinner');
         titleDiv.append(titleH3);
         titleDiv.append(titleP);
 
@@ -333,7 +312,6 @@ $(document).ready(function () {
         });
     }
 
-
     function ajaxCallSearch(inputString) {
         var searchInput = inputString;
         var queryURL = apiSearchUrl + searchInput;
@@ -352,7 +330,6 @@ $(document).ready(function () {
                     // create card and append
                     var mealCard = createCard(meal);
                     appendCardTo('recipe-box', mealCard);
-
                 }
 
                 // ===================================================
@@ -364,13 +341,10 @@ $(document).ready(function () {
                     var key = $(this).attr('recipekey');
                     var queryURL = apiLookupUrl + key;
 
-
                     $.ajax({
                         url: queryURL,
                         method: "GET"
                     })
-
-
                         .then(function (response) {
                             masterCardsList = $('.recipe-box').detach();
                             mealName = response.meals[0].strMeal;
@@ -385,7 +359,6 @@ $(document).ready(function () {
                             // Chris Stead magic juice 
                             // ===================================================
                             var recipeOutput = '<p>' + instructions.replace(/(\r?\n){2}/g, '</p><p>').replace(/(\r?\n)+/g, '<br/>') + '</p>';
-
 
                             var i = 1;
                             var ingredient = '';
@@ -416,12 +389,6 @@ $(document).ready(function () {
                             $('#categoryTag').html(category);
                             $('#areaTag').html(cuisineType);
                             $('#instructions').html(recipeOutput);
-
-
-
-
-
-
                         });
 
 
