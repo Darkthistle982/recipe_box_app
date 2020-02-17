@@ -88,7 +88,6 @@ $(document).ready(function () {
         }
     });
 
-
     // ===================================================
     // GLOBAL variables
     // ===================================================
@@ -314,7 +313,6 @@ $(document).ready(function () {
             method: 'GET',
             dataType: 'json'
         }).then(function (response) {
-
             $('.dad-joke-box').append(response.joke);
 
         });
@@ -371,10 +369,7 @@ $(document).ready(function () {
                             var ingredient = '';
                             var measure = '';
                             do {
-                                // ingredient = [meals.strIngredient + i.toString()];
                                 ingredient = response.meals[0]["strIngredient" + i.toString()];
-
-                                // measure = [meals.strMeasure + i.toString()];
                                 measure = response.meals[0]["strMeasure" + i.toString()];
 
                                 if ((ingredient === null || measure === null)) {
@@ -389,7 +384,6 @@ $(document).ready(function () {
                                 i++;
                             } while (i <= 20);
 
-
                             $('#mealName').html("<h2 class='float-right'>" + mealName + "</h2>");
                             $('#exampleIMG').attr("src", mealIMG);
                             $('#exampleIMG').attr("style", "height: 200px; width: 200px;");
@@ -397,7 +391,6 @@ $(document).ready(function () {
                             $('#areaTag').html(cuisineType);
                             $('#instructions').html(recipeOutput);
                         });
-
 
                     //CSS onclick functions
                     $('.jumbotron').hide();
