@@ -16,7 +16,7 @@ $(document).ready(function () {
     firebase.initializeApp(config);
     var dataRef = firebase.database();
 
-    $('.details-box').hide();
+    // $('.details-box').hide();
     // $('.main-box').css('background-color', '#333333');
     // $('.main-box').css('border', '0px');
     // $('.main-box').css('margin-top', '+15px');
@@ -69,7 +69,7 @@ $(document).ready(function () {
         });
     });
 
-    $('.details-box').hide();
+    // $('.details-box').hide();
     // ===================================================
     // child added to firebase
     // ===================================================
@@ -98,6 +98,7 @@ $(document).ready(function () {
     var masterCardsList = $('<div>');
 
     var myTastyRecipes = [];
+    $('.details-box').hide();
 
     // ===================================================
     // go get a dad joke
@@ -343,7 +344,6 @@ $(document).ready(function () {
                 // ON CLICK - recipe card
                 // ===================================================
                 $('.recipe-card').on('click', function () {
-                    // FIXME: details box doesn't come back second time
                     $('.details-box').show();
                     var key = $(this).attr('recipekey');
                     var queryURL = apiLookupUrl + key;
