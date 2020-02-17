@@ -1,263 +1,379 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="./assets/imgs/utensils-solid.png" type="image/gif">
+    <link rel="icon" href="./assets/imgs/utensils-solid.png" type="image/gif" />
     <title>The Salty Beard | Recipe App</title>
     <!-- reset.css -->
     <link rel="stylesheet" href="./assets/css/reset.css" />
     <!-- bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+    <!-- Google Fonts-->
+    <link
+      href="https://fonts.googleapis.com/css?family=Permanent+Marker|Rock+Salt&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Miltonian+Tattoo&display=swap"
+      rel="stylesheet"
+    />
     <!-- font awesome -->
-    <script src="https://kit.fontawesome.com/d54a006847.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/d54a006847.js"
+      crossorigin="anonymous"
+    ></script>
     <!-- my style -->
     <link rel="stylesheet" href="./assets/css/style.css" />
-    <!-- Google Fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker|Rock+Salt&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Miltonian+Tattoo&display=swap" rel="stylesheet">
-    <!-- Favorites Page link -->
-    <link rel="favoritesPage" href="favoriteRecipes.html" />
-    <!-- Saved recipes Page link -->
-    <link rel="favoritesPage" href="savedRecipes.html" />
-</head>
+  </head>
 
-<body>
+  <body>
     <!-- logo lives here -->
     <div class="top-box"></div>
 
     <!-- MAIN container -->
     <div class=" container card main-box">
-        <div class="jumbotron">
-            <h1 class="display-4">Welcome!</h1>
-            <p class="lead">Come sit by the hearth. Enjoy looking for and saving recipes. </p>
-            <small class="text-muted dad-joke-box"></small>
-            <hr class="my-4">
-            <p>Don't forget to eat your fruit to avoid scurvy!</p>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" id="searchInput-below" type="search" placeholder="Search" aria-label="Search" />
-                <button class="btn btn-outline-success my-2 my-sm-0" id="searchBtn-below" type="submit">Search</button>
-                <button class="btn btn-outline-danger my-2 my-sm-0 ml-2" type="submit">Clear Search Results</button>
-                <button class="btn btn-outline-primary my-2 my-sm-0 ml-2" id="my-meals" type="submit">Saved Recipes</button>
-            </form>
-        </div>
-        <!-- ====== here is where message displays ================= -->
-        <div class="card-message"></div>
+      <div class="jumbotron">
+        <h1 class="display-4">Welcome!</h1>
+        <p class="lead">
+          Come sit by the hearth. Enjoy looking for and saving recipes.
+        </p>
+        <small class="text-muted dad-joke-box"></small>
+        <hr class="my-4" />
+        <p>Don't forget to eat your fruit to avoid scurvy!</p>
+        <form class="form-inline my-2 my-lg-0">
+          <input
+            class="form-control mr-sm-2"
+            id="searchInput-below"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <button
+            class="btn btn-outline-success my-2 my-sm-0"
+            id="searchBtn-below"
+            type="submit"
+          >
+            Search
+          </button>
+          <button
+            class="btn btn-outline-danger my-2 my-sm-0 ml-2"
+            type="submit"
+          >
+            Clear Search Results
+          </button>
+          <button
+            class="btn btn-outline-primary my-2 my-sm-0 ml-2"
+            id="my-meals"
+            type="submit"
+          >
+            Saved Recipes
+          </button>
+        </form>
+      </div>
+      <!-- ====== here is where success-error message displays ================= -->
+      <div class="card-message"></div>
 
+      <!-- ================================================================================================= -->
+      <!-- place the cards in this container -->
+      <!-- ================================================================================================= -->
+      <div class="container recipe-box row col-lg-12 "></div>
+      <!-- end of recipe-box contianer -->
 
-        <!-- ================================================================================================= -->
-        <!-- place the cards in this container -->
-        <!-- ================================================================================================= -->
-        <div class="container recipe-box row col-lg-12 ">
-
-        </div>
-        <!-- end of recipe-box contianer -->
-
-
-        <!-- DETAILS PART -->
-        <div class="container details-box">
-
-            <!-- CARD -->
-            <div class="card details-card">
-
-                <!-- CARD HEADER -->
-                <div class="card-header">
-                    <div class="row">
-                        <div class="container col-md-6">
-                        </div>
-                        <div class="container col-md-6">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="container col-md-5 col-xs-3">
-                            <img id="exampleIMG" src="" class="meal-img">
-                        </div>
-                        <div class="container col-md-7 col-xs-9">
-                            <div id="mealName" class="MealTitle float-right"></div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="container">
-                            <span id="areaTag" class="badge badge-warning area float-left"></span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="container">
-                            <span id="categoryTag" class="badge badge-info category float-left"></span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="container col-md-6">
-                            <button class="btn btn-primary go-back-btn float-right">Back</button>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- CARD BODY -->
-                <div class="card-body">
-                    <div class="row">
-
-                        <div class="container col-md-4 ingredient-box">
-                            <div class="card">
-                                <div class="card-header bg-dark">
-                                    <h5>stuff you need i guess......</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div id="ingredients-list" class="ingredientList"></div>
-                                    <ul>
-                                        <li id="ing1" class="ingredient"></li>
-                                        <li id="ing2" class="ingredient"></li>
-                                        <li id="ing3" class="ingredient"></li>
-                                        <li id="ing4" class="ingredient"></li>
-                                        <li id="ing5" class="ingredient"></li>
-                                        <li id="ing6" class="ingredient"></li>
-                                        <li id="ing7" class="ingredient"></li>
-                                        <li id="ing8" class="ingredient"></li>
-                                        <li id="ing9" class="ingredient"></li>
-                                        <li id="ing10" class="ingredient"></li>
-                                        <li id="ing11" class="ingredient"></li>
-                                        <li id="ing12" class="ingredient"></li>
-                                        <li id="ing13" class="ingredient"></li>
-                                        <li id="ing14" class="ingredient"></li>
-                                        <li id="ing15" class="ingredient"></li>
-                                        <li id="ing16" class="ingredient"></li>
-                                        <li id="ing17" class="ingredient"></li>
-                                        <li id="ing18" class="ingredient"></li>
-                                        <li id="ing19" class="ingredient"></li>
-                                        <li id="ing20" class="ingredient"></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="container col-md-8 steps-box">
-                            <div class="card text-wrap steps-box">
-                                <div class="card-header bg-dark">
-                                    <h5>Here is how to do it, get kraken!</h5>
-                                </div>
-                                <div class="container">
-                                    <div id="instructions" class="instructionsArea text-wrap steps-box"></div>
-                                    <div id="recall-button" data-toggle="tooltip" data-placement="top" title="Back to Search Window"></div>
-                                </div>
-
-
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
-
-
-                <!-- end of card -->
+      <!-- DETAILS PART -->
+      <div class="container details-box">
+        <!-- CARD -->
+        <div class="card details-card">
+          <!-- CARD HEADER -->
+          <div class="card-header">
+            <div class="row">
+              <div class="container col-md-6"></div>
+              <div class="container col-md-6"></div>
             </div>
-
-            <!-- END of details-box  -->
-        </div>
-
-    </div>
-    <!-- end of main container -->
-    </div>
-
-
-    <!-- Modal button to add a new recipe -->
-    <footer class="footer mt-auto py-3">
-        <div class="container" id="newRecipeModal">
-
-            <!-- PLUS ( + ) button  -->
-            <button class="float-right rounded-circle btn btn-secondary bt-info" id="plusAdd" data-toggle="modal" data-target="#addNewRecipe">
-                    <i class="fas fa-plus fa-2x"></i>
+            <div class="row">
+              <div class="container col-md-5 col-xs-3">
+                <img id="exampleIMG" src="" class="meal-img" />
+              </div>
+              <div class="container col-md-7 col-xs-9">
+                <div id="mealName" class="MealTitle float-right"></div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="container">
+                <span
+                  id="areaTag"
+                  class="badge badge-warning area float-left"
+                ></span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="container">
+                <span
+                  id="categoryTag"
+                  class="badge badge-info category float-left"
+                ></span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="container col-md-6">
+                <button class="btn btn-primary go-back-btn float-right">
+                  Back
                 </button>
-
-            <!-- new recipe modal -->
-            <div id="addNewRecipe" class="modal fade" tabindex="-1" role="dialog">
-                <div class="modal-dialog modal-dialog-scrollable" role="document">
-                    
-                    <!--content of the modal-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">Add a New Recipe</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-                        <div class="modal-body ml-1 mr-1">
-                            <div class="card-message"></div>
-                            <!-- ===================== FORM ================================= -->
-                            <form role="form">
-                                <div class="form-group row">
-                                    <label for="recipe-input">Recipe Title:</label>
-                                    <input class="form-control form-data" id="recipe-input" type="text" />
-                                </div>
-                                <div class="form-group row">
-                                    <h3>Ingredients & Measurements:</h3>
-                                    <label for="ingredient-input">Ingredient 1</label>
-                                    <input class="form-control form-data ingredient-input mb-1" id="ing1" type="text" />
-                                    <br>
-                                    <label for="ingredient-input">Ingredient 2</label>
-                                    <input class="form-control form-data ingredient-input mb-1" id="ing2" type="text" />
-                                    <br>
-                                    <label for="ingredient-input">Ingredient 3</label>
-                                    <input class="form-control form-data ingredient-input mb-1" id="ing3" type="text" /> 
-                                    <br>
-                                    <label for="ingredient-input">Ingredient 4</label>
-                                    <input class="form-control form-data ingredient-input mb-1" id="ing4" type="text" /> 
-                                    <br>
-                                    <label for="ingredient-input">Ingredient 5</label>
-                                    <input class="form-control form-data ingredient-input mb-1" id="ing5" type="text" /> 
-                                    <br>
-                                    <label for="ingredient-input">Ingredient 6</label>
-                                    <input class="form-control form-data ingredient-input mb-1" id="ing6" type="text" /> 
-                                    <br>
-                                    <label for="ingredient-input">Ingredient 7</label>
-                                    <input class="form-control form-data ingredient-input mb-1" id="ing7" type="text" /> 
-                                    <br>
-                                    <label for="ingredient-input">Ingredient 8</label>
-                                    <input class="form-control form-data ingredient-input mb-1" id="ing8" type="text" /> 
-                                    <br>
-                                    <label for="ingredient-input">Ingredient 9</label>
-                                    <input class="form-control form-data ingredient-input mb-1" id="ing9" type="text" /> 
-                                    <br>
-                                    <label for="ingredient-input">Ingredient 10</label>
-                                    <input class="form-control form-data ingredient-input mb-1" id="ing10" type="text" /> 
-                                    <br>
-                                    <label for="ingredient-input">Ingredient 11</label>
-                                    <input class="form-control form-data ingredient-input mb-1" id="ing11" type="text" /> 
-                                    <br>
-                                    <label for="ingredient-input">Ingredient 12</label>
-                                    <input class="form-control form-data ingredient-input mb-1" id="ing12" type="text" /> 
-                                    <br>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="instructions-input">Cooking Instructions</label>
-                                    <textarea class="form-control form-data" rows="5" id="instructions-input" aria-describedby="instructionsHelp"></textarea>
-                                    <small id="instructionsHelp" class="form-text text-muted">Remember to include all steps of the recipe. We recommend numbering your steps.</small>
-                                </div>
-                            </form>
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default btn-outline-danger" data-dismiss="modal">
-                                    Close
-                                </button>
-                            <button id="save-recipe-btn" type="button" class="btn btn-default btn-primary" data-dismiss="modal">
-                                    Save Recipe
-                                </button>
-                        </div>
-                    </div>
-                </div>
+              </div>
             </div>
+          </div>
+
+          <!-- CARD BODY -->
+          <div class="card-body">
+            <div class="row">
+              <div class="container col-md-4 ingredient-box">
+                <div class="card">
+                  <div class="card-header bg-dark">
+                    <h5>stuff you need i guess......</h5>
+                  </div>
+                  <div class="card-body">
+                    <div id="ingredients-list" class="ingredientList"></div>
+                    <ul>
+                      <li id="ing1" class="ingredient"></li>
+                      <li id="ing2" class="ingredient"></li>
+                      <li id="ing3" class="ingredient"></li>
+                      <li id="ing4" class="ingredient"></li>
+                      <li id="ing5" class="ingredient"></li>
+                      <li id="ing6" class="ingredient"></li>
+                      <li id="ing7" class="ingredient"></li>
+                      <li id="ing8" class="ingredient"></li>
+                      <li id="ing9" class="ingredient"></li>
+                      <li id="ing10" class="ingredient"></li>
+                      <li id="ing11" class="ingredient"></li>
+                      <li id="ing12" class="ingredient"></li>
+                      <li id="ing13" class="ingredient"></li>
+                      <li id="ing14" class="ingredient"></li>
+                      <li id="ing15" class="ingredient"></li>
+                      <li id="ing16" class="ingredient"></li>
+                      <li id="ing17" class="ingredient"></li>
+                      <li id="ing18" class="ingredient"></li>
+                      <li id="ing19" class="ingredient"></li>
+                      <li id="ing20" class="ingredient"></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="container col-md-8 steps-box">
+                <div class="card text-wrap steps-box">
+                  <div class="card-header bg-dark">
+                    <h5>Here is how to do it, get kraken!</h5>
+                  </div>
+                  <div class="container">
+                    <div
+                      id="instructions"
+                      class="instructionsArea text-wrap steps-box"
+                    ></div>
+                    <div
+                      id="recall-button"
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      title="Back to Search Window"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- end of card -->
         </div>
+
+        <!-- END of details-box  -->
+      </div>
+
+      <!-- end of main container -->
+    </div>
+
+    <!-- FOOTER - Modal button to add ( + ) a new recipe -->
+    <footer class="footer mt-auto py-3">
+      <div class="container" id="newRecipeModal">
+        <!-- PLUS ( + ) button  -->
+        <button
+          class="float-right rounded-circle btn btn-secondary bt-info"
+          id="plusAdd"
+          data-toggle="modal"
+          data-target="#addNewRecipe"
+        >
+          <i class="fas fa-plus fa-2x"></i>
+        </button>
+
+        <!-- new recipe modal -->
+        <div id="addNewRecipe" class="modal fade" tabindex="-1" role="dialog">
+          <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <!--content of the modal-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Add a New Recipe</h4>
+                <button type="button" class="close" data-dismiss="modal">
+                  &times;
+                </button>
+              </div>
+              <div class="modal-body ml-1 mr-1">
+                <div class="card-message"></div>
+                <!-- ===================== FORM ================================= -->
+                <form role="form">
+                  <div class="form-group row">
+                    <label for="recipe-input">Recipe Title:</label>
+                    <input
+                      class="form-control form-data"
+                      id="recipe-input"
+                      type="text"
+                    />
+                  </div>
+                  <div class="form-group row">
+                    <h3>Ingredients & Measurements:</h3>
+                    <label for="ingredient-input">Ingredient 1</label>
+                    <input
+                      class="form-control form-data ingredient-input mb-1"
+                      id="ing1"
+                      type="text"
+                    />
+                    <br />
+                    <label for="ingredient-input">Ingredient 2</label>
+                    <input
+                      class="form-control form-data ingredient-input mb-1"
+                      id="ing2"
+                      type="text"
+                    />
+                    <br />
+                    <label for="ingredient-input">Ingredient 3</label>
+                    <input
+                      class="form-control form-data ingredient-input mb-1"
+                      id="ing3"
+                      type="text"
+                    />
+                    <br />
+                    <label for="ingredient-input">Ingredient 4</label>
+                    <input
+                      class="form-control form-data ingredient-input mb-1"
+                      id="ing4"
+                      type="text"
+                    />
+                    <br />
+                    <label for="ingredient-input">Ingredient 5</label>
+                    <input
+                      class="form-control form-data ingredient-input mb-1"
+                      id="ing5"
+                      type="text"
+                    />
+                    <br />
+                    <label for="ingredient-input">Ingredient 6</label>
+                    <input
+                      class="form-control form-data ingredient-input mb-1"
+                      id="ing6"
+                      type="text"
+                    />
+                    <br />
+                    <label for="ingredient-input">Ingredient 7</label>
+                    <input
+                      class="form-control form-data ingredient-input mb-1"
+                      id="ing7"
+                      type="text"
+                    />
+                    <br />
+                    <label for="ingredient-input">Ingredient 8</label>
+                    <input
+                      class="form-control form-data ingredient-input mb-1"
+                      id="ing8"
+                      type="text"
+                    />
+                    <br />
+                    <label for="ingredient-input">Ingredient 9</label>
+                    <input
+                      class="form-control form-data ingredient-input mb-1"
+                      id="ing9"
+                      type="text"
+                    />
+                    <br />
+                    <label for="ingredient-input">Ingredient 10</label>
+                    <input
+                      class="form-control form-data ingredient-input mb-1"
+                      id="ing10"
+                      type="text"
+                    />
+                    <br />
+                    <label for="ingredient-input">Ingredient 11</label>
+                    <input
+                      class="form-control form-data ingredient-input mb-1"
+                      id="ing11"
+                      type="text"
+                    />
+                    <br />
+                    <label for="ingredient-input">Ingredient 12</label>
+                    <input
+                      class="form-control form-data ingredient-input mb-1"
+                      id="ing12"
+                      type="text"
+                    />
+                    <br />
+                  </div>
+                  <div class="form-group row">
+                    <label for="instructions-input">Cooking Instructions</label>
+                    <textarea
+                      class="form-control form-data"
+                      rows="5"
+                      id="instructions-input"
+                      aria-describedby="instructionsHelp"
+                    ></textarea>
+                    <small id="instructionsHelp" class="form-text text-muted"
+                      >Remember to include all steps of the recipe. We recommend
+                      numbering your steps.</small
+                    >
+                  </div>
+                </form>
+              </div>
+
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-default btn-outline-danger"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button
+                  id="save-recipe-btn"
+                  type="button"
+                  class="btn btn-default btn-primary"
+                  data-dismiss="modal"
+                >
+                  Save Recipe
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </footer>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.js"
+      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+      crossorigin="anonymous"
+    ></script>
     <!-- bootstrap js related scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
     <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-database.js"></script>
     <script src="./assets/javascript/app.js"></script>
-</body>
-
+  </body>
 </html>
