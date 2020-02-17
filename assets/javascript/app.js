@@ -162,6 +162,7 @@ $(document).ready(function () {
                 return newTag;
 
             default:
+                newTag.addClass('badge-dark')
                 return newTag;
         }
     }
@@ -192,8 +193,6 @@ $(document).ready(function () {
              method: 'GET',
              dataType: 'json'
         }).then(function(response){
-            console.log(response);
-            // console.log(response.joke);
             
             $('.dad-joke-box').append(response.joke);
             
@@ -277,7 +276,7 @@ $(document).ready(function () {
                             } while (i <= 20);
 
 
-                            $('#mealName').html("<h3>" + mealName + "</h3>");
+                            $('#mealName').html("<h2 class='float-right'>" + mealName + "</h2>");
                             $('#exampleIMG').attr("src", mealIMG);
                             $('#exampleIMG').attr("style", "height: 200px; width: 200px;");
                             $('#categoryTag').html(category);
