@@ -16,6 +16,11 @@ $(document).ready(function () {
     firebase.initializeApp(config);
     var dataRef = firebase.database();
     
+    $('.details-box').hide();
+    $('.main-box').css('background-color', '#333333');
+    $('.main-box').css('border', '0px');
+    $('.main-box').css('margin-top', '+15px');
+
 // Send the new recipe input from the modal to the database
     $('#save-recipe-btn').on('click', function() {
         var recipeTitle = $('#recipe-input').val();
@@ -50,14 +55,7 @@ $(document).ready(function () {
         }, function(err) {
             console.log(err);
         });
-    })
-
-    // comments here?
-    $('.details-box').hide();
-    $('.main-box').css('background-color', '#333333');
-    $('.main-box').css('border', '0px');
-    $('.main-box').css('margin-top', '+15px');
-
+    });
 
     // ===================================================
     // child added to firebase
