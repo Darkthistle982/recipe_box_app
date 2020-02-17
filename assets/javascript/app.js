@@ -315,9 +315,9 @@ $(document).ready(function () {
                             $('#mealName').html("<h3>" + mealName + "</h3>");
                             $('#exampleIMG').attr("src", mealIMG);
                             $('#exampleIMG').attr("style", "height: 200px; width: 200px;");
-                            $('#categoryTag').html("Category: " + category);
-                            $('#areaTag').html("Cuisine: " + cuisineType);
-                            $('#ingredients-list').html("Ingredients: ");
+                            $('#categoryTag').html(category);
+                            $('#areaTag').html(cuisineType);
+                            // $('#ingredients-list').html("Ingredients: ");
                             // $('#ing1').text(ing1);
                             // $('#ing2').html(ing2);
                             // $('#ing3').html(ing3);

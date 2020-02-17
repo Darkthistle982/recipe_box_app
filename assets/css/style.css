@@ -77,6 +77,6 @@ nav {
     word-wrap: break-word;
 } */
 
-.ingredient-box, .steps-box {
+.ingredient-box, .steps-box, .ingredientList, .ingredient {
     font-family: Arial, Helvetica, sans-serif;
 }
