@@ -86,22 +86,24 @@ nav {
 .top-box {
     background-color: white;
     background-image: url("../imgs/main-logo.png");
-    /* padding-bottom: 500px; */
-    background-size: 400px 125px;
+    background-size: 690px 125px;
     background-repeat: no-repeat;
     height: 130px;
     padding: 10px 20px 5px 20px;
-    background-position: 8% 0%;
+    background-position: center;
     margin-bottom: 20px;
 }
 
 
 
 /* media queries */
-@media only screen and (max-width: 350px) {
-    .img-part {
+@media only screen and (max-width: 380px) {
+    .top-box {
         background-image: url("../imgs/mobile-logo.png");
         padding-bottom: 50px;
+        background-size: 300px 200px;
+        height: 210px;
+        background-repeat: no-repeat;
         /* background-color: aqua; */
         /* background-color: chartreuse; */
     }
