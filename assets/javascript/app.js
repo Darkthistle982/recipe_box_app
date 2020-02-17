@@ -16,7 +16,8 @@ $(document).ready(function () {
     firebase.initializeApp(config);
     var dataRef = firebase.database();
 
-    // $('.details-box').hide();
+    $('.details-box').hide();
+    // TODO: maybe add this css in style.css
     // $('.main-box').css('background-color', '#333333');
     // $('.main-box').css('border', '0px');
     // $('.main-box').css('margin-top', '+15px');
@@ -73,9 +74,10 @@ $(document).ready(function () {
     // ===================================================
     // child added to firebase
     // ===================================================
-    dataRef.ref().on("child_added", function (childSnapshot) {
+    dataRef.ref('user-added-recipes/').on("child_added", function (childSnapshot) {
         // push snapshot to local array
         myTastyRecipes.push(childSnapshot);
+        console.log(myTastyRecipes);
 
 
     }, function (errorObject) {
@@ -107,7 +109,9 @@ $(document).ready(function () {
     // ===================================================
     // EVENT - show saved recipes
     // ===================================================
+    // FIXME: not showing the saved recipes
     $('#my-meals').on('click', function (event) {
+        event.preventDefault();
 
         console.log('my recipes inside button: ', myTastyRecipes[0].key);
         console.log('my recipes inside button: ', myTastyRecipes[0].val().instructions);
@@ -115,6 +119,8 @@ $(document).ready(function () {
         console.log('my recipes inside button: ', myTastyRecipes[0].val().ingredients);
         console.log('my recipes inside button: ', myTastyRecipes[0].val().dateAdded);
 
+        console.log(myTastyRecipes);
+        
         for (let i = 0; i < myTastyRecipes.length; i++) {
             console.log('stuff', myTastyRecipes[i].val());
 
@@ -184,6 +190,7 @@ $(document).ready(function () {
         // === right side ===
         var titleDiv = $('<div>').addClass('container col-xs-12 col-md-9');
         var titleH3 = $('<h3>').addClass('text-right text-break').text(mealTitle);
+        var titleP = $('<p>').addClass('text-right').text('This elegant dish can be made in under 30mins. Feeds 4. #dinner');
         titleDiv.append(titleH3);
         titleDiv.append(titleP);
 
