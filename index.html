@@ -27,12 +27,12 @@
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">
-            <h3> <span class="fas fa-drumstick-bite fa-3x"></span> The Salty Beard</h3>
+            <h3>The Salty Beard</h3>
         </a>
         <!-- <a class="navbar-brand" href="#">The Salty Beards</a> -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-        </button>
+        </button> -->
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
@@ -65,9 +65,9 @@
         <div class="jumbotron">
             <h1 class="display-4">Welcome!</h1>
             <p class="lead">Come sit by the hearth. Enjoy looking for and saving recipes. </p>
-            <small class="text-muted">Don't forget to eat your fruit to avoid scurvy!</small>
+            <small class="text-muted dad-joke-box"></small>
             <hr class="my-4">
-            <p>Try it out...</p>
+            <p>Don't forget to eat your fruit to avoid scurvy!</p>
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" id="searchInput-below" type="search" placeholder="Search" aria-label="Search" />
                 <button class="btn btn-outline-success my-2 my-sm-0" id="searchBtn-below" type="submit">Search</button>
@@ -97,17 +97,34 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="container col-md-6">
-                            <div id="mealName" class="MealTitle"></div>
                         </div>
-                        <div class="col-md-6">
-                            <button class="btn btn-dark float-right go-back-btn">Back</button>
+                        <div class="container col-md-6">
                         </div>
                     </div>
-                    <div class="container">
-                        <img id="exampleIMG" src="" class="float-right">
-                        <h3>Category: <span id="categoryTag" class="badge badge-info category"></span></h3>
-                        <h3>Cuisine: <span id="areaTag" class="badge badge-warning area"></span></h3>
+                    <div class="row">
+                        <div class="container col-md-5 col-xs-3">
+                            <img id="exampleIMG" src="" class="meal-img">
+                        </div>
+                        <div class="container col-md-7 col-xs-9">
+                            <div id="mealName" class="MealTitle float-right"></div>
+                        </div>
                     </div>
+                    <div class="row">
+                        <div class="container">
+                            <span id="areaTag" class="badge badge-warning area float-left"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="container">
+                            <span id="categoryTag" class="badge badge-info category float-left"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="container col-md-6">
+                            <button class="btn btn-primary go-back-btn float-right">Back</button>
+                        </div>
+                    </div>
+
                 </div>
 
                 <!-- CARD BODY -->
@@ -116,7 +133,7 @@
 
                         <div class="container col-md-4 ingredient-box">
                             <div class="card">
-                                <div class="card-header">
+                                <div class="card-header bg-dark">
                                     <h5>stuff you need i guess......</h5>
                                 </div>
                                 <div class="card-body">
@@ -149,7 +166,7 @@
 
                         <div class="container col-md-8 steps-box">
                             <div class="card text-wrap steps-box">
-                                <div class="card-header">
+                                <div class="card-header bg-dark">
                                     <h5>Here is how to do it, get kraken!</h5>
                                 </div>
                                 <div class="container">

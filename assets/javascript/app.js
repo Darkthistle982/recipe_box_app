@@ -50,8 +50,13 @@ $(document).ready(function () {
     // ===================================================
     const apiSearchUrl = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
     const apiLookupUrl = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=";
-
+    const apiDadJokeUrl = "https://icanhazdadjoke.com/";
     var masterCardsList = $('<div>');
+
+    // ===================================================
+    // go get a dad joke
+    // ===================================================
+    goGetDadJoke( apiDadJokeUrl );
 
     // ===================================================
     // EVENT - save recipe ( + ) button 
@@ -159,6 +164,7 @@ $(document).ready(function () {
                 return newTag;
 
             default:
+                newTag.addClass('badge-dark')
                 return newTag;
         }
     }
@@ -180,6 +186,19 @@ $(document).ready(function () {
         setTimeout(function () {
             $(elementClass).detach();
         }, 4 * 1000);
+    }
+
+    function goGetDadJoke(queryUrl) {
+            //dataType: 'json',
+        $.ajax({
+             url: queryUrl,
+             method: 'GET',
+             dataType: 'json'
+        }).then(function(response){
+            
+            $('.dad-joke-box').append(response.joke);
+            
+        });
     }
 
 
@@ -259,7 +278,7 @@ $(document).ready(function () {
                             } while (i <= 20);
 
 
-                            $('#mealName').html("<h3>" + mealName + "</h3>");
+                            $('#mealName').html("<h2 class='float-right'>" + mealName + "</h2>");
                             $('#exampleIMG').attr("src", mealIMG);
                             $('#exampleIMG').attr("style", "height: 200px; width: 200px;");
                             $('#categoryTag').html(category);
