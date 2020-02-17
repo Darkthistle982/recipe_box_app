@@ -3,9 +3,7 @@
 }
 
 body {
-    /* color: #333; */
     background-image: url("../imgs/pink dust.png");
-    /* background-image: url("../imgs/mobile-logo.png"); */
     /* background-color: #333; */
     /* color: #333; */
     font-size: 100%;
@@ -71,16 +69,6 @@ nav {
 
 .form-data {
     font-family: Arial, Helvetica, sans-serif;
-}
-
-nav {
-    /* background-color: whitesmoke; */
-    /* background-image: url("../imgs/mobile-logo.png"); */
-}
-
-.img-part {
-    /* background-image: url("../imgs/mobile-logo.png"); */
-    /* margin-bottom: 300px; */
 }
 
 .top-box {
