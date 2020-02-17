@@ -32,7 +32,7 @@ $(document).ready(function () {
         var ing11 = $('#ing11').val();
         var ing12 = $('#ing12').val();
         var instructions = $('#instructions-input').val();
-        database.ref('user-added-recipes/').push({
+        dataRef.ref('user-added-recipes/').push({
             title: recipeTitle,
             ing1: ing1,
             ing2: ing2,
@@ -47,18 +47,12 @@ $(document).ready(function () {
             ing11: ing11,
             ing12: ing12,
             instructions: instructions
-        })
-    })
-    // ============ TEST push ==========
-    $('.test-save').on('click', function (event) {
-        dataRef.ref().push({
-            title: 'Bean bread',
-            img: 'https://www.themealdb.com/images/media/meals/1529444830.jpg',
-            instructions: 'First get the pan. cook. then serve.',
-            dateAdded: firebase.database.ServerValue.TIMESTAMP
+        }, function(err) {
+            console.log(err);
         });
-    });
+    })
 
+    // comments here?
     $('.details-box').hide();
     $('.main-box').css('background-color', '#333333');
     $('.main-box').css('border', '0px');
@@ -69,13 +63,8 @@ $(document).ready(function () {
     // child added to firebase
     // ===================================================
     dataRef.ref().on("child_added", function (childSnapshot) {
-        //TODO: I will be back!
-        console.log('child added');
-        // console.log(childSnapshot);
-        
-        // createMyCard(childSnapshot);
+        // push snapshot to local array
         myTastyRecipes.push(childSnapshot);
-        console.log('myTastyRecipes', myTastyRecipes);
         
 
     }, function (errorObject) {
