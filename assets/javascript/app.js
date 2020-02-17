@@ -17,6 +17,7 @@ $(document).ready(function () {
     var dataRef = firebase.database();
 
     $('.details-box').hide();
+    // TODO: maybe add this css in style.css
     // $('.main-box').css('background-color', '#333333');
     // $('.main-box').css('border', '0px');
     // $('.main-box').css('margin-top', '+15px');
