@@ -1,27 +1,5 @@
 // Project 1
 
-var config = {
-    apiKey: "AIzaSyAggh_9HPrLN-IokUfsrCz2bCP_4ABUd4Y",
-    authDomain: "salty-beards-recipe-box.firebaseio.com",
-    databaseURL: "https://salty-beards-recipe-box.firebaseio.com/",
-    projectId: "salty-beards-recipe-box",
-    storageBucket: "salty-beards-recipe-box.appspot.com",
-    messagingSenderId: "655365438357",
-    appId: "1:655365438357:web:3b219292065eb7ad0e149c"
-};
-
-firebase.initializeApp(config);
-var dataRef = firebase.database();
-
-// ============ TEST push ==========
-$('.test-save').on('click', function (event) {
-    dataRef.ref().push({
-        title: 'Bean bread',
-        img: 'https://www.themealdb.com/images/media/meals/1529444830.jpg',
-        instructions: 'First get the pan. cook. then serve.',
-        dateAdded: firebase.database.ServerValue.TIMESTAMP
-    });
-});
 
 
 
@@ -31,6 +9,29 @@ $('.test-save').on('click', function (event) {
 // doc ready
 // ===================================================
 $(document).ready(function () {
+    
+    var config = {
+        apiKey: "AIzaSyAggh_9HPrLN-IokUfsrCz2bCP_4ABUd4Y",
+        authDomain: "salty-beards-recipe-box.firebaseio.com",
+        databaseURL: "https://salty-beards-recipe-box.firebaseio.com/",
+        projectId: "salty-beards-recipe-box",
+        storageBucket: "salty-beards-recipe-box.appspot.com",
+        messagingSenderId: "655365438357",
+        appId: "1:655365438357:web:3b219292065eb7ad0e149c"
+    };
+    
+    firebase.initializeApp(config);
+    var dataRef = firebase.database();
+    
+    // ============ TEST push ==========
+    $('.test-save').on('click', function (event) {
+        dataRef.ref().push({
+            title: 'Bean bread',
+            img: 'https://www.themealdb.com/images/media/meals/1529444830.jpg',
+            instructions: 'First get the pan. cook. then serve.',
+            dateAdded: firebase.database.ServerValue.TIMESTAMP
+        });
+    });
 
     $('.details-box').hide();
     $('.main-box').css('background-color', '#333333');
@@ -97,6 +98,15 @@ $(document).ready(function () {
             ingredients: ingredients,
             instructions: instructions,
             dateAdded: firebase.database.ServerValue.TIMESTAMP
+        },function (errorObject) {
+            // console.log("Errors handled: " + errorObject.code);
+            if (errorObject) {
+                
+            } else {
+                //hooray!
+                addSuccessMessage('card-message');
+    
+            }
         });
         
         // addSuccessMessage('card-message');
