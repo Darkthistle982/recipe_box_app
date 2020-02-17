@@ -118,6 +118,8 @@ $(document).ready(function () {
         console.log('my recipes inside button: ', myTastyRecipes[0].val().ingredients);
         console.log('my recipes inside button: ', myTastyRecipes[0].val().dateAdded);
 
+        console.log(myTastyRecipes);
+        
         for (let i = 0; i < myTastyRecipes.length; i++) {
             console.log('stuff', myTastyRecipes[i].val());
 
