@@ -17,13 +17,14 @@ $(document).ready(function () {
     var dataRef = firebase.database();
 
     $('.details-box').hide();
-    $('.main-box').css('background-color', '#333333');
-    $('.main-box').css('border', '0px');
-    $('.main-box').css('margin-top', '+15px');
+    // $('.main-box').css('background-color', '#333333');
+    // $('.main-box').css('border', '0px');
+    // $('.main-box').css('margin-top', '+15px');
 
-    // ===================================================
+
+    // ========================================================
     // EVENT - save recipe ( + ) button 
-    // ===================================================
+    // ========================================================
     // Send the new recipe input from the modal to the database
     $('#save-recipe-btn').on('click', function (event) {
         event.preventDefault();
