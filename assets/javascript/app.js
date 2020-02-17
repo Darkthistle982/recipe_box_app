@@ -101,10 +101,11 @@ $(document).ready(function () {
         },function (errorObject) {
             // console.log("Errors handled: " + errorObject.code);
             if (errorObject) {
-                
+                addErrorMessage('card-message');
             } else {
                 //hooray!
                 addSuccessMessage('card-message');
+                loadRecipeCards(myTastyRecipes);
     
             }
         });
@@ -133,6 +134,17 @@ $(document).ready(function () {
         }
 
     });
+
+    function loadRecipeCards(arr) {
+        for (let i = 0; i < arr.length; i++) {
+            console.log('stuff', arr[i].val());
+            
+            var mealCard = createMyCard( arr[i].val() );
+            console.log('mealCard: ', mealCard);
+            
+            appendCardTo('recipe-box', mealCard);
+        }
+    }
 
 
     // ===================================================
