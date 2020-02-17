@@ -16,6 +16,39 @@ $(document).ready(function () {
     firebase.initializeApp(config);
     var dataRef = firebase.database();
     
+// Send the new recipe input from the modal to the database
+    $('#save-recipe-btn').on('click', function() {
+        var recipeTitle = $('#recipe-input').val();
+        var ing1 = $('#ing1').val();
+        var ing2 = $('#ing2').val();
+        var ing3 = $('#ing3').val();
+        var ing4 = $('#ing4').val();
+        var ing5 = $('#ing5').val();
+        var ing6 = $('#ing6').val();
+        var ing7 = $('#ing7').val();
+        var ing8 = $('#ing8').val();
+        var ing9 = $('#ing9').val();
+        var ing10 = $('#ing10').val();
+        var ing11 = $('#ing11').val();
+        var ing12 = $('#ing12').val();
+        var instructions = $('#instructions-input').val();
+        database.ref('user-added-recipes/').push({
+            title: recipeTitle,
+            ing1: ing1,
+            ing2: ing2,
+            ing3: ing3,
+            ing4: ing4,
+            ing5: ing5,
+            ing6: ing6,
+            ing7: ing7,
+            ing8: ing8,
+            ing9: ing9,
+            ing10: ing10,
+            ing11: ing11,
+            ing12: ing12,
+            instructions: instructions
+        })
+    })
     // ============ TEST push ==========
     $('.test-save').on('click', function (event) {
         dataRef.ref().push({
