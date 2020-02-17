@@ -21,6 +21,12 @@ pre {
     margin-bottom: 20px;
 }
 
+.main-box {
+    background-color: #333333;
+    border: 0px;
+    margin-top: +15px;
+}
+
 .card-header {
     margin-bottom: 10px;
 }

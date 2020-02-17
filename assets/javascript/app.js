@@ -17,11 +17,6 @@ $(document).ready(function () {
     var dataRef = firebase.database();
 
     $('.details-box').hide();
-    // TODO: maybe add this css in style.css
-    // $('.main-box').css('background-color', '#333333');
-    // $('.main-box').css('border', '0px');
-    // $('.main-box').css('margin-top', '+15px');
-
 
     // ========================================================
     // EVENT - save recipe ( + ) button 
@@ -77,7 +72,7 @@ $(document).ready(function () {
     dataRef.ref('user-added-recipes/').on("child_added", function (childSnapshot) {
         // push snapshot to local array
         myTastyRecipes.push(childSnapshot);
-        console.log(myTastyRecipes);
+        // console.log(myTastyRecipes);
 
 
     }, function (errorObject) {
@@ -113,19 +108,19 @@ $(document).ready(function () {
     $('#my-meals').on('click', function (event) {
         event.preventDefault();
 
-        console.log('my recipes inside button: ', myTastyRecipes[0].key);
-        console.log('my recipes inside button: ', myTastyRecipes[0].val().instructions);
-        console.log('my recipes inside button: ', myTastyRecipes[0].val().title);
-        console.log('my recipes inside button: ', myTastyRecipes[0].val().ingredients);
-        console.log('my recipes inside button: ', myTastyRecipes[0].val().dateAdded);
+        // console.log('my recipes inside button: ', myTastyRecipes[0].key);
+        // console.log('my recipes inside button: ', myTastyRecipes[0].val().instructions);
+        // console.log('my recipes inside button: ', myTastyRecipes[0].val().title);
+        // console.log('my recipes inside button: ', myTastyRecipes[0].val().ingredients);
+        // console.log('my recipes inside button: ', myTastyRecipes[0].val().dateAdded);
 
-        console.log(myTastyRecipes);
+        // console.log(myTastyRecipes);
         
         for (let i = 0; i < myTastyRecipes.length; i++) {
-            console.log('stuff', myTastyRecipes[i].val());
+            // console.log('stuff', myTastyRecipes[i].val());
 
             var mealCard = createMyCard(myTastyRecipes[i].val());
-            console.log('mealCard: ', mealCard);
+            // console.log('mealCard: ', mealCard);
 
             appendCardTo('recipe-box', mealCard);
         }
@@ -133,10 +128,10 @@ $(document).ready(function () {
 
     function loadRecipeCards(arr) {
         for (let i = 0; i < arr.length; i++) {
-            console.log('stuff', arr[i].val());
+            // console.log('stuff', arr[i].val());
 
             var mealCard = createMyCard(arr[i].val());
-            console.log('mealCard: ', mealCard);
+            // console.log('mealCard: ', mealCard);
 
             appendCardTo('recipe-box', mealCard);
         }
@@ -146,7 +141,6 @@ $(document).ready(function () {
     // EVENT - go back button
     // ===================================================
     $('.go-back-btn').on('click', function (event) {
-        // TODO: handle the go back button
         $('.details-box').hide();
         $('.main-box').append(masterCardsList);
         $('.jumbotron').show();
