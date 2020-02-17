@@ -2,7 +2,7 @@
 // doc ready
 // ======================================================================================
 $(document).ready(function () {
-    
+
     var config = {
         apiKey: "AIzaSyAggh_9HPrLN-IokUfsrCz2bCP_4ABUd4Y",
         authDomain: "salty-beards-recipe-box.firebaseio.com",
@@ -12,31 +12,33 @@ $(document).ready(function () {
         messagingSenderId: "655365438357",
         appId: "1:655365438357:web:3b219292065eb7ad0e149c"
     };
-    
+
     firebase.initializeApp(config);
     var dataRef = firebase.database();
-    
+
     $('.details-box').hide();
     $('.main-box').css('background-color', '#333333');
     $('.main-box').css('border', '0px');
     $('.main-box').css('margin-top', '+15px');
 
-// Send the new recipe input from the modal to the database
-    $('#save-recipe-btn').on('click', function() {
-        var recipeTitle = $('#recipe-input').val();
-        var ing1 = $('#ing1').val();
-        var ing2 = $('#ing2').val();
-        var ing3 = $('#ing3').val();
-        var ing4 = $('#ing4').val();
-        var ing5 = $('#ing5').val();
-        var ing6 = $('#ing6').val();
-        var ing7 = $('#ing7').val();
-        var ing8 = $('#ing8').val();
-        var ing9 = $('#ing9').val();
-        var ing10 = $('#ing10').val();
-        var ing11 = $('#ing11').val();
-        var ing12 = $('#ing12').val();
-        var instructions = $('#instructions-input').val();
+    // Send the new recipe input from the modal to the database
+    $('#save-recipe-btn').on('click', function (event) {
+        event.preventDefault();
+        recipeTitle = $('#recipe-input').val().trim();
+        ing1 = $('#ing1').val();
+        ing2 = $('#ing2').val();
+        ing3 = $('#ing3').val();
+        ing4 = $('#ing4').val();
+        ing5 = $('#ing5').val();
+        ing6 = $('#ing6').val();
+        ing7 = $('#ing7').val();
+        ing8 = $('#ing8').val();
+        ing9 = $('#ing9').val();
+        ing10 = $('#ing10').val();
+        ing11 = $('#ing11').val();
+        ing12 = $('#ing12').val();
+        instructions = $('#instructions-input').val().trim();
+
         dataRef.ref('user-added-recipes/').push({
             title: recipeTitle,
             ing1: ing1,
@@ -52,8 +54,14 @@ $(document).ready(function () {
             ing11: ing11,
             ing12: ing12,
             instructions: instructions
-        }, function(err) {
-            console.log(err);
+        }, function (errorObject) {
+            if (errorObject) {
+                addErrorMessage('card-message');
+            } else {
+                //hooray!
+                addSuccessMessage('card-message');
+                loadRecipeCards(myTastyRecipes);
+            }
         });
     });
 
@@ -63,12 +71,12 @@ $(document).ready(function () {
     dataRef.ref().on("child_added", function (childSnapshot) {
         // push snapshot to local array
         myTastyRecipes.push(childSnapshot);
-        
+
 
     }, function (errorObject) {
         // console.log("Errors handled: " + errorObject.code);
         if (errorObject) {
-            
+
         } else {
             //hooray!
             addSuccessMessage('card-message');
@@ -89,51 +97,51 @@ $(document).ready(function () {
     // ===================================================
     // go get a dad joke
     // ===================================================
-    goGetDadJoke( apiDadJokeUrl );
+    goGetDadJoke(apiDadJokeUrl);
 
     // ===================================================
     // EVENT - save recipe ( + ) button 
     // ===================================================
-    $('#save-recipe-btn').on('click', function (event) {
-        var name = $('#recipe-input').val();
-        var ingredients = $('#ingredient-input').val();
-        var instructions = $('#instructions-input').val();
-        console.log('here is saved thing', name, ingredients, instructions);
+    // $('#save-recipe-btn').on('click', function (event) {
+    //     var name = $('#recipe-input').val();
+    //     var ingredients = $('#ingredient-input').val();
+    //     var instructions = $('#instructions-input').val();
+    //     console.log('here is saved thing', name, ingredients, instructions);
 
-        dataRef.ref().push({
-            title: name,
-            ingredients: ingredients,
-            instructions: instructions,
-            dateAdded: firebase.database.ServerValue.TIMESTAMP
-        },function (errorObject) {
-            // console.log("Errors handled: " + errorObject.code);
-            if (errorObject) {
-                addErrorMessage('card-message');
-            } else {
-                //hooray!
-                addSuccessMessage('card-message');
-                loadRecipeCards(myTastyRecipes);
-            }
-        });       
-    });
+    //     dataRef.ref().push({
+    //         title: name,
+    //         ingredients: ingredients,
+    //         instructions: instructions,
+    //         dateAdded: firebase.database.ServerValue.TIMESTAMP
+    //     },function (errorObject) {
+    //         // console.log("Errors handled: " + errorObject.code);
+    //         if (errorObject) {
+    //             addErrorMessage('card-message');
+    //         } else {
+    //             //hooray!
+    //             addSuccessMessage('card-message');
+    //             loadRecipeCards(myTastyRecipes);
+    //         }
+    //     });       
+    // });
 
     // ===================================================
     // EVENT - show saved recipes
     // ===================================================
-    $('#my-meals').on('click', function(event) {
+    $('#my-meals').on('click', function (event) {
 
-        console.log('my recipes inside button: ', myTastyRecipes[0].key );
-        console.log('my recipes inside button: ', myTastyRecipes[0].val().instructions );
-        console.log('my recipes inside button: ', myTastyRecipes[0].val().title );
-        console.log('my recipes inside button: ', myTastyRecipes[0].val().ingredients );
-        console.log('my recipes inside button: ', myTastyRecipes[0].val().dateAdded );
-        
+        console.log('my recipes inside button: ', myTastyRecipes[0].key);
+        console.log('my recipes inside button: ', myTastyRecipes[0].val().instructions);
+        console.log('my recipes inside button: ', myTastyRecipes[0].val().title);
+        console.log('my recipes inside button: ', myTastyRecipes[0].val().ingredients);
+        console.log('my recipes inside button: ', myTastyRecipes[0].val().dateAdded);
+
         for (let i = 0; i < myTastyRecipes.length; i++) {
             console.log('stuff', myTastyRecipes[i].val());
-            
-            var mealCard = createMyCard( myTastyRecipes[i].val() );
+
+            var mealCard = createMyCard(myTastyRecipes[i].val());
             console.log('mealCard: ', mealCard);
-            
+
             appendCardTo('recipe-box', mealCard);
         }
     });
@@ -141,10 +149,10 @@ $(document).ready(function () {
     function loadRecipeCards(arr) {
         for (let i = 0; i < arr.length; i++) {
             console.log('stuff', arr[i].val());
-            
-            var mealCard = createMyCard( arr[i].val() );
+
+            var mealCard = createMyCard(arr[i].val());
             console.log('mealCard: ', mealCard);
-            
+
             appendCardTo('recipe-box', mealCard);
         }
     }
@@ -176,11 +184,11 @@ $(document).ready(function () {
     // helper functions
     // ===================================================
     function createMyCard(meal) {
-        
+
         var mealTitle = meal.title;
         var mealImg = 'https://www.themealdb.com/images/media/meals/1529444830.jpg';
         var recipeKey = meal.key;
-        var datePutInDB = meal.dateAdded;     
+        var datePutInDB = meal.dateAdded;
 
         var parentCard = $('<div>').addClass('card mx-auto');
         var cardBody = $('<div>').addClass('card-body recipe-card').attr('recipeKey', recipeKey);
@@ -242,7 +250,7 @@ $(document).ready(function () {
         var titleDiv = $('<div>').addClass('container col-xs-12 col-md-9');
         var titleH3 = $('<h3>').addClass('text-right text-break').text(mealTitle);
         // var titleP = $('<p>').addClass('text-right').text('This elegant dish can be made in under 30mins. Feeds 4. #dinner');
-        var titleP = $('<p>').addClass('text-right').text( truncatedDirections.substr(0, 65) );
+        var titleP = $('<p>').addClass('text-right').text(truncatedDirections.substr(0, 65));
         titleDiv.append(titleH3);
         titleDiv.append(titleP);
 
@@ -320,15 +328,15 @@ $(document).ready(function () {
     }
 
     function goGetDadJoke(queryUrl) {
-            //dataType: 'json',
+        //dataType: 'json',
         $.ajax({
-             url: queryUrl,
-             method: 'GET',
-             dataType: 'json'
-        }).then(function(response){
-            
+            url: queryUrl,
+            method: 'GET',
+            dataType: 'json'
+        }).then(function (response) {
+
             $('.dad-joke-box').append(response.joke);
-            
+
         });
     }
 
@@ -393,10 +401,10 @@ $(document).ready(function () {
                                 if ((ingredient === null || measure === null)) {
                                     ingredient = '';
                                     measure = '';
-                                    $( '#ing' + i.toString() ).text( " " );
+                                    $('#ing' + i.toString()).text(" ");
 
                                 } else {
-                                    $('#ing' + i.toString() ).text( measure + "  " + ingredient );
+                                    $('#ing' + i.toString()).text(measure + "  " + ingredient);
                                 }
 
                                 i++;
