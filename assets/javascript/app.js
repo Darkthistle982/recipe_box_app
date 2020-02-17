@@ -245,9 +245,6 @@ $(document).ready(function () {
                             //logic to eliminate the null status from JSON object results applied to some recipe data
 
 
-
-                            // now need to add the logic to the do while loop
-                            // var meals = response.meals[0];
                             var i = 1;
                             var ingredient = '';
                             var measure = '';
