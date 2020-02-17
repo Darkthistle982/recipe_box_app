@@ -21,6 +21,9 @@ $(document).ready(function () {
     $('.main-box').css('border', '0px');
     $('.main-box').css('margin-top', '+15px');
 
+    // ===================================================
+    // EVENT - save recipe ( + ) button 
+    // ===================================================
     // Send the new recipe input from the modal to the database
     $('#save-recipe-btn').on('click', function (event) {
         event.preventDefault();
@@ -98,32 +101,6 @@ $(document).ready(function () {
     // go get a dad joke
     // ===================================================
     goGetDadJoke(apiDadJokeUrl);
-
-    // ===================================================
-    // EVENT - save recipe ( + ) button 
-    // ===================================================
-    // $('#save-recipe-btn').on('click', function (event) {
-    //     var name = $('#recipe-input').val();
-    //     var ingredients = $('#ingredient-input').val();
-    //     var instructions = $('#instructions-input').val();
-    //     console.log('here is saved thing', name, ingredients, instructions);
-
-    //     dataRef.ref().push({
-    //         title: name,
-    //         ingredients: ingredients,
-    //         instructions: instructions,
-    //         dateAdded: firebase.database.ServerValue.TIMESTAMP
-    //     },function (errorObject) {
-    //         // console.log("Errors handled: " + errorObject.code);
-    //         if (errorObject) {
-    //             addErrorMessage('card-message');
-    //         } else {
-    //             //hooray!
-    //             addSuccessMessage('card-message');
-    //             loadRecipeCards(myTastyRecipes);
-    //         }
-    //     });       
-    // });
 
     // ===================================================
     // EVENT - show saved recipes
