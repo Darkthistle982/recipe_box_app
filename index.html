@@ -206,7 +206,7 @@
 
             <!-- new recipe modal -->
             <div id="addNewRecipe" class="modal fade" tabindex="-1" role="dialog">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-dialog-scrollable" role="document">
                     
                     <!--content of the modal-->
                     <div class="modal-content">
@@ -223,12 +223,48 @@
                                     <input class="form-control form-data" id="recipe-input" type="text" />
                                 </div>
                                 <div class="form-group row">
-                                    <label for="ingredient-input">Ingredients:</label>
-                                    <input class="form-control form-data" id="ingredient-input" type="ingredient" />
+                                    <h3>Ingredients & Measurements:</h3>
+                                    <label for="ingredient-input">Ingredient 1</label>
+                                    <input class="form-control form-data ingredient-input mb-1" type="ingredient" />
+                                    <br>
+                                    <label for="ingredient-input">Ingredient 2</label>
+                                    <input class="form-control form-data ingredient-input mb-1" type="ingredient" />
+                                    <br>
+                                    <label for="ingredient-input">Ingredient 3</label>
+                                    <input class="form-control form-data ingredient-input mb-1" type="ingredient" /> 
+                                    <br>
+                                    <label for="ingredient-input">Ingredient 4</label>
+                                    <input class="form-control form-data ingredient-input mb-1" type="ingredient" /> 
+                                    <br>
+                                    <label for="ingredient-input">Ingredient 5</label>
+                                    <input class="form-control form-data ingredient-input mb-1" type="ingredient" /> 
+                                    <br>
+                                    <label for="ingredient-input">Ingredient 6</label>
+                                    <input class="form-control form-data ingredient-input mb-1" type="ingredient" /> 
+                                    <br>
+                                    <label for="ingredient-input">Ingredient 7</label>
+                                    <input class="form-control form-data ingredient-input mb-1" type="ingredient" /> 
+                                    <br>
+                                    <label for="ingredient-input">Ingredient 8</label>
+                                    <input class="form-control form-data ingredient-input mb-1" type="ingredient" /> 
+                                    <br>
+                                    <label for="ingredient-input">Ingredient 9</label>
+                                    <input class="form-control form-data ingredient-input mb-1" type="ingredient" /> 
+                                    <br>
+                                    <label for="ingredient-input">Ingredient 10</label>
+                                    <input class="form-control form-data ingredient-input mb-1" type="ingredient" /> 
+                                    <br>
+                                    <label for="ingredient-input">Ingredient 11</label>
+                                    <input class="form-control form-data ingredient-input mb-1" type="ingredient" /> 
+                                    <br>
+                                    <label for="ingredient-input">Ingredient 12</label>
+                                    <input class="form-control form-data ingredient-input mb-1" type="ingredient" /> 
+                                    <br>
                                 </div>
                                 <div class="form-group row">
                                     <label for="instructions-input">Cooking Instructions</label>
-                                    <textarea class="form-control form-data" rows="5" id="instructions-input"></textarea>
+                                    <textarea class="form-control form-data" rows="5" id="instructions-input" aria-describedby="instructionsHelp"></textarea>
+                                    <small id="instructionsHelp" class="form-text text-muted">Remember to include all steps of the recipe. We recommend numbering your steps.</small>
                                 </div>
                             </form>
                         </div>
