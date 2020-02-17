@@ -54,9 +54,9 @@ $(document).ready(function () {
 
     // comments here?
     $('.details-box').hide();
-    $('.main-box').css('background-color', '#333333');
-    $('.main-box').css('border', '0px');
-    $('.main-box').css('margin-top', '+15px');
+    // $('.main-box').css('background-color', '#333333');
+    // $('.main-box').css('border', '0px');
+    // $('.main-box').css('margin-top', '+15px');
 
 
     // ===================================================
