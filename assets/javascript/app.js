@@ -24,15 +24,7 @@ $('.test-save').on('click', function (event) {
 });
 
 
-// ===================================================
-// child added to firebase
-// ===================================================
-dataRef.ref().on("child_added", function (childSnapshot) {
-    //TODO: I will be back!
 
-}, function (errorObject) {
-    // console.log("Errors handled: " + errorObject.code);
-});
 
 
 // ===================================================
@@ -45,6 +37,37 @@ $(document).ready(function () {
     $('.main-box').css('border', '0px');
     $('.main-box').css('margin-top', '+15px');
 
+
+
+
+
+    // ===================================================
+    // child added to firebase
+    // ===================================================
+    dataRef.ref().on("child_added", function (childSnapshot) {
+        //TODO: I will be back!
+        console.log('child added');
+        // console.log(childSnapshot);
+        
+        // createMyCard(childSnapshot);
+        myTastyRecipes.push(childSnapshot);
+        console.log('myTastyRecipes', myTastyRecipes);
+        
+        
+
+    }, function (errorObject) {
+        // console.log("Errors handled: " + errorObject.code);
+        if (errorObject) {
+            
+        } else {
+            //hooray!
+            addSuccessMessage('card-message');
+
+        }
+    });
+
+
+
     // ===================================================
     // GLOBAL variables
     // ===================================================
@@ -52,6 +75,8 @@ $(document).ready(function () {
     const apiLookupUrl = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=";
     const apiDadJokeUrl = "https://icanhazdadjoke.com/";
     var masterCardsList = $('<div>');
+
+    var myTastyRecipes = [];
 
     // ===================================================
     // go get a dad joke
@@ -62,9 +87,43 @@ $(document).ready(function () {
     // EVENT - save recipe ( + ) button 
     // ===================================================
     $('#save-recipe-btn').on('click', function (event) {
-        var title = $('#recipe-input').val();
-        addSuccessMessage('card-message');
+        var name = $('#recipe-input').val();
+        var ingredients = $('#ingredient-input').val();
+        var instructions = $('#instructions-input').val();
+        console.log('here is saved thing', name, ingredients, instructions);
+
+        dataRef.ref().push({
+            title: name,
+            ingredients: ingredients,
+            instructions: instructions,
+            dateAdded: firebase.database.ServerValue.TIMESTAMP
+        });
+        
+        // addSuccessMessage('card-message');
     });
+
+    // ===================================================
+    // EVENT - show saved recipes
+    // ===================================================
+    $('#my-meals').on('click', function(event) {
+
+        console.log('my recipes inside button: ', myTastyRecipes[0].key );
+        console.log('my recipes inside button: ', myTastyRecipes[0].val().instructions );
+        console.log('my recipes inside button: ', myTastyRecipes[0].val().title );
+        console.log('my recipes inside button: ', myTastyRecipes[0].val().ingredients );
+        console.log('my recipes inside button: ', myTastyRecipes[0].val().dateAdded );
+        
+        for (let i = 0; i < myTastyRecipes.length; i++) {
+            console.log('stuff', myTastyRecipes[i].val());
+            
+            var mealCard = createMyCard( myTastyRecipes[i].val() );
+            console.log('mealCard: ', mealCard);
+            
+            appendCardTo('recipe-box', mealCard);
+        }
+
+    });
+
 
     // ===================================================
     // EVENT - go back button
@@ -93,6 +152,43 @@ $(document).ready(function () {
     // ===================================================
     // helper functions
     // ===================================================
+    function createMyCard(meal) {
+        // console.log('meal', meal);
+        
+        var mealTitle = meal.title;
+        var mealImg = 'https://www.themealdb.com/images/media/meals/1529444830.jpg';
+        var recipeKey = meal.key;
+        var datePutInDB = meal.dateAdded;     
+
+        var parentCard = $('<div>').addClass('card mx-auto');
+        var cardBody = $('<div>').addClass('card-body recipe-card').attr('recipeKey', recipeKey);
+        var parentCardRow = $('<div>').addClass('row');
+        parentCard.append(cardBody);
+        cardBody.append(parentCardRow);
+
+        // === left side ===
+        var cardImgDiv = $('<div>').addClass('container img-box col-xs-12 col-md-3');
+        var cardImg = $('<img>').attr('src', mealImg).addClass('card-img');
+        cardImgDiv.append(cardImg);
+        parentCardRow.append(cardImgDiv);
+
+        // === right side ===
+        var titleDiv = $('<div>').addClass('container col-xs-12 col-md-9');
+        var titleH3 = $('<h3>').addClass('text-right text-break').text(mealTitle);
+        var titleP = $('<p>').addClass('text-right').text('This elegant dish can be made in under 30mins. Feeds 4. #dinner');
+        titleDiv.append(titleH3);
+        titleDiv.append(titleP);
+
+        var divRow = $('<div>').addClass('row');
+        titleDiv.append(divRow);
+        var tagBox = $('<div>').addClass('container tag-box');
+        divRow.append(tagBox);
+
+        parentCardRow.append(titleDiv);
+
+        return parentCard;
+    }
+
     function createCard(meal) {
         var mealTitle = meal.strMeal;
         var mealImg = meal.strMealThumb;
@@ -179,6 +275,20 @@ $(document).ready(function () {
         var successMessage = $('<div>').addClass('alert alert-success')
             .attr('role', 'alert')
             .text('Yay! you saved something!');
+
+        $(elementClass).prepend(successMessage);
+
+        // removes message after time
+        setTimeout(function () {
+            $(elementClass).detach();
+        }, 4 * 1000);
+    }
+
+    function addErrorMessage(elementClass) {
+        elementClass = '.' + elementClass;
+        var successMessage = $('<div>').addClass('alert alert-danger')
+            .attr('role', 'alert')
+            .text('o no!! bad things!!!! or... data didnt save');
 
         $(elementClass).prepend(successMessage);
 
