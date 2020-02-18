@@ -281,33 +281,6 @@ $(document).ready(function () {
         $(elementClass).prepend(theMessage);
     }
 
-    // function addSuccessMessage(elementClass) {
-    //     elementClass = '.' + elementClass;
-    //     var successMessage = $('<div>').addClass('alert alert-success')
-    //         .attr('role', 'alert')
-    //         .text('Yay! you saved something!');
-
-    //     $(elementClass).prepend(successMessage);
-
-    //     // removes message after time
-    //     setTimeout(function () {
-    //         $(elementClass).detach();
-    //     }, 4 * 1000);
-    // }
-
-    // function addErrorMessage(elementClass) {
-    //     elementClass = '.' + elementClass;
-    //     var successMessage = $('<div>').addClass('alert alert-danger')
-    //         .attr('role', 'alert')
-    //         .text('o no!! bad things!!!! or... data didnt save');
-
-    //     $(elementClass).prepend(successMessage);
-
-    //     // removes message after time
-    //     setTimeout(function () {
-    //         $(elementClass).detach();
-    //     }, 4 * 1000);
-    // }
 
     function goGetDadJoke(queryUrl) {
         //dataType: 'json',
