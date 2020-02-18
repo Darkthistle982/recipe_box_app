@@ -279,7 +279,6 @@ $(document).ready(function () {
         }
 
         $(elementClass).prepend(theMessage);
-        // TODO: fix add message calls
     }
 
     // function addSuccessMessage(elementClass) {
