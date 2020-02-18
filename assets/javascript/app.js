@@ -1,9 +1,9 @@
-// ======================================================================================
-// doc ready
-// ======================================================================================
+// project 1 - Recipe app
+// Derrek, Brian, Matt, and Jacob. 
+
 $(document).ready(function () {
     // ===================================================
-    // GLOBAL variables
+    // GLOBAL VARIABLES
     // ===================================================
     const apiSearchUrl = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
     const apiLookupUrl = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=";
@@ -23,11 +23,20 @@ $(document).ready(function () {
     firebase.initializeApp(config);
     var dataRef = firebase.database();
 
+    // making sure details hide when back button is pressed
     $('.details-box').hide();
+    var myTastyRecipes = [];
 
-    // ========================================================
-    // EVENT - save recipe ( + ) button 
-    // ========================================================
+    // ===================================================
+    // go get a dad joke
+    // ===================================================
+    goGetDadJoke(apiDadJokeUrl);
+    
+
+    // ===================================================
+    // EVENTS - ALL
+    // ===================================================
+
     // Send the new recipe input from the modal to the database
     $('#save-recipe-btn').on('click', function (event) {
         event.preventDefault();
@@ -63,19 +72,19 @@ $(document).ready(function () {
             instructions: instructions
         }, function (errorObject) {
             if (errorObject) {
-                addErrorMessage('card-message');
+                // addErrorMessage('card-message');
+                addMessage('card-message', 'error');
             } else {
                 //hooray!
-                addSuccessMessage('card-message');
+                // addSuccessMessage('card-message');
+                addMessage('card-message', 'success');
                 loadRecipeCards(myTastyRecipes);
             }
         });
     });
 
 
-    // ===================================================
-    // child added to firebase
-    // ===================================================
+    // ===== child added to firebase =====
     dataRef.ref('user-added-recipes/').on("child_added", function (childSnapshot) {
         // push snapshot to local array
         myTastyRecipes.push(childSnapshot);
@@ -92,19 +101,7 @@ $(document).ready(function () {
     });
 
     
-
-    var myTastyRecipes = [];
-    $('.details-box').hide();
-
-    // ===================================================
-    // go get a dad joke
-    // ===================================================
-    goGetDadJoke(apiDadJokeUrl);
-
-
-    // ===================================================
-    // EVENT - show saved recipes
-    // ===================================================
+    // display saved recipes from firebase
     $('#my-meals').on('click', function (event) {
         event.preventDefault();
         
@@ -114,20 +111,14 @@ $(document).ready(function () {
         }
     });
 
-    
 
-    // ===================================================
-    // EVENT - go back button
-    // ===================================================
     $('.go-back-btn').on('click', function (event) {
         $('.details-box').hide();
         $('.main-box').append(masterCardsList);
         $('.jumbotron').show();
     });
 
-    // ===================================================
-    // EVENT - Search button
-    // ===================================================
+
     $("#searchBtn-below").on("click", function (event) {
         event.preventDefault();
         var trimSearchInputValue = $("#searchInput-below").val().trim();
@@ -137,6 +128,9 @@ $(document).ready(function () {
 
         $('#searchInput-below').val("");
     });
+
+
+
 
     // ===================================================
     // helper functions
@@ -269,33 +263,52 @@ $(document).ready(function () {
         $(targetClass).prepend(card);
     }
 
-    function addSuccessMessage(elementClass) {
+    function addMessage(elementClass, type) {
         elementClass = '.' + elementClass;
-        var successMessage = $('<div>').addClass('alert alert-success')
+        var theMessage = '';
+
+        if (type === 'success') {
+            theMessage = $('<div>').addClass('alert alert-success')
             .attr('role', 'alert')
             .text('Yay! you saved something!');
 
-        $(elementClass).prepend(successMessage);
-
-        // removes message after time
-        setTimeout(function () {
-            $(elementClass).detach();
-        }, 4 * 1000);
-    }
-
-    function addErrorMessage(elementClass) {
-        elementClass = '.' + elementClass;
-        var successMessage = $('<div>').addClass('alert alert-danger')
+        } else {
+            theMessage = $('<div>').addClass('alert alert-danger')
             .attr('role', 'alert')
             .text('o no!! bad things!!!! or... data didnt save');
+        }
 
-        $(elementClass).prepend(successMessage);
-
-        // removes message after time
-        setTimeout(function () {
-            $(elementClass).detach();
-        }, 4 * 1000);
+        $(elementClass).prepend(theMessage);
+        // TODO: fix add message calls
     }
+
+    // function addSuccessMessage(elementClass) {
+    //     elementClass = '.' + elementClass;
+    //     var successMessage = $('<div>').addClass('alert alert-success')
+    //         .attr('role', 'alert')
+    //         .text('Yay! you saved something!');
+
+    //     $(elementClass).prepend(successMessage);
+
+    //     // removes message after time
+    //     setTimeout(function () {
+    //         $(elementClass).detach();
+    //     }, 4 * 1000);
+    // }
+
+    // function addErrorMessage(elementClass) {
+    //     elementClass = '.' + elementClass;
+    //     var successMessage = $('<div>').addClass('alert alert-danger')
+    //         .attr('role', 'alert')
+    //         .text('o no!! bad things!!!! or... data didnt save');
+
+    //     $(elementClass).prepend(successMessage);
+
+    //     // removes message after time
+    //     setTimeout(function () {
+    //         $(elementClass).detach();
+    //     }, 4 * 1000);
+    // }
 
     function goGetDadJoke(queryUrl) {
         //dataType: 'json',
