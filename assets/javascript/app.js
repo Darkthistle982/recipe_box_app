@@ -65,14 +65,13 @@ $(document).ready(function () {
         });
     });
 
-    // $('.details-box').hide();
+
     // ===================================================
     // child added to firebase
     // ===================================================
     dataRef.ref('user-added-recipes/').on("child_added", function (childSnapshot) {
         // push snapshot to local array
         myTastyRecipes.push(childSnapshot);
-        // console.log(myTastyRecipes);
 
 
     }, function (errorObject) {
@@ -107,21 +106,9 @@ $(document).ready(function () {
     // FIXME: not showing the saved recipes
     $('#my-meals').on('click', function (event) {
         event.preventDefault();
-
-        // console.log('my recipes inside button: ', myTastyRecipes[0].key);
-        // console.log('my recipes inside button: ', myTastyRecipes[0].val().instructions);
-        // console.log('my recipes inside button: ', myTastyRecipes[0].val().title);
-        // console.log('my recipes inside button: ', myTastyRecipes[0].val().ingredients);
-        // console.log('my recipes inside button: ', myTastyRecipes[0].val().dateAdded);
-
-        // console.log(myTastyRecipes);
         
         for (let i = 0; i < myTastyRecipes.length; i++) {
-            // console.log('stuff', myTastyRecipes[i].val());
-
             var mealCard = createMyCard(myTastyRecipes[i].val());
-            // console.log('mealCard: ', mealCard);
-
             appendCardTo('recipe-box', mealCard);
         }
     });
