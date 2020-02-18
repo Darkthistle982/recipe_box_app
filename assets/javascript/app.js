@@ -36,40 +36,67 @@ $(document).ready(function () {
     // ===================================================
     // EVENTS - ALL
     // ===================================================
+    const goGetThemInputs = function() {
+
+        var userInputs = {
+            title: $('#recipe-input').val().trim(),
+            instructions: $('#instructions-input').val().trim(),
+            ing1: ing1,
+            ing2:   $('#ingredient-input2').val(),
+            ing3:   $('#ingredient-input3').val(),
+            ing5:   $('#ingredient-input5').val(),
+            ing4:   $('#ingredient-input4').val(),
+            ing6:   $('#ingredient-input6').val(),
+            ing7:   $('#ingredient-input7').val(),
+            ing8:   $('#ingredient-input8').val(),
+            ing9:   $('#ingredient-input9').val(),
+            ing10:  $('#ingredient-input10').val(),
+            ing11:  $('#ingredient-input11').val(),
+            ing12:  $('#ingredient-input12').val(),
+        }
+
+        return userInputs;
+    }
 
     // Send the new recipe input from the modal to the database
     $('#save-recipe-btn').on('click', function (event) {
         event.preventDefault();
-        recipeTitle = $('#recipe-input').val().trim();
-        ing1 = $('#ing1').val();
-        ing2 = $('#ing2').val();
-        ing3 = $('#ing3').val();
-        ing4 = $('#ing4').val();
-        ing5 = $('#ing5').val();
-        ing6 = $('#ing6').val();
-        ing7 = $('#ing7').val();
-        ing8 = $('#ing8').val();
-        ing9 = $('#ing9').val();
-        ing10 = $('#ing10').val();
-        ing11 = $('#ing11').val();
-        ing12 = $('#ing12').val();
-        instructions = $('#instructions-input').val().trim();
+        // recipeTitle = $('#recipe-input').val().trim();
+        // ing1 = $('#ing1').val();
+        // ing2 = $('#ing2').val();
+        // ing3 = $('#ing3').val();
+        // ing4 = $('#ing4').val();
+        // ing5 = $('#ing5').val();
+        // ing6 = $('#ing6').val();
+        // ing7 = $('#ing7').val();
+        // ing8 = $('#ing8').val();
+        // ing9 = $('#ing9').val();
+        // ing10 = $('#ing10').val();
+        // ing11 = $('#ing11').val();
+        // ing12 = $('#ing12').val();
+        // instructions = $('#instructions-input').val().trim();
 
+        var myRecipe = goGetThemInputs();
+        console.log('here is my recipe');
+        console.log(myRecipe);
+        
+        
         dataRef.ref('user-added-recipes/').push({
-            title: recipeTitle,
-            ing1: ing1,
-            ing2: ing2,
-            ing3: ing3,
-            ing4: ing4,
-            ing5: ing5,
-            ing6: ing6,
-            ing7: ing7,
-            ing8: ing8,
-            ing9: ing9,
-            ing10: ing10,
-            ing11: ing11,
-            ing12: ing12,
-            instructions: instructions
+            myRecipe
+            // title: recipeTitle,
+            // ing1: ing1,
+            // ing2: ing2,
+            // ing3: ing3,
+            // ing4: ing4,
+            // ing5: ing5,
+            // ing6: ing6,
+            // ing7: ing7,
+            // ing8: ing8,
+            // ing9: ing9,
+            // ing10: ing10,
+            // ing11: ing11,
+            // ing12: ing12,
+            // instructions: instructions
         }, function (errorObject) {
             if (errorObject) {
                 // addErrorMessage('card-message');
