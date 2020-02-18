@@ -53,6 +53,7 @@ $(document).ready(function () {
             ing10:  $('#ingredient-input10').val(),
             ing11:  $('#ingredient-input11').val(),
             ing12:  $('#ingredient-input12').val(),
+            dateAdded: firebase.database.ServerValue.TIMESTAMP
         }
 
         return userInputs;
@@ -61,45 +62,13 @@ $(document).ready(function () {
     // Send the new recipe input from the modal to the database
     $('#save-recipe-btn').on('click', function (event) {
         event.preventDefault();
-        // recipeTitle = $('#recipe-input').val().trim();
-        // ing1 = $('#ing1').val();
-        // ing2 = $('#ing2').val();
-        // ing3 = $('#ing3').val();
-        // ing4 = $('#ing4').val();
-        // ing5 = $('#ing5').val();
-        // ing6 = $('#ing6').val();
-        // ing7 = $('#ing7').val();
-        // ing8 = $('#ing8').val();
-        // ing9 = $('#ing9').val();
-        // ing10 = $('#ing10').val();
-        // ing11 = $('#ing11').val();
-        // ing12 = $('#ing12').val();
-        // instructions = $('#instructions-input').val().trim();
-
         var myRecipe = goGetThemInputs();
-        console.log('here is my recipe');
-        console.log(myRecipe);
-        
         
         dataRef.ref('user-added-recipes/').push({
             myRecipe
-            // title: recipeTitle,
-            // ing1: ing1,
-            // ing2: ing2,
-            // ing3: ing3,
-            // ing4: ing4,
-            // ing5: ing5,
-            // ing6: ing6,
-            // ing7: ing7,
-            // ing8: ing8,
-            // ing9: ing9,
-            // ing10: ing10,
-            // ing11: ing11,
-            // ing12: ing12,
-            // instructions: instructions
+
         }, function (errorObject) {
             if (errorObject) {
-                // addErrorMessage('card-message');
                 addMessage('card-message', 'error');
             } else {
                 //hooray!
@@ -157,6 +126,23 @@ $(document).ready(function () {
     });
 
 
+// var myRecipe = {
+//     ing10: "fg",
+//     ing11: "fg",
+//     ing12: "fgh",
+//     ing2: "gh",
+//     ing3: "gh",
+//     ing4: "fg",
+//     ing5: "hf",
+//     ing6: "gh",
+//     ing7: "fgh",
+//     ing8: "fg",
+//     ing9: "fg",
+//     instructions: "fghjkhgfdfghj",
+//     title: "my new and imrpoved recipe"
+// }
+
+
 
 
     // ===================================================
@@ -166,7 +152,7 @@ $(document).ready(function () {
         for (let i = 0; i < arr.length; i++) {
             // console.log('stuff', arr[i].val());
 
-            var mealCard = createMyCard(arr[i].val());
+            var mealCard = createMyCard(arr[i]);
             // console.log('mealCard: ', mealCard);
 
             appendCardTo('recipe-box', mealCard);
@@ -174,11 +160,16 @@ $(document).ready(function () {
     }
 
     function createMyCard(meal) {
+        meal = meal.myRecipe;
 
         var mealTitle = meal.title;
         var mealImg = 'https://www.themealdb.com/images/media/meals/1529444830.jpg';
         var recipeKey = meal.key;
         var datePutInDB = meal.dateAdded;
+        var ing1 = meal.ing1;
+
+        
+        
 
         var parentCard = $('<div>').addClass('card mx-auto');
         var cardBody = $('<div>').addClass('card-body recipe-card').attr('recipeKey', recipeKey);
@@ -195,7 +186,7 @@ $(document).ready(function () {
         // === right side ===
         var titleDiv = $('<div>').addClass('container col-xs-12 col-md-9');
         var titleH3 = $('<h3>').addClass('text-right text-break').text(mealTitle);
-        var titleP = $('<p>').addClass('text-right').text('This elegant dish can be made in under 30mins. Feeds 4. #dinner');
+        var titleP = $('<p>').addClass('text-right').text(datePutInDB);
         titleDiv.append(titleH3);
         titleDiv.append(titleP);
 
