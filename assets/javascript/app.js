@@ -391,7 +391,7 @@ $(document).ready(function () {
                     $('.jumbotron').hide();
                     $('.details-box').css('margin-top', '+15px');
                     $('.details-box').css('margin-bottom', '+15px');
-                    $('.main-box').css('background-color', '#333333');
+                    // $('.main-box').css('background-color', '#333333');
                     $('.main-box').css('border', '0px');
 
                 });
