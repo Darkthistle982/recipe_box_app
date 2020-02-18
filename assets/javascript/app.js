@@ -2,7 +2,14 @@
 // doc ready
 // ======================================================================================
 $(document).ready(function () {
-
+    // ===================================================
+    // GLOBAL variables
+    // ===================================================
+    const apiSearchUrl = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
+    const apiLookupUrl = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=";
+    const apiDadJokeUrl = "https://icanhazdadjoke.com/";
+    var masterCardsList = $('<div>');
+    
     var config = {
         apiKey: "AIzaSyAggh_9HPrLN-IokUfsrCz2bCP_4ABUd4Y",
         authDomain: "salty-beards-recipe-box.firebaseio.com",
@@ -84,13 +91,7 @@ $(document).ready(function () {
         }
     });
 
-    // ===================================================
-    // GLOBAL variables
-    // ===================================================
-    const apiSearchUrl = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
-    const apiLookupUrl = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=";
-    const apiDadJokeUrl = "https://icanhazdadjoke.com/";
-    var masterCardsList = $('<div>');
+    
 
     var myTastyRecipes = [];
     $('.details-box').hide();
@@ -100,10 +101,10 @@ $(document).ready(function () {
     // ===================================================
     goGetDadJoke(apiDadJokeUrl);
 
+
     // ===================================================
     // EVENT - show saved recipes
     // ===================================================
-    // FIXME: not showing the saved recipes
     $('#my-meals').on('click', function (event) {
         event.preventDefault();
         
@@ -113,16 +114,7 @@ $(document).ready(function () {
         }
     });
 
-    function loadRecipeCards(arr) {
-        for (let i = 0; i < arr.length; i++) {
-            // console.log('stuff', arr[i].val());
-
-            var mealCard = createMyCard(arr[i].val());
-            // console.log('mealCard: ', mealCard);
-
-            appendCardTo('recipe-box', mealCard);
-        }
-    }
+    
 
     // ===================================================
     // EVENT - go back button
@@ -149,6 +141,17 @@ $(document).ready(function () {
     // ===================================================
     // helper functions
     // ===================================================
+    function loadRecipeCards(arr) {
+        for (let i = 0; i < arr.length; i++) {
+            // console.log('stuff', arr[i].val());
+
+            var mealCard = createMyCard(arr[i].val());
+            // console.log('mealCard: ', mealCard);
+
+            appendCardTo('recipe-box', mealCard);
+        }
+    }
+
     function createMyCard(meal) {
 
         var mealTitle = meal.title;
@@ -340,6 +343,8 @@ $(document).ready(function () {
                     })
                         .then(function (response) {
                             masterCardsList = $('.recipe-box').detach();
+
+                            //get variables from response
                             mealName = response.meals[0].strMeal;
                             mealIMG = response.meals[0].strMealThumb;
                             category = response.meals[0].strCategory;
@@ -352,7 +357,9 @@ $(document).ready(function () {
                             // Chris Stead magic juice 
                             // ===================================================
                             var recipeOutput = '<p>' + instructions.replace(/(\r?\n){2}/g, '</p><p>').replace(/(\r?\n)+/g, '<br/>') + '</p>';
+                            // ===================================================
 
+                            // checking for null 
                             var i = 1;
                             var ingredient = '';
                             var measure = '';
