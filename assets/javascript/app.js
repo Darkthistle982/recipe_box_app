@@ -155,7 +155,8 @@ $(document).ready(function () {
         // mealTitle = 'some title';
         var mealImg = 'https://www.themealdb.com/images/media/meals/1529444830.jpg';
         var recipeKey = meal.key;
-        var datePutInDB = meal.dateAdded;
+        // var datePutInDB = moment.unix( meal.dateAdded );
+        var datePutInDB = moment(meal.dateAdded).format('YYYY-MM-DD h:mm');
         var ing1 = meal.ing1;
 
         
@@ -176,9 +177,11 @@ $(document).ready(function () {
         // === right side ===
         var titleDiv = $('<div>').addClass('container col-xs-12 col-md-9');
         var titleH3 = $('<h3>').addClass('text-right text-break').text(mealTitle);
-        var titleP = $('<p>').addClass('text-right').text(datePutInDB);
+        var titleP = $('<p>').addClass('text-right').text('this dish will elevate stuff and do things....so ya.');
+        var titleP2 = $('<p>').addClass('text-right').text(datePutInDB);
         titleDiv.append(titleH3);
         titleDiv.append(titleP);
+        titleDiv.append(titleP2);
 
         var divRow = $('<div>').addClass('row');
         titleDiv.append(divRow);
