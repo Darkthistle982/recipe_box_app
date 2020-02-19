@@ -36,43 +36,40 @@ $(document).ready(function () {
     // ===================================================
     // EVENTS - ALL
     // ===================================================
+    const goGetThemInputs = function() {
+
+        var userInputs = {
+            title: $('#recipe-input').val().trim(),
+            instructions: $('#instructions-input').val().trim(),
+            ing1: ing1,
+            ing2:   $('#ingredient-input2').val(),
+            ing3:   $('#ingredient-input3').val(),
+            ing5:   $('#ingredient-input5').val(),
+            ing4:   $('#ingredient-input4').val(),
+            ing6:   $('#ingredient-input6').val(),
+            ing7:   $('#ingredient-input7').val(),
+            ing8:   $('#ingredient-input8').val(),
+            ing9:   $('#ingredient-input9').val(),
+            ing10:  $('#ingredient-input10').val(),
+            ing11:  $('#ingredient-input11').val(),
+            ing12:  $('#ingredient-input12').val(),
+            dateAdded: firebase.database.ServerValue.TIMESTAMP
+        }
+
+        return userInputs;
+    }
 
     // Send the new recipe input from the modal to the database
+    // FIXME: this one does have errors.
     $('#save-recipe-btn').on('click', function (event) {
         event.preventDefault();
-        recipeTitle = $('#recipe-input').val().trim();
-        ing1 = $('#ing1').val();
-        ing2 = $('#ing2').val();
-        ing3 = $('#ing3').val();
-        ing4 = $('#ing4').val();
-        ing5 = $('#ing5').val();
-        ing6 = $('#ing6').val();
-        ing7 = $('#ing7').val();
-        ing8 = $('#ing8').val();
-        ing9 = $('#ing9').val();
-        ing10 = $('#ing10').val();
-        ing11 = $('#ing11').val();
-        ing12 = $('#ing12').val();
-        instructions = $('#instructions-input').val().trim();
-
+        var myRecipe = goGetThemInputs();
+        
         dataRef.ref('user-added-recipes/').push({
-            title: recipeTitle,
-            ing1: ing1,
-            ing2: ing2,
-            ing3: ing3,
-            ing4: ing4,
-            ing5: ing5,
-            ing6: ing6,
-            ing7: ing7,
-            ing8: ing8,
-            ing9: ing9,
-            ing10: ing10,
-            ing11: ing11,
-            ing12: ing12,
-            instructions: instructions
+            myRecipe
+
         }, function (errorObject) {
             if (errorObject) {
-                // addErrorMessage('card-message');
                 addMessage('card-message', 'error');
             } else {
                 //hooray!
@@ -102,6 +99,7 @@ $(document).ready(function () {
 
     
     // display saved recipes from firebase
+    // FIXME: this one does no errors
     $('#my-meals').on('click', function (event) {
         event.preventDefault();
         
@@ -129,9 +127,6 @@ $(document).ready(function () {
         $('#searchInput-below').val("");
     });
 
-
-
-
     // ===================================================
     // helper functions
     // ===================================================
@@ -147,11 +142,25 @@ $(document).ready(function () {
     }
 
     function createMyCard(meal) {
+        console.log('createMyCard');
+        console.log(meal);
+        
+        
+        meal = meal.myRecipe;
+        console.log(meal.title);
+        
+        
 
         var mealTitle = meal.title;
+        // mealTitle = 'some title';
         var mealImg = 'https://www.themealdb.com/images/media/meals/1529444830.jpg';
         var recipeKey = meal.key;
-        var datePutInDB = meal.dateAdded;
+        // var datePutInDB = moment.unix( meal.dateAdded );
+        var datePutInDB = moment(meal.dateAdded).format('YYYY-MM-DD h:mm');
+        var ing1 = meal.ing1;
+
+        
+        
 
         var parentCard = $('<div>').addClass('card mx-auto');
         var cardBody = $('<div>').addClass('card-body recipe-card').attr('recipeKey', recipeKey);
@@ -168,9 +177,11 @@ $(document).ready(function () {
         // === right side ===
         var titleDiv = $('<div>').addClass('container col-xs-12 col-md-9');
         var titleH3 = $('<h3>').addClass('text-right text-break').text(mealTitle);
-        var titleP = $('<p>').addClass('text-right').text('This elegant dish can be made in under 30mins. Feeds 4. #dinner');
+        var titleP = $('<p>').addClass('text-right').text('this dish will elevate stuff and do things....so ya.');
+        var titleP2 = $('<p>').addClass('text-right').text(datePutInDB);
         titleDiv.append(titleH3);
         titleDiv.append(titleP);
+        titleDiv.append(titleP2);
 
         var divRow = $('<div>').addClass('row');
         titleDiv.append(divRow);
@@ -279,36 +290,7 @@ $(document).ready(function () {
         }
 
         $(elementClass).prepend(theMessage);
-        // TODO: fix add message calls
     }
-
-    // function addSuccessMessage(elementClass) {
-    //     elementClass = '.' + elementClass;
-    //     var successMessage = $('<div>').addClass('alert alert-success')
-    //         .attr('role', 'alert')
-    //         .text('Yay! you saved something!');
-
-    //     $(elementClass).prepend(successMessage);
-
-    //     // removes message after time
-    //     setTimeout(function () {
-    //         $(elementClass).detach();
-    //     }, 4 * 1000);
-    // }
-
-    // function addErrorMessage(elementClass) {
-    //     elementClass = '.' + elementClass;
-    //     var successMessage = $('<div>').addClass('alert alert-danger')
-    //         .attr('role', 'alert')
-    //         .text('o no!! bad things!!!! or... data didnt save');
-
-    //     $(elementClass).prepend(successMessage);
-
-    //     // removes message after time
-    //     setTimeout(function () {
-    //         $(elementClass).detach();
-    //     }, 4 * 1000);
-    // }
 
     function goGetDadJoke(queryUrl) {
         //dataType: 'json',
