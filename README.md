@@ -40,3 +40,5 @@ The Salty Beards recipe-app is currently useable to search for recipes online, a
 * Addition of authentication and login for each user to allow for unique data being save to the DB for each user.
 * More robust search results through a larger and more detailed API.
 * Ability to add and search for recipes based on nutrition, type of cuisine, and time to prepare.
+* Allow the user to upload a picture of the meal they have added to show on the card and expanded recipe.
+* Ability to view details of the user saved recipes, just like the database searched ones.
