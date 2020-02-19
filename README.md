@@ -27,7 +27,7 @@ The project was required to feature a number of items. We needed to use at least
 * theMealsDB API
 * DadJoke API
 * Modal Style Popups
-* tiny tiny bit of SASS
+* Experimented with SASS
 
 ## Details of the Application
 
