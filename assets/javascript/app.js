@@ -60,6 +60,7 @@ $(document).ready(function () {
     }
 
     // Send the new recipe input from the modal to the database
+    // FIXME: this one does have errors.
     $('#save-recipe-btn').on('click', function (event) {
         event.preventDefault();
         var myRecipe = goGetThemInputs();
@@ -98,6 +99,7 @@ $(document).ready(function () {
 
     
     // display saved recipes from firebase
+    // FIXME: this one does no errors
     $('#my-meals').on('click', function (event) {
         event.preventDefault();
         
@@ -125,26 +127,6 @@ $(document).ready(function () {
         $('#searchInput-below').val("");
     });
 
-
-// var myRecipe = {
-//     ing10: "fg",
-//     ing11: "fg",
-//     ing12: "fgh",
-//     ing2: "gh",
-//     ing3: "gh",
-//     ing4: "fg",
-//     ing5: "hf",
-//     ing6: "gh",
-//     ing7: "fgh",
-//     ing8: "fg",
-//     ing9: "fg",
-//     instructions: "fghjkhgfdfghj",
-//     title: "my new and imrpoved recipe"
-// }
-
-
-
-
     // ===================================================
     // helper functions
     // ===================================================
@@ -152,7 +134,7 @@ $(document).ready(function () {
         for (let i = 0; i < arr.length; i++) {
             // console.log('stuff', arr[i].val());
 
-            var mealCard = createMyCard(arr[i]);
+            var mealCard = createMyCard(arr[i].val());
             // console.log('mealCard: ', mealCard);
 
             appendCardTo('recipe-box', mealCard);
@@ -160,9 +142,17 @@ $(document).ready(function () {
     }
 
     function createMyCard(meal) {
+        console.log('createMyCard');
+        console.log(meal);
+        
+        
         meal = meal.myRecipe;
+        console.log(meal.title);
+        
+        
 
         var mealTitle = meal.title;
+        // mealTitle = 'some title';
         var mealImg = 'https://www.themealdb.com/images/media/meals/1529444830.jpg';
         var recipeKey = meal.key;
         var datePutInDB = meal.dateAdded;
