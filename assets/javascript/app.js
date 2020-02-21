@@ -3,14 +3,14 @@
 
 $(document).ready(function () {
     // ===================================================
-    // GLOBAL VARIABLES
+    // GLOBAL letIABLES
     // ===================================================
     const apiSearchUrl = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
     const apiLookupUrl = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=";
     const apiDadJokeUrl = "https://icanhazdadjoke.com/";
-    var masterCardsList = $('<div>');
+    let masterCardsList = $('<div>');
     
-    var config = {
+    let config = {
         apiKey: "AIzaSyAggh_9HPrLN-IokUfsrCz2bCP_4ABUd4Y",
         authDomain: "salty-beards-recipe-box.firebaseio.com",
         databaseURL: "https://salty-beards-recipe-box.firebaseio.com/",
@@ -21,11 +21,11 @@ $(document).ready(function () {
     };
 
     firebase.initializeApp(config);
-    var dataRef = firebase.database();
+    let dataRef = firebase.database();
 
     // making sure details hide when back button is pressed
     $('.details-box').hide();
-    var myTastyRecipes = [];
+    let myTastyRecipes = [];
 
     // ===================================================
     // go get a dad joke
@@ -36,11 +36,12 @@ $(document).ready(function () {
     // ===================================================
     // EVENTS - ALL
     // ===================================================
-    const goGetThemInputs = function() {
+    const goGetThemInputs = () => {
 
-        var userInputs = {
+        let userInputs = {
             title: $('#recipe-input').val().trim(),
             instructions: $('#instructions-input').val().trim(),
+            // FIXME: ing1 looks off
             ing1: ing1,
             ing2:   $('#ingredient-input2').val(),
             ing3:   $('#ingredient-input3').val(),
@@ -60,10 +61,9 @@ $(document).ready(function () {
     }
 
     // Send the new recipe input from the modal to the database
-    // FIXME: this one does have errors.
     $('#save-recipe-btn').on('click', function (event) {
         event.preventDefault();
-        var myRecipe = goGetThemInputs();
+        let myRecipe = goGetThemInputs();
         
         dataRef.ref('user-added-recipes/').push({
             myRecipe
@@ -82,29 +82,26 @@ $(document).ready(function () {
 
 
     // ===== child added to firebase =====
-    dataRef.ref('user-added-recipes/').on("child_added", function (childSnapshot) {
-        // push snapshot to local array
-        myTastyRecipes.push(childSnapshot);
-
-
-    }, function (errorObject) {
-        // console.log("Errors handled: " + errorObject.code);
+    dataRef.ref('user-added-recipes/').on("child_added", pushChildSnapshot(), function (errorObject) {
         if (errorObject) {
-
+            // error thing
         } else {
             //hooray!
             addSuccessMessage('card-message');
         }
     });
 
+    function pushChildSnapshot() {
+        myTastyRecipes.push(childSnapshot);
+    }
+
     
     // display saved recipes from firebase
-    // FIXME: this one does no errors
     $('#my-meals').on('click', function (event) {
         event.preventDefault();
         
         for (let i = 0; i < myTastyRecipes.length; i++) {
-            var mealCard = createMyCard(myTastyRecipes[i].val());
+            let mealCard = createMyCard(myTastyRecipes[i].val());
             appendCardTo('recipe-box', mealCard);
         }
     });
@@ -119,7 +116,7 @@ $(document).ready(function () {
 
     $("#searchBtn-below").on("click", function (event) {
         event.preventDefault();
-        var trimSearchInputValue = $("#searchInput-below").val().trim();
+        let trimSearchInputValue = $("#searchInput-below").val().trim();
 
         // go get recipe data!
         ajaxCallSearch(trimSearchInputValue);
@@ -132,115 +129,95 @@ $(document).ready(function () {
     // ===================================================
     function loadRecipeCards(arr) {
         for (let i = 0; i < arr.length; i++) {
-            // console.log('stuff', arr[i].val());
-
-            var mealCard = createMyCard(arr[i].val());
-            // console.log('mealCard: ', mealCard);
-
+            let mealCard = createMyCard(arr[i].val());
             appendCardTo('recipe-box', mealCard);
         }
     }
 
     function createMyCard(meal) {
-        console.log('createMyCard');
-        console.log(meal);
-        
-        
         meal = meal.myRecipe;
-        console.log(meal.title);
-        
-        
 
-        var mealTitle = meal.title;
-        // mealTitle = 'some title';
-        var mealImg = 'https://www.themealdb.com/images/media/meals/1529444830.jpg';
-        var recipeKey = meal.key;
-        // var datePutInDB = moment.unix( meal.dateAdded );
-        var datePutInDB = moment(meal.dateAdded).format('YYYY-MM-DD h:mm');
-        var ing1 = meal.ing1;
+        let mealImg = 'https://www.themealdb.com/images/media/meals/1529444830.jpg';
+        let datePutInDB = moment(meal.dateAdded).format('YYYY-MM-DD h:mm');
 
-        
-        
-
-        var parentCard = $('<div>').addClass('card mx-auto');
-        var cardBody = $('<div>').addClass('card-body recipe-card').attr('recipeKey', recipeKey);
-        var parentCardRow = $('<div>').addClass('row');
+        let parentCard = $('<div>').addClass('card mx-auto');
+        let cardBody = $('<div>').addClass('card-body recipe-card').attr('recipeKey', meal.key);
+        let parentCardRow = $('<div>').addClass('row');
         parentCard.append(cardBody);
         cardBody.append(parentCardRow);
 
         // === left side ===
-        var cardImgDiv = $('<div>').addClass('container img-box col-xs-12 col-md-3');
-        var cardImg = $('<img>').attr('src', mealImg).addClass('card-img');
+        let cardImgDiv = $('<div>').addClass('container img-box col-xs-12 col-md-3');
+        let cardImg = $('<img>').attr('src', mealImg).addClass('card-img');
         cardImgDiv.append(cardImg);
         parentCardRow.append(cardImgDiv);
 
         // === right side ===
-        var titleDiv = $('<div>').addClass('container col-xs-12 col-md-9');
-        var titleH3 = $('<h3>').addClass('text-right text-break').text(mealTitle);
-        var titleP = $('<p>').addClass('text-right').text('this dish will elevate stuff and do things....so ya.');
-        var titleP2 = $('<p>').addClass('text-right').text(datePutInDB);
+        let titleDiv = $('<div>').addClass('container col-xs-12 col-md-9');
+        let titleH3 = $('<h3>').addClass('text-right text-break').text( meal.title );
+        let titleP = $('<p>').addClass('text-right').text('this dish will elevate stuff and do things....so ya.');
+        let titleP2 = $('<p>').addClass('text-right').text(datePutInDB);
         titleDiv.append(titleH3);
         titleDiv.append(titleP);
         titleDiv.append(titleP2);
 
-        var divRow = $('<div>').addClass('row');
+        let divRow = $('<div>').addClass('row');
         titleDiv.append(divRow);
-        var tagBox = $('<div>').addClass('container tag-box');
+        let tagBox = $('<div>').addClass('container tag-box');
         divRow.append(tagBox);
-
         parentCardRow.append(titleDiv);
 
         return parentCard;
     }
 
     function createCard(meal) {
-        var mealTitle = meal.strMeal;
-        var mealImg = meal.strMealThumb;
-        var recipeKey = meal.idMeal;
-        var areaTag = '';
+        let mealTitle = meal.strMeal;
+        let mealImg = meal.strMealThumb;
+        let recipeKey = meal.idMeal;
+        let areaTag = '';
         areaTag = meal.strArea;
 
-        var truncatedDirections = 'This elegant dish can be made in under 30mins. Feeds 4. #dinner';
+        let truncatedDirections = 'This elegant dish can be made in under 30mins. Feeds 4. #dinner';
         truncatedDirections = meal.strInstructions;
 
         // safety feature
-        var mealTagsArray = [];
-        if (meal.strTags != null) {
+        let mealTagsArray = [];
+        if (meal.strTags !== null) {
             mealTagsArray = meal.strTags.split(',');
         }
 
-        var parentCard = $('<div>').addClass('card mx-auto');
-        var cardBody = $('<div>').addClass('card-body recipe-card').attr('recipeKey', recipeKey);
-        var parentCardRow = $('<div>').addClass('row');
+        let parentCard = $('<div>').addClass('card mx-auto');
+        let cardBody = $('<div>').addClass('card-body recipe-card').attr('recipeKey', recipeKey);
+        let parentCardRow = $('<div>').addClass('row');
         parentCard.append(cardBody);
         cardBody.append(parentCardRow);
 
         // === left side ===
-        var cardImgDiv = $('<div>').addClass('container img-box col-xs-12 col-md-3');
-        var cardImg = $('<img>').attr('src', mealImg).addClass('card-img');
+        let cardImgDiv = $('<div>').addClass('container img-box col-xs-12 col-md-3');
+        let cardImg = $('<img>').attr('src', mealImg).addClass('card-img');
         cardImgDiv.append(cardImg);
         parentCardRow.append(cardImgDiv);
 
         // === right side ===
-        var titleDiv = $('<div>').addClass('container col-xs-12 col-md-9');
-        var titleH3 = $('<h3>').addClass('text-right text-break').text(mealTitle);
-        var titleP = $('<p>').addClass('text-right').text('This elegant dish can be made in under 30mins. Feeds 4. #dinner');
-        var titleP = $('<p>').addClass('text-right').text(truncatedDirections.substr(0, 65));
+        let titleDiv = $('<div>').addClass('container col-xs-12 col-md-9');
+        let titleH3 = $('<h3>').addClass('text-right text-break').text(mealTitle);
+        let titleP = $('<p>').addClass('text-right').text('This elegant dish can be made in under 30mins. Feeds 4. #dinner');
+        let titleP = $('<p>').addClass('text-right').text(truncatedDirections.substr(0, 65));
         titleDiv.append(titleH3);
         titleDiv.append(titleP);
 
-        var divRow = $('<div>').addClass('row');
+        let divRow = $('<div>').addClass('row');
         titleDiv.append(divRow);
-        var tagBox = $('<div>').addClass('container tag-box');
+        let tagBox = $('<div>').addClass('container tag-box');
         divRow.append(tagBox);
 
         if (areaTag !== '') {
-            var mealArea = $('<span>').addClass('badge badge-pill badge-warning').text(areaTag);
+            let mealArea = $('<span>').addClass('badge badge-pill badge-warning').text(areaTag);
             tagBox.append(mealArea);
         }
 
         for (let i = 0; i < mealTagsArray.length; i++) {
-            var spanTag = createPillTag(mealTagsArray[i]);
+            let spanTag = createPillTag(mealTagsArray[i]);
 
             tagBox.append(spanTag);
         }
@@ -251,8 +228,8 @@ $(document).ready(function () {
     }
 
     function createPillTag(element) {
-        var lowerTag = element.toLowerCase();
-        var newTag = $('<span>').addClass('badge badge-pill').text(element);
+        let lowerTag = element.toLowerCase();
+        let newTag = $('<span>').addClass('badge badge-pill').text(element);
 
         switch (lowerTag) {
             case 'meat':
@@ -276,24 +253,18 @@ $(document).ready(function () {
 
     function addMessage(elementClass, type) {
         elementClass = '.' + elementClass;
-        var theMessage = '';
+        let theMessage = '';
 
         if (type === 'success') {
-            theMessage = $('<div>').addClass('alert alert-success')
-            .attr('role', 'alert')
-            .text('Yay! you saved something!');
-
+            theMessage = $('<div>').addClass('alert alert-success').attr('role', 'alert').text('Yay! you saved something!');
         } else {
-            theMessage = $('<div>').addClass('alert alert-danger')
-            .attr('role', 'alert')
-            .text('o no!! bad things!!!! or... data didnt save');
+            theMessage = $('<div>').addClass('alert alert-danger').attr('role', 'alert').text('o no!! bad things!!!! or... data didnt save');
         }
 
         $(elementClass).prepend(theMessage);
     }
 
     function goGetDadJoke(queryUrl) {
-        //dataType: 'json',
         $.ajax({
             url: queryUrl,
             method: 'GET',
@@ -305,9 +276,9 @@ $(document).ready(function () {
     }
 
     function ajaxCallSearch(inputString) {
-        var searchInput = inputString;
-        var queryURL = apiSearchUrl + searchInput;
-        var arrayOfMeals = [];
+        let searchInput = inputString;
+        let queryURL = apiSearchUrl + searchInput;
+        let arrayOfMeals = [];
 
         $.ajax({
             url: queryURL,
@@ -319,8 +290,7 @@ $(document).ready(function () {
                 for (let i = 0; i < arrayOfMeals.length; i++) {
                     const meal = arrayOfMeals[i];
 
-                    // create card and append
-                    var mealCard = createCard(meal);
+                    let mealCard = createCard(meal);
                     appendCardTo('recipe-box', mealCard);
                 }
 
@@ -329,8 +299,8 @@ $(document).ready(function () {
                 // ===================================================
                 $('.recipe-card').on('click', function () {
                     $('.details-box').show();
-                    var key = $(this).attr('recipekey');
-                    var queryURL = apiLookupUrl + key;
+                    let key = $(this).attr('recipekey');
+                    let queryURL = apiLookupUrl + key;
 
                     $.ajax({
                         url: queryURL,
@@ -339,7 +309,7 @@ $(document).ready(function () {
                         .then(function (response) {
                             masterCardsList = $('.recipe-box').detach();
 
-                            //get variables from response
+                            //get letiables from response
                             mealName = response.meals[0].strMeal;
                             mealIMG = response.meals[0].strMealThumb;
                             category = response.meals[0].strCategory;
@@ -351,13 +321,11 @@ $(document).ready(function () {
                             // ===================================================
                             // Chris Stead magic juice 
                             // ===================================================
-                            var recipeOutput = '<p>' + instructions.replace(/(\r?\n){2}/g, '</p><p>').replace(/(\r?\n)+/g, '<br/>') + '</p>';
-                            // ===================================================
+                            let recipeOutput = '<p>' + instructions.replace(/(\r?\n){2}/g, '</p><p>').replace(/(\r?\n)+/g, '<br/>') + '</p>';
 
-                            // checking for null 
-                            var i = 1;
-                            var ingredient = '';
-                            var measure = '';
+                            let i = 1;
+                            let ingredient = '';
+                            let measure = '';
                             do {
                                 ingredient = response.meals[0]["strIngredient" + i.toString()];
                                 measure = response.meals[0]["strMeasure" + i.toString()];
@@ -382,11 +350,9 @@ $(document).ready(function () {
                             $('#instructions').html(recipeOutput);
                         });
 
-                    //CSS onclick functions
                     $('.jumbotron').hide();
                     $('.details-box').css('margin-top', '+15px');
                     $('.details-box').css('margin-bottom', '+15px');
-                    // $('.main-box').css('background-color', '#333333');
                     $('.main-box').css('border', '0px');
 
                 });
