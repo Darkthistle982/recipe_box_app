@@ -30,7 +30,11 @@ $(document).ready(function () {
     // ===================================================
     // go get a dad joke
     // ===================================================
-    goGetDadJoke(apiDadJokeUrl);
+    let responseReturned = goGetDadJoke(apiDadJokeUrl);
+    // console.log('here is responseReturned');
+    // console.log(responseReturned);
+    
+    
     
 
     // ===================================================
@@ -80,18 +84,22 @@ $(document).ready(function () {
         });
     });
 
-
-    // ===== child added to firebase =====
-    dataRef.ref('user-added-recipes/').on("child_added", pushChildSnapshot(), function (errorObject) {
-        if (errorObject) {
-            // error thing
-        } else {
-            //hooray!
-            addSuccessMessage('card-message');
-        }
+    dataRef.ref('user-added-recipes/').on('child_added', function(childSnapshot) {
+        pushChildSnapshot(childSnapshot);
     });
 
-    function pushChildSnapshot() {
+
+    // ===== child added to firebase =====
+    // dataRef.ref('user-added-recipes/').on("child_added", pushChildSnapshot(childSnapshot), function (errorObject) {
+    //     if (errorObject) {
+    //         // error thing
+    //     } else {
+    //         //hooray!
+    //         addSuccessMessage('card-message');
+    //     }
+    // });
+
+    function pushChildSnapshot(childSnapshot) {
         myTastyRecipes.push(childSnapshot);
     }
 
@@ -202,7 +210,7 @@ $(document).ready(function () {
         let titleDiv = $('<div>').addClass('container col-xs-12 col-md-9');
         let titleH3 = $('<h3>').addClass('text-right text-break').text(mealTitle);
         let titleP = $('<p>').addClass('text-right').text('This elegant dish can be made in under 30mins. Feeds 4. #dinner');
-        let titleP = $('<p>').addClass('text-right').text(truncatedDirections.substr(0, 65));
+        titleP = $('<p>').addClass('text-right').text(truncatedDirections.substr(0, 65));
         titleDiv.append(titleH3);
         titleDiv.append(titleP);
 
@@ -247,12 +255,15 @@ $(document).ready(function () {
     }
 
     function appendCardTo(targetClass, card) {
-        targetClass = '.' + targetClass;
+        // targetClass = '.' + targetClass;
+        targetClass = `. ${targetClass}`;
         $(targetClass).prepend(card);
     }
 
     function addMessage(elementClass, type) {
-        elementClass = '.' + elementClass;
+        // elementClass = '.' + elementClass;
+        // elementClass = '.' `${elementClass}`;
+        elementClass = `. ${elementClass}`;
         let theMessage = '';
 
         if (type === 'success') {
@@ -263,7 +274,7 @@ $(document).ready(function () {
 
         $(elementClass).prepend(theMessage);
     }
-
+    
     function goGetDadJoke(queryUrl) {
         $.ajax({
             url: queryUrl,
@@ -271,8 +282,91 @@ $(document).ready(function () {
             dataType: 'json'
         }).then(function (response) {
             $('.dad-joke-box').append(response.joke);
-
         });
+
+        // fetch(apiSearchUrl).then((response) => {
+        //     return response.json();
+        // }).then((myJson) => { 
+        //     console.log(myJson);
+            
+        // });
+
+        // let myHeaders = new Headers({
+        //     'Accept': 'application/json'
+        // });
+
+        // fetch(apiSearchUrl,{
+        //     method: 'GET'
+        // }, myHeaders).then( function(response) {
+        //     console.log(response);
+        //     // console.log(response.text());
+        //     // console.log( response.json() );
+            
+            
+        // }, function(error) {
+        //     console.error(error.message);
+        //     // error.message;
+        // });
+
+
+
+
+        // let myHeaders = new Headers({
+        //     'Content-Type': 'application/json'
+        //   });
+        
+        // fetch(url, {
+        //     method: "GET",
+        //     headers: myHeaders
+        //   }).then(function(response) {
+        //     response.status     //=> number 100–599
+        //     response.statusText //=> String
+        //     response.headers    //=> Headers
+        //     response.url        //=> String
+          
+        //     return response.text()
+        //   }, function(error) {
+        //     error.message //=> String
+        //   });
+          
+
+
+        // $.ajax({
+        //     url: queryU,
+        //     method: 'GET',
+        //     dataType: 'json'
+        // }).then(function (response) {
+        //     $('.dad-joke-box').append(response.joke);
+
+        // });
+
+        // fetch(apiString, {
+        //     method: "GET",
+        //     dataType: 'json',
+        //     ContentType: 'application/json'
+        //   })
+        //   .then((resp) => {
+        //     return resp.json();
+        //   })
+        //   .then((user) => {
+        //     console.log(user);
+        //   })
+        //   .catch((err) => {
+        //     console.log(err)
+        //   });
+
+        // fetch(apiString).then((response) => {
+        //     return response.json();
+        // }).then((myJson) => {
+        //     console.log(myJson);
+        // });
+
+        // fetch(apiString).then((resp) => resp.json())
+        //     .then(function(data){
+        //         console.log(data);
+        //     });
+
+
     }
 
     function ajaxCallSearch(inputString) {
