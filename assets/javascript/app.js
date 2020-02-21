@@ -30,9 +30,7 @@ $(document).ready(function() {
   // ===================================================
   // go get a dad joke
   // ===================================================
-  let responseReturned = goGetDadJoke(apiDadJokeUrl);
-  // console.log('here is responseReturned');
-  // console.log(responseReturned);
+  goGetDadJoke(apiDadJokeUrl);
 
   // ===================================================
   // EVENTS - ALL
@@ -78,7 +76,6 @@ $(document).ready(function() {
           addMessage("card-message", "error");
         } else {
           //hooray!
-          // addSuccessMessage('card-message');
           addMessage("card-message", "success");
           loadRecipeCards(myTastyRecipes);
         }
@@ -89,16 +86,6 @@ $(document).ready(function() {
   dataRef.ref("user-added-recipes/").on("child_added", function(childSnapshot) {
     pushChildSnapshot(childSnapshot);
   });
-
-  // ===== child added to firebase =====
-  // dataRef.ref('user-added-recipes/').on("child_added", pushChildSnapshot(childSnapshot), function (errorObject) {
-  //     if (errorObject) {
-  //         // error thing
-  //     } else {
-  //         //hooray!
-  //         addSuccessMessage('card-message');
-  //     }
-  // });
 
   function pushChildSnapshot(childSnapshot) {
     myTastyRecipes.push(childSnapshot);
@@ -428,13 +415,12 @@ $(document).ready(function() {
       }).then(function(response) {
         masterCardsList = $(".recipe-box").detach();
   
-        //get letiables from response
+        //get variables from response
         mealName = response.meals[0].strMeal;
         mealIMG = response.meals[0].strMealThumb;
         category = response.meals[0].strCategory;
         cuisineType = response.meals[0].strArea;
         ing20 = response.meals[0].strMeasure20 + "  " + response.meals[0].strIngredient20;
-  
         instructions = response.meals[0].strInstructions;
   
         // ===================================================
@@ -478,6 +464,8 @@ $(document).ready(function() {
       $(".details-box").css("margin-bottom", "+15px");
       $(".main-box").css("border", "0px");
     });
+
+  // end of etRecipeCardListener
   }
 
 
