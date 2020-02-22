@@ -1,7 +1,7 @@
 // project 1 - Recipe app
 // Derrek, Brian, Matt, and Jacob.
 
-$(document).ready(function() {
+$(document).ready(function () {
   // ===================================================
   // GLOBAL letIABLES
   // ===================================================
@@ -63,7 +63,7 @@ $(document).ready(function() {
   };
 
   // Send the new recipe input from the modal to the database
-  $("#save-recipe-btn").on("click", function(event) {
+  $("#save-recipe-btn").on("click", function (event) {
     event.preventDefault();
     let myRecipe = goGetThemInputs();
 
@@ -71,7 +71,7 @@ $(document).ready(function() {
       {
         myRecipe
       },
-      function(errorObject) {
+      function (errorObject) {
         if (errorObject) {
           addMessage("card-message", "error");
         } else {
@@ -83,7 +83,7 @@ $(document).ready(function() {
     );
   });
 
-  dataRef.ref("user-added-recipes/").on("child_added", function(childSnapshot) {
+  dataRef.ref("user-added-recipes/").on("child_added", function (childSnapshot) {
     pushChildSnapshot(childSnapshot);
   });
 
@@ -92,7 +92,7 @@ $(document).ready(function() {
   }
 
   // display saved recipes from firebase
-  $("#my-meals").on("click", function(event) {
+  $("#my-meals").on("click", function (event) {
     event.preventDefault();
 
     for (let i = 0; i < myTastyRecipes.length; i++) {
@@ -101,13 +101,14 @@ $(document).ready(function() {
     }
   });
 
-  $(".go-back-btn").on("click", function(event) {
+  $(".go-back-btn").on("click", function (event) {
+    event.preventDefault();
     $(".details-box").hide();
     $(".main-box").append(masterCardsList);
     $(".jumbotron").show();
   });
 
-  $("#searchBtn-below").on("click", function(event) {
+  $("#searchBtn-below").on("click", function (event) {
     event.preventDefault();
     let trimSearchInputValue = $("#searchInput-below")
       .val()
@@ -302,7 +303,7 @@ $(document).ready(function() {
       url: queryUrl,
       method: "GET",
       dataType: "json"
-    }).then(function(response) {
+    }).then(function (response) {
       $(".dad-joke-box").append(response.joke);
     });
 
@@ -391,11 +392,11 @@ $(document).ready(function() {
     $.ajax({
       url: queryURL,
       method: "GET"
-    }).then(function(response) {
+    }).then(function (response) {
       arrayOfMeals = response.meals;
 
       for (let i = 0; i < arrayOfMeals.length; i++) {
-        appendCardTo("recipe-box", createCard(arrayOfMeals[i]) );
+        appendCardTo("recipe-box", createCard(arrayOfMeals[i]));
       }
 
       setRecipeCardListener();
@@ -404,17 +405,17 @@ $(document).ready(function() {
   }
 
   function setRecipeCardListener() {
-    $(".recipe-card").on("click", function() {
+    $(".recipe-card").on("click", function () {
       $(".details-box").show();
       let key = $(this).attr("recipekey");
       let queryURL = apiLookupUrl + key;
-  
+
       $.ajax({
         url: queryURL,
         method: "GET"
-      }).then(function(response) {
+      }).then(function (response) {
         masterCardsList = $(".recipe-box").detach();
-  
+
         //get variables from response
         mealName = response.meals[0].strMeal;
         mealIMG = response.meals[0].strMealThumb;
@@ -422,24 +423,22 @@ $(document).ready(function() {
         cuisineType = response.meals[0].strArea;
         ing20 = response.meals[0].strMeasure20 + "  " + response.meals[0].strIngredient20;
         instructions = response.meals[0].strInstructions;
-  
-        // ===================================================
-        // Chris Stead magic juice
-        // ===================================================
+
+        //reformat input for instructions to include and manage spacing/line break data in object
         let recipeOutput =
           "<p>" +
           instructions
             .replace(/(\r?\n){2}/g, "</p><p>")
             .replace(/(\r?\n)+/g, "<br/>") +
           "</p>";
-  
+
         let i = 1;
         let ingredient = "";
         let measure = "";
         do {
           ingredient = response.meals[0]["strIngredient" + i.toString()];
           measure = response.meals[0]["strMeasure" + i.toString()];
-  
+
           if (ingredient === null || measure === null) {
             ingredient = "";
             measure = "";
@@ -447,10 +446,10 @@ $(document).ready(function() {
           } else {
             $("#ing" + i.toString()).text(measure + "  " + ingredient);
           }
-  
+
           i++;
         } while (i <= 20);
-  
+
         $("#mealName").html("<h2 class='float-right'>" + mealName + "</h2>");
         $("#exampleIMG").attr("src", mealIMG);
         $("#exampleIMG").attr("style", "height: 200px; width: 200px;");
@@ -458,20 +457,15 @@ $(document).ready(function() {
         $("#areaTag").html(cuisineType);
         $("#instructions").html(recipeOutput);
       });
-  
+
       $(".jumbotron").hide();
       $(".details-box").css("margin-top", "+15px");
       $(".details-box").css("margin-bottom", "+15px");
       $(".main-box").css("border", "0px");
     });
 
-  // end of etRecipeCardListener
+    // end of etRecipeCardListener
   }
-
-
-
-
-
 
   //end of doc ready
 });
